@@ -1,0 +1,18 @@
+.password {
+    position: relative;
+    width: fit-content;
+
+    .password__swticher {
+        position: absolute;
+        top: 50%;
+        right: 0;
+
+        transform: translate(-10px, -50%);
+
+        cursor: pointer;
+
+        img {
+            width: 30px;
+        }
+    }
+}

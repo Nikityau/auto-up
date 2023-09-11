@@ -1,0 +1,21 @@
+.platform-logo {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    img {
+        width: 65px;
+    }
+
+    .platform-logo__title {
+        display: flex;
+        flex-direction: column;
+
+        color: #292929;
+        font-family: Comfortaa, sans-serif;
+        font-size: 46px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 85.889%;
+    }
+}

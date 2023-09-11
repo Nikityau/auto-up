@@ -3,7 +3,6 @@ const path = require('path')
 const TerserPlugin = require("terser-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const ESLintPlugin = require("eslint-webpack-plugin")
 
 const exclude_var = /node_modules/
 
@@ -26,11 +25,16 @@ module.exports = (env) => {
         resolve: {
             extensions: ['.js', '.jsx', '.ts', '.tsx'],
             alias: {
-                // ALIASES
+                app: path.resolve(__dirname, 'src', 'app'),
+                pages: path.resolve(__dirname, 'src', 'pages'),
+                widgets: path.resolve(__dirname, 'src','widgets'),
+                features: path.resolve(__dirname, 'src', 'features'),
+                entities: path.resolve(__dirname, 'src', 'entities'),
+                shared: path.resolve(__dirname, 'src', 'shared')
             },
         },
         output: {
-            filename: "[name].[contenthash].bundle.js",
+            filename: "js/[name].[contenthash].bundle.js",
             assetModuleFilename: "assets/[name][ext]",
             sourceMapFilename: "[name].js.map",
             path: outputPathByDevice(device),
@@ -52,7 +56,7 @@ module.exports = (env) => {
             },
             historyApiFallback: true,
             compress: false,
-            port: 8080,
+            port: 3000,
             open: true,
             hot: true,
             client: {
@@ -66,12 +70,8 @@ module.exports = (env) => {
                 minify: false,
             }),
             new MiniCssExtractPlugin({
-                filename: '[name].[contenthash].bundle.css'
+                filename: 'css/[name].[contenthash].bundle.css',
             }),
-            new ESLintPlugin({
-                files: './.eslintrc.json',
-                useEslintrc: true
-            })
         ],
         module: {
             rules: [

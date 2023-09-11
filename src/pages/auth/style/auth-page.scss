@@ -1,0 +1,70 @@
+.auth-page {
+    position: relative;
+
+    width: 100%;
+    height: 100vh;
+
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    overflow: hidden;
+
+    .auth-page__bg-grid,
+    .auth-page__bg-wave {
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        width: 100%;
+        height: 100%;
+
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    .auth-page__bg-wave {
+        //fix it
+       //transform: scale(1.1);
+    }
+
+    .auth-page__bg-grid {
+        background-position: center;
+        opacity: .5;
+    }
+
+    .auth-page__container {
+        position: relative;
+
+        height: calc(100% - 100px);
+        padding: 50px 150px;
+
+        display: flex;
+        align-items: center;
+
+        z-index: 1;
+
+        .auth-page__up {
+            //height: 100%;
+
+            //margin-top: 180px;
+
+
+            display: grid;
+            grid-template-columns: 500px auto;
+            gap: 35%;
+
+            .auth-page__folders {
+                height: 100%;
+
+                display: flex;
+                align-items: flex-end;
+
+                img {
+                    width: 400px;
+                    height: auto;
+                }
+            }
+        }
+    }
+}
