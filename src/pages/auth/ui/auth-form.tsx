@@ -4,22 +4,30 @@ import Password from '../../../shared/ui/password';
 import PlatformLogo from './platorm-logo';
 import Addons from './addons';
 import Btn from '../../../shared/ui/btn';
+import { authStore } from '../store';
+import AuthProvider from '../provider/auth-provider';
 
 const AuthForm = () => {
     return (
-        <div className='auth-form'>
+        <AuthProvider>
+            <div className='auth-form'>
             <PlatformLogo/>
             <div className='auth-form__inputs'>
-                <Login onChange={() => { }} />
-                <Password onChange={() => { }} />
+                <Login
+                    onChange={(login) => authStore.setLogin(login)}
+                />
+                <Password
+                    onChange={(password) => authStore.setPassword(password)} 
+                />
             </div>
             <Addons/>
             <Btn 
                 text='Продолжить'
-                onClick={() => {}}
+                onClick={() => authStore.auth()}
                 classNames={['auth-form__btn']}
             />
         </div>
+        </AuthProvider>
     );
 };
 
