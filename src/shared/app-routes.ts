@@ -1,5 +1,9 @@
 export const AppRoutes = {
-    "skillget": "/skillget",
+    "skillget": "skillget",
     "auth": "auth",
-    "lecturer": "lecturer"
+    "lecturer": "lecturer",
+    "timetable": "timetable",
+    "month": "month",
+    "week": "week",
+    "day": "day"
 }

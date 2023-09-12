@@ -21,7 +21,7 @@ export const useAuth = () => {
         const res = adminResponse()
 
         if(res.role == 'admin') {
-          nav(`${AppRoutes.skillget}/${AppRoutes.lecturer}`) 
+          nav(`/${AppRoutes.skillget}/${AppRoutes.lecturer}`, {replace: true}) 
         }
     }
 }

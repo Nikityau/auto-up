@@ -1,0 +1,49 @@
+.timetable-types {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+
+    border-radius: 6px;
+    border: 2px solid #000;
+
+    overflow: hidden;
+
+    .timetable-types__type {
+        cursor: pointer;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        height: 50px;
+
+        color: #4F4B5C;
+        font-family: Montserrat, sans-serif;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;       
+    }
+
+    .timetable-types__type {   
+        border-color: transparent;
+    }
+
+    .timetable-types__type_border_r {
+        border-right: 1px solid;
+    }
+
+    .timetable-types__type_border_l {
+        border-left: 1px solid;
+    }
+
+    .timetable-types__type_border_b {
+        border-right: 1px solid;
+        border-left: 1px solid;
+    }
+
+    .timetable-types__type_current {
+        color: #7E5EFF;
+        border-color: #9E9CFF;
+        background: #EBEBFF;
+    }
+}
