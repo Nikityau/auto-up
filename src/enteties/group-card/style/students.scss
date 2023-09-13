@@ -1,0 +1,61 @@
+.group-card__students {
+    margin-top: 32px;
+
+    height: 45px;
+
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+
+    .group-card__circle {
+        width: 40px;
+        height: 40px;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        border-radius: 50%;
+
+        background-color: #fff;
+    }
+
+    .group-card__circle-inner {
+        width: 38px;
+        height: 38px;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;    
+
+        border-radius: 50%;
+    }
+
+    .group-card__remain-circle {
+        position: relative;
+
+        z-index: 4;
+
+        color: #FFF;
+        font-family: Montserrat, sans-serif;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 600;
+
+        .group-card__circle-inner {
+            background: #000;
+        }
+    }
+
+    .group-card__student {
+        position: relative;
+
+        background-color: #fff;
+
+        .group-card__circle-inner {
+            background-color: var(--color-purple);
+        }
+
+        z-index: 0;
+    }
+}

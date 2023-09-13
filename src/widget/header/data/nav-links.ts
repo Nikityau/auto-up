@@ -10,7 +10,7 @@ export const lecturerLinks: NavLink[] = [
     {
         id: nanoid(),
         text: 'Расписание',
-        link: ''
+        link: 'timetable'
     },
     {
         id: nanoid(),
@@ -20,7 +20,7 @@ export const lecturerLinks: NavLink[] = [
     {
         id: nanoid(),
         text: 'База Знаний',
-        link: 'db'
+        link: 'knowledge-base'
     }
 ]
 

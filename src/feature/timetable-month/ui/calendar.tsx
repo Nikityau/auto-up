@@ -4,6 +4,7 @@ import { observer } from 'mobx-react-lite';
 import { TimetableStore } from '../../../local-store/timetable/timtetable-store';
 import DateMonth from './date';
 import { useMonthCalendar } from '../helpers/hooks/use-month-calendar';
+import { datesCompare } from '../../../shared/helpers/dates/dates-compare';
 
 type Props = {
     timetable: TimetableStore
@@ -20,20 +21,13 @@ const Calendar = observer(({timetable}: Props) => {
                     <DateMonth
                         key={el.id}
                         number={el.date?.getDate() || 0}
+                        isCurrentDate={datesCompare(el.date, timetable.timetable.now)}
                         isCurrentMonth={
                             timetable.timetable.activeDate.getMonth() == el.date.getMonth()
                         }
                     />
                 ))
             }
-            {/* {
-                timetable.timetable.dates.map(d => (
-                    <DateMonth
-                        key={nanoid()}
-                        number={d.getDate()}
-                    />
-                ))
-            } */}
         </div>
     );
 });

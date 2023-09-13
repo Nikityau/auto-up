@@ -26,6 +26,12 @@ export class TimetableStore {
             prevMonth: action,
         })
 
+        const localType = sessionStorage.getItem('lecturer-month-type')
+
+        if(localType) {
+            this.type = localType as TimetableType
+        }
+
         const now = new Date()
 
         this.timetable.now = now
@@ -38,6 +44,7 @@ export class TimetableStore {
 
     setType(type: TimetableType) {
         this.type = type
+        sessionStorage.setItem('lecturer-month-type', type)
     }
 
 
@@ -53,10 +60,20 @@ export class TimetableStore {
             start: new Date(aD.getFullYear(), aD.getMonth(), 1),
             end: new Date(aD.getFullYear(), aD.getMonth() + 1, 0)
         })
-        //this.timetable = [new Date()]
+        
     }
     prevMonth() {
-        //this.timetable = [new Date()]
+        this.timetable.activeDate = new Date(
+            this.timetable.activeDate.getFullYear(),
+            this.timetable.activeDate.getMonth() - 1,
+            )
+
+        const aD = this.timetable.activeDate
+
+        this.timetable.dates = eachDayOfInterval({
+            start: new Date(aD.getFullYear(), aD.getMonth(), 1),
+            end: new Date(aD.getFullYear(), aD.getMonth() + 1, 0)
+        })
     }
 }
 

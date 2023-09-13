@@ -1,0 +1,13 @@
+.knowledge-base-page {
+    width: 100%;
+
+    padding-top: 110px;
+
+    .knowledge-base-page__course-list {
+        margin-top: 36px;
+
+        display: flex;
+        flex-wrap: wrap;
+        gap: 24px;
+    }
+}

@@ -5,9 +5,9 @@ import AuthPage from './auth';
 import BasePage from './base';
 import Platform from './platform';
 import Timetable from './timetable';
-import TimetableMonth from '../feature/timetable-month';
-import TimetableWeek from '../feature/timetable-week';
-import TimetableDay from '../feature/timetable-day';
+import Groups from './groups';
+import KnowledgeBase from './knowledge-base';
+import Group from './group';
 
 const AppRouter = () => {
     return (
@@ -17,6 +17,10 @@ const AppRouter = () => {
 
                 <Route path={AppRoutes.lecturer} element={<Platform/>}>
                     <Route path={AppRoutes.timetable} element={<Timetable/>}/>
+                    <Route path={AppRoutes.groups} element={<Groups/>}/>
+                    <Route path={`${AppRoutes.groups}/:id`} element={<Group/>}/>
+                    <Route path={AppRoutes.knowledgeBase} element={<KnowledgeBase/>}/>
+                    <Route path={`${AppRoutes.knowledgeBase}/:id`} element={'course'}/>
 
                     <Route path={''} element={<Navigate to={AppRoutes.timetable}/>}/>
                 </Route>

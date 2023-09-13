@@ -7,6 +7,10 @@ a {
   text-decoration: unset;  
 }
 
+body {
+  overflow-x: hidden;
+}
+
 .app-container {
     width: calc(100vw - 180px);
     margin: 0 auto;

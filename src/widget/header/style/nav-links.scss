@@ -16,8 +16,10 @@
 }
 
 .nav-link__current {
-    color: #3D3AFF;
-    font-weight: 600;
+    .nav-link {
+        color: #3D3AFF;
+        font-weight: 600;
 
-    border-color: #3D3AFF;
+        border-color: #3D3AFF;
+    }
 }

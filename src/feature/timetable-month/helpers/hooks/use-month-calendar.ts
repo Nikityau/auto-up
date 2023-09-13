@@ -1,3 +1,4 @@
+import produce from "immer"
 import { nanoid } from "nanoid"
 import { useMemo, useState } from "react"
 
@@ -33,49 +34,69 @@ export const useMonthCalendar = (dates: Date[]) => {
     }
 
     const fillLeft = (dates: DatesGrid[]): DatesGrid[] => {
-        let to = null;
-        for(let i = 0; i < dates.length; ++i) {
-            if(dates[i].date) {
-                to = i
-                break;
+        return produce(dates, draft => {
+            let from = null;
+            for (let i = 0; i < draft.length; ++i) {
+                if (draft[i].date) {
+                    from = i
+                    break;
+                }
             }
-        }
 
-        if(!to) return
+            if (!from) return
 
-        for(let i = to; i >= 0; --i) {
-            const prevDate = dates[i + 1].date
-            const newDate = new Date(prevDate)
-            newDate.setDate(newDate.getDate() - 1)
+            for (let i = from; i >= 0; --i) {
+                const prevDate = draft[i + 1].date
+                const newDate = new Date(prevDate)
+                newDate.setDate(newDate.getDate() - 1)
 
-            dates[i].date = newDate
-        }
+                draft[i].date = newDate
+            }
 
-        return dates
+            return draft
+        })
     }
 
     const fillRight = (dates: DatesGrid[]): DatesGrid[] => {
-        let from = null
-        for(let i = dates.length - 1; i >= 0; --i) {
-            if(dates[i].date) {
-                from = i
-                break
+        return produce(dates, draft => {
+            let from = null
+            for (let i = draft.length - 1; i >= 0; --i) {
+                if (draft[i].date) {
+                    from = i
+                    break
+                }
             }
-        }
 
-        if(!from) return dates
+            if (!from) return draft
 
-        
+            for (let i = from; i < dates.length; ++i) {
+                const prevDate = draft[i - 1].date
+                const newDate = new Date(prevDate)
+                newDate.setDate(newDate.getDate() + 1)
 
-        for(let i = from; i < dates.length; ++i) {
-            const prevDate = dates[i - 1].date
-            const newDate = new Date(prevDate)
-            newDate.setDate(newDate.getDate() + 1)
+                draft[i].date = newDate
+            }
 
-            dates[i].date = newDate            
-        }
+            return draft
+        })
+    }
 
-        return dates
+    const addDays = (dates: DatesGrid[]): DatesGrid[] => {
+        return produce(dates, draft => {
+            if(draft.length > 35) {
+                const newl = 42 - draft.length
+
+                for(let i = 0; i < newl; ++i) {
+                    draft.push({
+                        id: nanoid(),
+                        date: null,
+                        children: null
+                    })
+                }
+            }
+
+            return draft
+        })
     }
 
     const datesGrid = useMemo<DatesGrid[]>(() => {
@@ -95,6 +116,8 @@ export const useMonthCalendar = (dates: Date[]) => {
                 dGrid[i + offset].date = dates[i]
             }
         }
+
+        dGrid = addDays(dGrid)
 
         dGrid = fillLeft(dGrid)
         dGrid = fillRight(dGrid)

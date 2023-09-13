@@ -1,13 +1,13 @@
 import React from 'react';
 import { studentLinks } from '../data/nav-links';
-import NavLink from './nav-link';
+import NavLinkApp from './nav-link';
 
 const HeaderStudents = () => {
     return (
         <>
            {
                 studentLinks.map(l => (
-                    <NavLink
+                    <NavLinkApp
                         key={l.id}
                         link={l.link}
                         text={l.text}

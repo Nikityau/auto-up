@@ -1,0 +1,14 @@
+.group-page {
+    width: 100%;
+
+    padding-top: 110px;
+    padding-bottom: 100px;
+
+    .group-page__info {
+        margin-top: 32px;
+
+        display: grid;
+        grid-template-columns: 256px 1050px;
+        gap: 117px;
+    }
+}

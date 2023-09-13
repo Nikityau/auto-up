@@ -1,0 +1,27 @@
+.group-page__title {
+    width: calc(100% - 70px);
+    height: fit-content;
+
+    padding: 26px 35px;
+
+    border-radius: 10px;
+    border: 1px solid #000;
+
+    .group-page__course-title,
+    .group-page__group-title {
+        color: #191617;
+        font-family: Montserrat, sans-serif;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+    }
+
+    .group-page__course-title {
+        span {
+            &:nth-child(2) {
+                font-weight: 400;
+            }
+        }
+    }
+}
