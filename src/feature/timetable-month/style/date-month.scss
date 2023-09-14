@@ -5,7 +5,7 @@
     height: calc(130px - 22px);
 
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: 60px 136px;
 
     border-left: 1px solid #4F4B5C;
     border-bottom: 1px solid #4F4B5C;
@@ -19,7 +19,7 @@
     cursor: pointer;
 
     .date-month__date {
-        width: 60px;
+        width: 100%;
 
         color: #4F4B5C;
         text-align: center;
@@ -27,7 +27,6 @@
         font-size: 14px;
         font-style: normal;
         font-weight: 600;
-        line-height: 6.3px;
     }
 }
 

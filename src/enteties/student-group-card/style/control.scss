@@ -3,23 +3,25 @@
     align-items: center;
     gap: 20px;
 
-    .student-group-card__position {
-        width: 23px;
-        padding: 4px 0px;
+   
+}
 
-        border-radius: 5px;
-        background: #EFFF8E;
+.student-group-card__position {
+    width: 23px;
+    padding: 4px 0px;
 
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    border-radius: 5px;
+    background: #EFFF8E;
 
-        color: #000;
-        text-align: center;
-        font-family: Montserrat, sans-serif;
-        font-size: 12.8px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: normal;
-    }
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: #000;
+    text-align: center;
+    font-family: Montserrat, sans-serif;
+    font-size: 12.8px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
 }

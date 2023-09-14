@@ -1,5 +1,4 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
 import Filters from './ui/filters';
 
 import TimetableProvider from './provider/timetable-provider';

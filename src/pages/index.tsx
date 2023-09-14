@@ -8,6 +8,7 @@ import Timetable from './timetable';
 import Groups from './groups';
 import KnowledgeBase from './knowledge-base';
 import Group from './group';
+import ScheduleDay from './schedule-day';
 
 const AppRouter = () => {
     return (
@@ -17,8 +18,10 @@ const AppRouter = () => {
 
                 <Route path={AppRoutes.lecturer} element={<Platform/>}>
                     <Route path={AppRoutes.timetable} element={<Timetable/>}/>
+                    <Route path={`${AppRoutes.timetable}/day/:id`} element={<ScheduleDay/>}/>
                     <Route path={AppRoutes.groups} element={<Groups/>}/>
                     <Route path={`${AppRoutes.groups}/:id`} element={<Group/>}/>
+                    <Route path={`${AppRoutes.groups}/:groupId/students/:studentId`} element={'student'}/>
                     <Route path={AppRoutes.knowledgeBase} element={<KnowledgeBase/>}/>
                     <Route path={`${AppRoutes.knowledgeBase}/:id`} element={'course'}/>
 

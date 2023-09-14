@@ -1,6 +1,6 @@
 import produce from "immer"
 import { nanoid } from "nanoid"
-import { useMemo, useState } from "react"
+import { useMemo } from "react"
 
 interface DatesGrid {
     id: string,
@@ -83,10 +83,10 @@ export const useMonthCalendar = (dates: Date[]) => {
 
     const addDays = (dates: DatesGrid[]): DatesGrid[] => {
         return produce(dates, draft => {
-            if(draft.length > 35) {
+            if (draft.length > 35) {
                 const newl = 42 - draft.length
 
-                for(let i = 0; i < newl; ++i) {
+                for (let i = 0; i < newl; ++i) {
                     draft.push({
                         id: nanoid(),
                         date: null,

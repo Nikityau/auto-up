@@ -26,16 +26,18 @@ const StudentGroupCard = ({
 }: Props) => {
     return (
         <div className='student-group-card'>
-            <Control
-                position={position}
-            />
-            <Avatar
-                avatar={avatar}
-            />
-            <TitleData
-                title='Ф.И.О.'
-                data={`${surname} ${name}`}
-            />
+            <div className='student-group-card__container'>
+                <Control
+                    position={position}
+                />
+                <Avatar
+                    avatar={avatar}
+                />
+                <TitleData
+                    title='Ф.И.О.'
+                    data={`${surname} ${name}`}
+                />
+            </div>
             <TitleData
                 classNames={[
                     'student-group-card__info_center'
@@ -72,6 +74,7 @@ const StudentGroupCard = ({
                 title='Зачислен'
                 data={toNormalNum(enrolled)}
             />
+            <div className='student-group-card__note'/>
         </div>
     );
 };

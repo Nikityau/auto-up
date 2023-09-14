@@ -1,0 +1,29 @@
+.schedule-day__students {
+    .page-title {
+        font-size: 24px;
+    }
+
+    .schedule-day__close-btn {
+        width: 24px;
+        height: 24px;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        border-radius: 50%;
+        background: rgba(0, 0, 0, 0.50);
+
+        cursor: pointer;
+
+        svg {
+            width: 20px;
+        }
+    }
+
+    .schedule-day__up-info {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+}

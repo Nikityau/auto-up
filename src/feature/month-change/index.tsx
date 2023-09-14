@@ -1,19 +1,27 @@
 import React from 'react';
 import CurrentMonth from './ui/current-month';
 import ChangeBtns from './ui/change-bnts';
-import { lecturerTimetable } from '../../local-store/timetable/timtetable-store';
+import { TimetableStore, lecturerTimetable } from '../../local-store/timetable/timtetable-store';
+import { FType } from '../../shared/helpers/types/f-types';
 
 import './style/index.scss'
+import { observer } from 'mobx-react-lite';
 
-const MonthChange = () => {
+type Props = {
+    timetable: TimetableStore
+}
+
+const MonthChange = observer(({timetable}:Props) => {
     return (
         <div className='month-change'>
             <CurrentMonth
-                timetable={lecturerTimetable}
+                timetable={timetable}
             />
-            <ChangeBtns/>
+            <ChangeBtns
+                timetable={timetable}
+            />
         </div>
     );
-};
+});
 
 export default MonthChange;

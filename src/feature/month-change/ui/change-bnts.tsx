@@ -1,12 +1,16 @@
 import React from 'react';
-import { lecturerTimetable } from '../../../local-store/timetable/timtetable-store';
+import { TimetableStore } from '../../../local-store/timetable/timtetable-store';
 
-const ChangeBtns = () => {
+type Props = {
+    timetable: TimetableStore
+}
+
+const ChangeBtns = ({timetable}:Props) => {
     return (
         <div className='month-change__btns'>
             <div className='month-change__prev'
                 onClick={() => {
-                    lecturerTimetable.prevMonth()
+                    timetable.prevMonth()
                 }}
             >
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -15,7 +19,7 @@ const ChangeBtns = () => {
             </div>
             <div className='month-change__next'
                 onClick={() => {
-                    lecturerTimetable.nextMonth()
+                    timetable.nextMonth()
                 }}
             >
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
