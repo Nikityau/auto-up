@@ -12,7 +12,7 @@ type Props = {
     showCurrentDay: boolean
 } & React.PropsWithChildren
 
-const Calendar = observer(({timetable, showCurrentDay,content}: Props) => {
+const Calendar = observer(({timetable, showCurrentDay,content, children}: Props) => {
 
     const datesGrid = useMonthCalendar(timetable.timetable.dates)
 
@@ -35,6 +35,9 @@ const Calendar = observer(({timetable, showCurrentDay,content}: Props) => {
     return (
         <div className='timetable-month__calendar'>
             {
+                children
+            }
+            {/* {
                 datesGrid.map(el => (
                     <DateMonth
                         key={el.id}
@@ -49,7 +52,7 @@ const Calendar = observer(({timetable, showCurrentDay,content}: Props) => {
                         }
                     </DateMonth>
                 ))
-            }
+            } */}
         </div>
     );
 });

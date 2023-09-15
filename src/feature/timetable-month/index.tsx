@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useEffect, Children } from 'react';
 import Weekdays from './ui/weekdays';
 import Calendar from './ui/calendar';
+import MonthProvider from './provider/month-provider';
 
 import { TimetableStore } from '../../local-store/timetable/timtetable-store';
 
 import './style/index.scss'
-import MonthProvider from './provider/month-provider';
 
 export interface Content {
     id: string
@@ -28,7 +28,9 @@ const TimetableMonth = ({ children, timetable, content,showCurrentDay = true }: 
                 showCurrentDay={showCurrentDay}
                 timetable={timetable}
                 content={content}
-            />
+            >
+                {children}
+            </Calendar>
         </div>
         </MonthProvider>
     );
