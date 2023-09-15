@@ -1,0 +1,23 @@
+.addon-material {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    .addon-material__material,
+    .addon-material__title {
+        color: #000;
+        font-family: Montserrat, sans-serif;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 700;
+    }
+
+    .addon-material__material {
+        font-weight: 400;
+        text-decoration-line: underline;
+
+        a {
+            color: #000;
+        }
+    }
+}

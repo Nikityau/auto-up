@@ -5,6 +5,7 @@ import Calendar from './ui/calendar';
 import { TimetableStore } from '../../local-store/timetable/timtetable-store';
 
 import './style/index.scss'
+import MonthProvider from './provider/month-provider';
 
 export interface Content {
     id: string
@@ -20,7 +21,8 @@ type Props = {
 
 const TimetableMonth = ({ children, timetable, content,showCurrentDay = true }: Props) => {
     return (
-        <div className='timetable-month'>
+        <MonthProvider>
+            <div className='timetable-month'>
             <Weekdays />
             <Calendar
                 showCurrentDay={showCurrentDay}
@@ -28,6 +30,7 @@ const TimetableMonth = ({ children, timetable, content,showCurrentDay = true }: 
                 content={content}
             />
         </div>
+        </MonthProvider>
     );
 };
 

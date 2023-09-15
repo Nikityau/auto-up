@@ -12,7 +12,8 @@ export class DayScheduleStore {
             schedule: observable,
             setTab: action,
             students: computed,
-            currentSchedule: computed
+            currentSchedule: computed,
+            tasks: computed
         })
 
         this.schedule = schedule
@@ -31,10 +32,14 @@ export class DayScheduleStore {
         return this.schedule.find(s => s.id == this.tab)
     }
 
+    get tasks() {
+        return this.currentSchedule.tasks
+    }
+
     setStudentStatus(studentId: string, status: boolean) {
         this.schedule
-        .find(s => s.id == this.tab)
-        .students.find(s => s.id == studentId).isIn = status
+            .find(s => s.id == this.tab)
+            .students.find(s => s.id == studentId).isIn = status
     }
 }
 

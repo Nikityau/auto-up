@@ -1,0 +1,45 @@
+.info-block {
+    width: 100%;
+
+    .info-block__title {
+        width: 100%;
+
+        cursor: pointer;
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .info-block__btn {
+            svg {
+                transition: all .3s;
+            }
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+
+    .info-bloc__info {
+        margin-top: 30px;
+    }
+}
+
+.info-block_open {
+    .info-block__btn {
+        svg {
+            transform: rotate(45deg);
+        }
+    }
+
+    .info-bloc__info {
+        display: block;
+    }
+}
+
+.info-block_close {
+    .info-bloc__info {
+        display: none;
+    }
+}

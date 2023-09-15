@@ -13,7 +13,9 @@ export interface TaskBlock {
 
 export interface Task {
     id: string,
-    isSpecial: boolean
+    isSpecial: boolean,
+    isSolved?: boolean | null,
+    needCheck?: boolean | null
 }
 
 export interface Student {

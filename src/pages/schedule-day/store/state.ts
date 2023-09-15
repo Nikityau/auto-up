@@ -191,7 +191,7 @@ export const schedule: Schedule[] = [
                     },
                     {
                         id: nanoid(),
-                        isSpecial: false
+                        isSpecial: true
                     },
                     {
                         id: nanoid(),
