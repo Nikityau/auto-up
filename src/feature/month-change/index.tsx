@@ -1,11 +1,10 @@
 import React from 'react';
+import { observer } from 'mobx-react-lite';
 import CurrentMonth from './ui/current-month';
 import ChangeBtns from './ui/change-bnts';
-import { TimetableStore, lecturerTimetable } from '../../local-store/timetable/timtetable-store';
-import { FType } from '../../shared/helpers/types/f-types';
+import { TimetableStore } from '../../local-store/timetable/timtetable-store';
 
 import './style/index.scss'
-import { observer } from 'mobx-react-lite';
 
 type Props = {
     timetable: TimetableStore

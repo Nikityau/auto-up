@@ -20,12 +20,12 @@ const TimetableProvider = observer(({ timetable }: Props) => {
     const content = useFetchTimetable(timetable)
 
     const getInfoByDate = (date: Date): JSX.Element => {
-        if(!content) return null
+        if (!content) return null
 
-        for(let i = 0; i < content.length; ++i) {
-            if(!content[i].content) continue
+        for (let i = 0; i < content.length; ++i) {
+            if (!content[i].content) continue
 
-            if(datesCompare(date, content[i].date)) {
+            if (datesCompare(date, content[i].date)) {
                 return content[i].content
             }
         }
@@ -38,14 +38,14 @@ const TimetableProvider = observer(({ timetable }: Props) => {
             case "month":
                 return (
                     <TimetableMonth
-                        timetable={timetable}
-                        content={content}
+                        showCurrentDay={true}
+                        date={timetable.timetable.activeDate}
                     >
                         {
                             timetable.timetable.dates.map(d => (
                                 <DateGrid
                                     key={nanoid()}
-                                    day={d.getDate()}
+                                    date={d}
                                 >
                                     {
                                         getInfoByDate(d)

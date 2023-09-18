@@ -1,11 +1,12 @@
 import React from 'react';
 
 import './style/index.scss'
+import { navHistory } from '../../local-store/nav-history/nav-history';
 
 const BackBtn = () => {
 
     const onPrevClick = () => {
-
+        navHistory.goBack()
     }
 
     return (

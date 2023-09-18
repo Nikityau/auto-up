@@ -7,12 +7,12 @@ type Props = {
     timetable: TimetableStore
 }
 
-const CurrentMonth = ({timetable}:Props) => {
+const CurrentMonth = observer(({timetable}:Props) => {
     return (
         <div className='month-change__current'>
             <span>{toMonthStr(timetable.timetable.activeDate.getMonth())} {timetable.timetable.activeDate.getFullYear()}</span>
         </div>
     );
-};
+});
 
 export default CurrentMonth;

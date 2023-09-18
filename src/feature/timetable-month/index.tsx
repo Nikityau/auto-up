@@ -14,24 +14,21 @@ export interface Content {
 }
 
 type Props = {
+    date: Date
     showCurrentDay?: boolean
-    content?: Content[]
-    timetable: TimetableStore
 } & React.PropsWithChildren
 
-const TimetableMonth = ({ children, timetable, content,showCurrentDay = true }: Props) => {
+const TimetableMonth = ({ children, date, showCurrentDay = false }: Props) => {
     return (
-        <MonthProvider>
+        <MonthProvider
+            gridChild={children}
+            date={date}
+            showCurrentDay={showCurrentDay}
+        >
             <div className='timetable-month'>
-            <Weekdays />
-            <Calendar
-                showCurrentDay={showCurrentDay}
-                timetable={timetable}
-                content={content}
-            >
-                {children}
-            </Calendar>
-        </div>
+                <Weekdays />
+                <Calendar />
+            </div>
         </MonthProvider>
     );
 };
