@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { NavHistoryContext } from '../../procceses/nav-history';
 
 import './style/index.scss'
-import { navHistory } from '../../local-store/nav-history/nav-history';
 
 const BackBtn = () => {
+    const {back} = useContext(NavHistoryContext)
 
     const onPrevClick = () => {
-        navHistory.goBack()
+        back()
     }
 
     return (

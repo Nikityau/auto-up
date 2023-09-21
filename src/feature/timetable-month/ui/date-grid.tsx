@@ -5,10 +5,11 @@ import { datesCompare } from '../../../shared/helpers/dates/dates-compare';
 
 type Props = {
     date: Date,
-    isInCurrentMonth?: boolean
+    isInCurrentMonth?: boolean,
+    classNames?: string[]
 } & React.PropsWithChildren
 
-const DateGrid = ({date,isInCurrentMonth = false, children}:Props) => {
+const DateGrid = ({date,isInCurrentMonth = false, children, classNames}:Props) => {
 
     const {showCurrentDay} = useContext(MonthContext)
 
@@ -16,7 +17,8 @@ const DateGrid = ({date,isInCurrentMonth = false, children}:Props) => {
         <div className={cn(
             'date-month',
             isInCurrentMonth && 'date-month_another',
-            datesCompare(new Date(), date) && showCurrentDay && 'date-month_current'
+            datesCompare(new Date(), date) && showCurrentDay && 'date-month_current',
+            classNames
         )}>
             <div className='date-month__date'>
                 <span>

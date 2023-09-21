@@ -16,17 +16,21 @@ export class TimetableStore {
         activeDate: null,
         dates: null
     }
+    who: string = ""
 
-    constructor() {
+    constructor(who: string) {
         makeObservable(this, {
             type: observable,
             timetable: observable,
+            who: observable,
             setType: action,
             nextMonth: action,
             prevMonth: action,
         })
 
-        const localType = sessionStorage.getItem('lecturer-month-type')
+        this.who = who
+
+        const localType = sessionStorage.getItem(`${this.who}-month-type`)
 
         if(localType) {
             this.type = localType as TimetableType
@@ -44,7 +48,7 @@ export class TimetableStore {
 
     setType(type: TimetableType) {
         this.type = type
-        sessionStorage.setItem('lecturer-month-type', type)
+        sessionStorage.setItem(`${this.who}-month-type`, type)
     }
 
 
@@ -77,4 +81,4 @@ export class TimetableStore {
     }
 }
 
-export const lecturerTimetable = new TimetableStore()
+export const lecturerTimetable = new TimetableStore('lecturer')

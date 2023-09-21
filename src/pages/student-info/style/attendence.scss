@@ -1,0 +1,55 @@
+.student-attendce {
+    margin-top: 50px;
+}
+
+.student-attendce__container {
+    margin-top: 60px;
+
+    display: grid;
+    grid-template-columns: 270px auto;
+    gap: 160px;
+
+    .attendence-calendar {
+        .date-month {
+            height: 80px;
+        }
+    }
+
+    .date_vert {
+        grid-template-columns: 196px;
+        grid-template-rows: 40px auto;
+        padding-top: unset;
+        padding-bottom: 22px;
+
+        .date-month__date {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+
+            padding-left: 23px;
+        }
+
+        .date-month__data {
+            padding-top: 8px;
+            padding-left: 23px;
+
+            color: #191617;
+            font-family: Montserrat, sans-serif;
+            font-size: 13px;
+            font-style: normal;
+            font-weight: 400;
+        }
+    }
+}
+
+.date_bg_green {
+    .date-month__date {
+        background: #20B57F;
+    }
+}
+
+.date_bg_red {
+    .date-month__date {
+        background: #FF5544;
+    }
+}

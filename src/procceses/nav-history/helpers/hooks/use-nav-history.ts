@@ -1,24 +1,41 @@
-import { useLocation, Location, useNavigate } from "react-router-dom"
-import { navHistory } from "../../../../local-store/nav-history/nav-history"
 import { useEffect } from "react"
+import { useLocation, Location, useNavigate } from "react-router-dom"
+import equal from "deep-equal"
 
+class NavHistory {
+    private current: Location = null
+    private history: Location[] = []
 
-export const useNavHistory = () => {
-    const loc = useLocation()
-    const nav = useNavigate()
+    add(loc:Location) {
+        if(this.current == null) {
+            this.current == loc
+        }
 
-   
-
-    useEffect(() => {
-        navHistory.add(loc)
-    }, [loc])
-
-    const back = () => {
-        const prevLoc = navHistory.prev()
-        nav(prevLoc)
+        if(!equal(this.current, loc)) {
+            this.history.push(this.current)
+            this.current = loc
+        }
     }
 
+    prev() {
+        return this.history.pop()
+    }
+}
+
+const history = new NavHistory()
+
+export const useNavHistory = () => {
+    const location = useLocation()
+    const nav = useNavigate()
+
     useEffect(() => {
-        navHistory.goBackCb = back
-    }, [])
+        history.add(location)
+        console.log(history);
+    }, [location])
+
+    const goBack = () => {    
+        nav(history.prev().pathname)
+    }
+
+    return goBack
 }

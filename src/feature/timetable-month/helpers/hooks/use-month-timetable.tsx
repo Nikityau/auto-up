@@ -28,9 +28,9 @@ export const useMonthTimetable = (children: React.ReactNode, date: Date) => {
 
     const fillLeft = (grid: any[], date: Date, count: number): any[] => {
         return produce(grid, draft => {
-            const d = new Date(date)
+            let d = new Date(date)
             for(let i = 0; i < count; ++i) {
-                d.setDate(d.getDate() - 1)
+                d = new Date(d.getFullYear(), d.getMonth(), d.getDate() - 1)
                 draft.unshift(dateTemplate(d))
             }
 
@@ -40,9 +40,9 @@ export const useMonthTimetable = (children: React.ReactNode, date: Date) => {
 
     const fillRight = (grid: any[], date:Date, count: number): any[] => {
         return produce(grid, draft => {
-            const d = new Date(date)
+            let d = new Date(date)
             for(let i = 0; i < count; ++i) {
-                d.setDate(d.getDate() + 1)
+                d = new Date(d.getFullYear(), d.getMonth(), d.getDate() + 1)
                 draft.push(dateTemplate(d))
             }
             

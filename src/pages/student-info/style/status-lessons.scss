@@ -1,0 +1,29 @@
+.status-lessons {
+    width: 100%;
+
+    margin-top: 62px;
+
+    .status-lessons__title {
+        color: #000;
+        font-family: Montserrat, sans-serif;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 600;
+    }
+
+    .status-lessons__lessons {
+        margin-top: 20px;
+
+        width: 100%;
+
+        display: grid;
+        grid-template-columns: repeat(8, 22px);
+        gap: 5px;
+    }
+}
+
+.bg_unk {
+    .status-block__status {
+        outline: 2px solid #E3E3E3;
+    }
+}

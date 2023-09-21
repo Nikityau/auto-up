@@ -7,5 +7,7 @@ export const AppRoutes = {
     "knowledgeBase": "knowledge-base",
     "month": "month",
     "week": "week",
-    "day": "day"
+    "day": "day",
 }
+
+export const baseLecturer = `/${AppRoutes.skillget}/${AppRoutes.lecturer}`

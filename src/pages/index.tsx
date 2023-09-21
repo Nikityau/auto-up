@@ -10,6 +10,7 @@ import KnowledgeBase from './knowledge-base';
 import Group from './group';
 import ScheduleDay from './schedule-day';
 import Documnetation from './doc-page';
+import StudentInfo from './student-info';
 
 const AppRouter = () => {
     return (
@@ -22,7 +23,7 @@ const AppRouter = () => {
                     <Route path={`${AppRoutes.timetable}/day/:id`} element={<ScheduleDay/>}/>
                     <Route path={AppRoutes.groups} element={<Groups/>}/>
                     <Route path={`${AppRoutes.groups}/:id`} element={<Group/>}/>
-                    <Route path={`${AppRoutes.groups}/:groupId/students/:studentId`} element={'student'}/>
+                    <Route path={`${AppRoutes.groups}/:groupId/students/:studentId`} element={<StudentInfo/>}/>
                     <Route path={AppRoutes.knowledgeBase} element={<KnowledgeBase/>}/>
                     <Route path={`${AppRoutes.knowledgeBase}/:id`} element={<Documnetation/>}/>
 

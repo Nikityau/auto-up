@@ -1,0 +1,40 @@
+.status-block {
+    display: grid;
+    grid-template-columns: 22px auto;
+    gap: 12px;
+
+    .status-block__status {
+        width: 22px;
+        height: 22px;
+
+        border-radius: 5px;
+        
+        align-self: center;
+    }
+
+    .status-block__text {
+        width: 100%;
+    
+        color: #000;
+        font-family: Montserrat, sans-serif;
+        font-size: 13px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+
+        align-self: center;
+    }
+
+}
+
+.bg_red {
+    .status-block__status {
+        background: #F54;
+    }
+}
+
+.bg_green {
+    .status-block__status {
+        background: #20B57F;
+    }
+}
