@@ -3,6 +3,7 @@ import StudentMiniInfo from './ui/student-mini-info';
 import StudentInfoProvider from './provider';
 import { TimetableStore } from '../../local-store/timetable/timtetable-store';
 import Attendence from './ui/attendence';
+import StudentSuccess from './ui/student-success';
 
 import './style/index.scss'
 
@@ -15,6 +16,7 @@ const StudentInfo = () => {
                 <div className='sutendt-info__container app-container'>
                     <StudentMiniInfo />
                     <Attendence/>
+                    <StudentSuccess/>
                 </div>
             </div>
         </StudentInfoProvider>

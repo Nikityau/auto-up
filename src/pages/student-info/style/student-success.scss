@@ -1,0 +1,11 @@
+.student-success {
+    .student-success__container {
+        margin-top: 50px;
+
+        height: 600px;
+
+        display: grid;
+        grid-template-columns: 270px 850px 270px;
+        gap: 165px;
+    }
+}
