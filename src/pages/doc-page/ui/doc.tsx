@@ -14,6 +14,7 @@ const Doc = () => {
     return (
         <div className='doc-page__doc'>
             <Swiper
+                //@ts-ignore
                 direction={'vertical'}
                 slidesPerView={'auto'}
                 spaceBetween={140}

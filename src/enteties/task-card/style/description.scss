@@ -1,0 +1,26 @@
+.task-card__description {
+  margin-top: 10px;
+
+  color: #9FA0A5;
+  font-family: Montserrat, sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+
+  .task-card__descr {
+    margin-top: 15px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    span {
+      &:before {
+        content: '-';
+        margin-left: 10px;
+        margin-right: 10px;
+      }
+    }
+  }
+}

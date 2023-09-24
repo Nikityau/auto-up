@@ -1,21 +1,21 @@
 import React from 'react';
-import { TaskBlock } from '../../pages/schedule-day/store/interface';
 import Block from './ui/block';
 
 import './style/index.scss'
 
 type Props = {
-    taskBlock: TaskBlock[]
+    taskBlock: any[]
 }
 
 const TaskBlock = ({ taskBlock }: Props) => {
     return (
         <div className='task-block'>
             {
-                taskBlock.map(tb => (
+                taskBlock?.map((tb, i) => (
                     <Block
                         key={tb.id}
                         block={tb}
+                        number={i + 1}
                     />
                 ))
             }

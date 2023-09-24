@@ -6,12 +6,13 @@ import './style/index.scss'
 
 type Props = {
     title: JSX.Element,
-    classNames?: string[]
+    classNames?: string[],
+    isOpen?: boolean
 } & React.PropsWithChildren
 
-const InfoBlock = ({ title, children, classNames }: Props) => {
+const InfoBlock = ({ title, children, classNames, isOpen = false }: Props) => {
 
-    const [is, { swtch }] = useToggle()
+    const [is, { swtch }] = useToggle(isOpen)
 
     return (
         <div className={cn(

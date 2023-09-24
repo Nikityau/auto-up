@@ -1,33 +1,25 @@
 import React from 'react';
-import { TaskBlock } from '../../../pages/schedule-day/store/interface';
-import Task from './task';
+import Tasks from './tasks';
+import {TasksBlock} from "../../../shared/data/interface/tasks-block.interface";
 
 type Props = {
-    block: TaskBlock
+    block: TasksBlock,
+    number: number
 }
 
-const Block = ({ block }: Props) => {
+const Block = ({ block, number }: Props) => {
     return (
         <div className='task-block__block'>
             <div className='task-block__title'>
-                <span>{block.subtitle}</span>
-            </div>
-            <div className='task-block__tasks'>
-                <div className='task-block__tasks-title'>
-                    <span>{block.title}</span>
-                </div>
-                <div className='task-block__task-list'>
-                    {
-                        block.tasks.map((task, i) => (
-                            <Task
-                                key={task.id}
-                                task={task}
-                                number={i + 1}
-                            />
-                        ))
+                <span>
+                    Б-{
+                        number < 10 
+                        ? `0${number}`
+                        : number
                     }
-                </div>
+                </span>
             </div>
+            <Tasks block={block}/>
         </div>
     );
 };

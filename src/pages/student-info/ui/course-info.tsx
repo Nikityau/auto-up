@@ -1,13 +1,13 @@
 import React from 'react';
-import { stAttStatus } from '../data/student';
+import {studentAttendance, studentBaseInfo} from "../data/student-info";
 
 const CourseInfo = () => {
     return (
         <div className='course-info'>
-            <p>{stAttStatus.group}</p>
+            <p>{studentBaseInfo.group}</p>
             <p>Курс: 
                 <span>
-                    {stAttStatus.course}
+                    {studentAttendance.course}
                 </span>
             </p>
         </div>

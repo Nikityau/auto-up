@@ -1,0 +1,21 @@
+.student-timetable {
+  padding-top: 110px;
+
+  .student-timetable__container {
+
+  }
+
+  .student-timetable__wrapper {
+    display: grid;
+    grid-template-columns: 270px auto;
+    gap: 15px;
+
+    margin-top: 64px;
+  }
+
+  .student-timetable__filter {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+}

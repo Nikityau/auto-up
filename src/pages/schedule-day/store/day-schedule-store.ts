@@ -1,10 +1,10 @@
 import { action, computed, makeObservable, observable } from "mobx"
-import { Schedule } from "./interface"
-import { schedule } from "./state"
+import {StudentSchedule} from "../../../shared/data/interface/student-schedule.interface";
+import {studentSchedule} from "../../../shared/data/student-schedule";
 
 export class DayScheduleStore {
     tab: string = null
-    schedule: Schedule[] = null
+    schedule: StudentSchedule[] = null
 
     constructor() {
         makeObservable(this, {
@@ -16,8 +16,8 @@ export class DayScheduleStore {
             tasks: computed
         })
 
-        this.schedule = schedule
-        this.tab = this.schedule[0].id
+        this.schedule = studentSchedule
+        this.tab = this.schedule[0]?.id || null
     }
 
     setTab(tab: string) {
@@ -25,7 +25,7 @@ export class DayScheduleStore {
     }
 
     get students() {
-        return this.schedule.find((s) => s.id == this.tab).students
+        return this.schedule.find((s) => s.id == this.tab)?.students
     }
 
     get currentSchedule() {

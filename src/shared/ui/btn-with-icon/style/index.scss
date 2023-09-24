@@ -1,0 +1,31 @@
+.btn-with-icon {
+  width: fit-content;
+
+  padding: 7px 20px;
+
+  border-radius: 10px;
+  border: 1px solid #191617;
+
+  color: #191617;
+  font-family: Montserrat, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+  .btn-with-icon__continue {
+    width: 30px;
+    height: 30px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 50%;
+    background: #191617;
+  }
+}

@@ -11,22 +11,22 @@ const LessonInfo = observer(({ schedule }: Props) => {
     return (
         <div className='schedule-day__lesson-info'>
             <div className='schedule-day__day'>
-                <span>0{schedule.currentSchedule.date.getDay()}</span>
-                <span>{toWeekDayStr(schedule.currentSchedule.date.getDay())}</span>
+                <span>0{schedule.currentSchedule?.date?.getDay() || "null"}</span>
+                <span>{toWeekDayStr(schedule.currentSchedule?.date?.getDay())}</span>
             </div>
             <div className='schedule-day__lesson-container'>
                 <div className='schedule-day__lesson-description'>
                     <div className='schedule-day__lesson-title'>
-                        <span>Группа {schedule.currentSchedule.groupTitle}</span>
-                        <span>Курс: {schedule.currentSchedule.courseTitle}</span>
+                        <span>Группа {schedule.currentSchedule?.groupTitle || "null"}</span>
+                        <span>Курс: {schedule.currentSchedule?.courseTitle || "null"}</span>
                     </div>
                     <div className='schedule-day__lesson-theme'>
-                        <span>{schedule.currentSchedule.lessonTitle}</span>
+                        <span>{schedule.currentSchedule?.lessonTitle || "null"}</span>
                     </div>
                     <div className='schedule-day__line'>
                     </div>
                     <div className='schedule-day__time'>
-                        <span>{schedule.currentSchedule.timeStart} — {schedule.currentSchedule.timeEnd}</span>
+                        <span>{schedule.currentSchedule?.timeStart || "null"} — {schedule.currentSchedule?.timeEnd || "null"}</span>
                     </div>
                 </div>
                 <div className='schedule-day__addon-materials'>
@@ -34,7 +34,7 @@ const LessonInfo = observer(({ schedule }: Props) => {
                         <span>Дополнительные материалы</span>
                     </div>
                     {
-                        schedule.currentSchedule.addonFiles.map(f => (
+                        schedule.currentSchedule?.addonFiles.map(f => (
                             <div className='schedule-day__addon-file'
                                 key={f.id}
                             >

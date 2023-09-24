@@ -1,10 +1,9 @@
-import { AddonFile, TaskBlock } from "../../../../pages/schedule-day/store/interface"
 
 export interface Lesson {
     id: string,
     title: string,
-    tasks: TaskBlock[],
-    addonMaterial: AddonFile[]
+    tasks: any[],
+    addonMaterial: any[]
 }
 
 export interface DocModule {

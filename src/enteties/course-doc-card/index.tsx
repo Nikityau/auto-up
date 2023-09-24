@@ -1,4 +1,5 @@
 import React from 'react';
+import ButtonWithIcon from "../../shared/ui/btn-with-icon";
 
 import './style/index.scss'
 
@@ -15,14 +16,7 @@ const CourseDocCard = ({ id, preview, title }: Props) => {
                 <p>Курс программирования</p>
                 <p>{title}</p>
             </div>
-            <div className='course-doc-card__btn'>
-                <span>Продолжить</span>
-                <div className='course-doc-card__continue'>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                        <path d="M10 17L15 12L10 7" stroke="white" />
-                    </svg>
-                </div>
-            </div>
+            <ButtonWithIcon title={'Продолжить'}/>
             <div className='course-doc-card__preview'>
                 <img src={preview} alt={'preview'} />
             </div>

@@ -9,13 +9,17 @@ import Groups from './groups';
 import KnowledgeBase from './knowledge-base';
 import Group from './group';
 import ScheduleDay from './schedule-day';
-import Documnetation from './doc-page';
+import Documentation from './doc-page';
 import StudentInfo from './student-info';
+import StudentCourse from "./student-course";
+import StudentTimetable from "./student-timetable";
+
+import {userStore} from "../local-store/user/user-store";
 
 const AppRouter = () => {
     return (
         <Routes>
-            <Route path={AppRoutes.skillget} element={<BasePage/>}>
+            <Route path={AppRoutes.skillget} element={<BasePage user={userStore}/>}>
                 <Route path={AppRoutes.auth} element={<AuthPage/>}/>
 
                 <Route path={AppRoutes.lecturer} element={<Platform/>}>
@@ -25,9 +29,16 @@ const AppRouter = () => {
                     <Route path={`${AppRoutes.groups}/:id`} element={<Group/>}/>
                     <Route path={`${AppRoutes.groups}/:groupId/students/:studentId`} element={<StudentInfo/>}/>
                     <Route path={AppRoutes.knowledgeBase} element={<KnowledgeBase/>}/>
-                    <Route path={`${AppRoutes.knowledgeBase}/:id`} element={<Documnetation/>}/>
+                    <Route path={`${AppRoutes.knowledgeBase}/:id`} element={<Documentation/>}/>
 
                     <Route path={''} element={<Navigate to={AppRoutes.timetable}/>}/>
+                </Route>
+
+                <Route path={AppRoutes.student} element={<Platform/>}>
+                    <Route path={AppRoutes.course} element={<StudentCourse/>}/>
+                    <Route path={AppRoutes.timetable} element={<StudentTimetable/>}/>
+
+                    <Route path={''} element={<Navigate to={AppRoutes.course}/>}/>
                 </Route>
 
                 <Route path={''} element={<Navigate to={AppRoutes.auth}/>}/>

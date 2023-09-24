@@ -3,7 +3,7 @@ import { action, makeObservable, observable } from "mobx"
 export class AuthStore {
     login: string = ""
     password: string = ""
-    isRemeber: boolean = true
+    isRemember: boolean = true
 
     authCb = null
 
@@ -11,16 +11,16 @@ export class AuthStore {
         makeObservable(this, {
             login: observable,
             password: observable,
-            isRemeber: observable,
-            switchRemeber: action,
+            isRemember: observable,
+            switchRemember: action,
             setLogin: action,
             setPassword: action,
             auth: action
         })
     }
 
-    switchRemeber() {
-        this.isRemeber = !this.isRemeber
+    switchRemember() {
+        this.isRemember = !this.isRemember
     }
 
     setLogin(login: string) {

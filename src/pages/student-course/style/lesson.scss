@@ -1,0 +1,20 @@
+.lesson {
+  padding: 9px 25px;
+  border-radius: 7px;
+
+  color: #191617;
+  font-family: Montserrat, sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+
+  cursor: pointer;
+}
+.lesson_current {
+  font-size: 20px;
+  font-weight: 600;
+  color: #fff;
+
+  background: #000;
+}

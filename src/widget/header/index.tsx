@@ -1,12 +1,12 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import HeaderChoser from './ui/header-choser';
-import { userStore } from '../../store/user-store';
 import PlatformLogo from './ui/platform-logo';
-import { Link } from 'react-router-dom';
+import {baseLecturer} from '../../shared/app-routes';
+import {userStore} from "../../local-store/user/user-store";
+import UserBar from "../user-bar";
 
 import './style/index.scss'
-import { baseLecturer } from '../../shared/app-routes';
-
 
 
 const Header = () => {
@@ -14,12 +14,13 @@ const Header = () => {
         <div className='header'>
             <div className='header__container app-container'>
                 <Link to={baseLecturer}>
-                    <PlatformLogo />
+                    <PlatformLogo/>
                 </Link>
                 <div className='header__nav-links'>
                     <HeaderChoser
-                        role={userStore.role}
+                        user={userStore}
                     />
+                    <UserBar/>
                 </div>
             </div>
         </div>

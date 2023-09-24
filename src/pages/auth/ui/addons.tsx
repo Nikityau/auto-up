@@ -8,9 +8,9 @@ const Addons = () => {
     return (
         <div className='auth-form__addon-info'>
             <AuthSwitcher
-                state={authStore.isRemeber}
+                state={authStore.isRemember}
                 onChagnge={() => {
-                    authStore.switchRemeber()
+                    authStore.switchRemember()
                 }}
             />
             <div className='auth-form__forgot-password'>

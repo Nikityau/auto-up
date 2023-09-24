@@ -15,7 +15,8 @@ const StudentsList = observer(({ schedule }: Props) => {
     return (
         <div className='schedule-day__students-list'>
             <Swiper
-                direction='vertical'
+                //@ts-ignore
+                direction={'vertical'}
                 slidesPerView={'auto'}
                 spaceBetween={16}
                 mousewheel={true}
@@ -24,11 +25,11 @@ const StudentsList = observer(({ schedule }: Props) => {
                 ]}
             >
                 {
-                    schedule.students.map((st, i) => (
+                    schedule?.students?.map((st, i) => (
                         <SwiperSlide
                             key={st.id}
                         >
-                            <StudentDayCard 
+                            <StudentDayCard
                                 id={st.id}
                                 avatar={st.avatar}
                                 name={st.name}

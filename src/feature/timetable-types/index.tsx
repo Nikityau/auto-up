@@ -1,7 +1,7 @@
 import React from 'react';
 import Type from './ui/type';
 import { nanoid } from 'nanoid';
-import { TimetableType, lecturerTimetable } from '../../local-store/timetable/timtetable-store';
+import {TimetableType, TimetableStore} from '../../local-store/timetable/timtetable-store';
 
 import './style/index.scss'
 
@@ -29,7 +29,11 @@ const types: Types[] = [
     }
 ]
 
-const TimetableTypes = () => {
+type Props = {
+    timetable: TimetableStore
+}
+
+const TimetableTypes = ({timetable}:Props) => {
     return (
         <div className='timetable-types'>
             {
@@ -38,7 +42,7 @@ const TimetableTypes = () => {
                         text={t.text}
                         type={t.type}
                         key={t.id}
-                        timetable={lecturerTimetable}
+                        timetable={timetable}
                     />
                 ))
             }

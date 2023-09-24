@@ -1,0 +1,14 @@
+.student-success-card__title {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+
+  .student-success-card__lesson,
+  .student-success-card__theme {
+    color: #000;
+    font-family: Montserrat, sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+  }
+}

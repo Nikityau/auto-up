@@ -14,7 +14,7 @@ const ModuleListProvider = ({children, modules, onChange}: Props) => {
 
     const setCurrentModule = (value: typeof modules[0]) => {
         setCurrent(value)
-        onChange(value)
+        onChange?.(value)
     }
 
     return (

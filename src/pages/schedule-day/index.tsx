@@ -1,8 +1,8 @@
 import React from 'react';
 import Students from './ui/students';
+import Schedule from './ui/schedule';
 
 import './style/index.scss'
-import Schedule from './ui/schedule';
 
 const ScheduleDay = () => {
     return (

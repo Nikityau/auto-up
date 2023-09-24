@@ -9,7 +9,9 @@ const Filters = () => {
             <MonthChange
                 timetable={lecturerTimetable}
             />
-            <TimetableTypes/>
+            <TimetableTypes
+                timetable={lecturerTimetable}
+            />
         </div>
     );
 };

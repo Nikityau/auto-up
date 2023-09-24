@@ -1,21 +1,21 @@
 import React from 'react';
 import MonthChange from '../../../feature/month-change';
-import { studentAttendceCalendar } from '..';
+import { studentAttendanceCalendar } from '..';
 import CourseInfo from './course-info';
-import AttendenceInfo from './attendence-info';
+import AttendanceInfo from './attendance-info';
 
-const AttendenceSideBar = () => {
+const AttendanceSideBar = () => {
     return (
         <div className='student-attendce__side-bar'>
             <MonthChange
-                timetable={studentAttendceCalendar}
+                timetable={studentAttendanceCalendar}
             />
             <div className='student-attendce__side-bar-wrrapper'>
                 <CourseInfo />
-                <AttendenceInfo />
+                <AttendanceInfo />
             </div>
         </div>
     );
 };
 
-export default AttendenceSideBar;
+export default AttendanceSideBar;

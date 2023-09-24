@@ -1,20 +1,26 @@
 import React from 'react';
 import {Outlet} from 'react-router-dom'
+import {observer} from "mobx-react-lite";
 
 import bg from './assets/grid.svg'
+import {UserStore} from "../../local-store/user/user-store";
 
 import './style/index.scss'
 
-const BasePage = () => {
+type Props = {
+    user: UserStore
+}
+
+const BasePage = observer(({user}:Props) => {
     return (
         <div className='app'
-            style={{
-                backgroundImage: `url(${bg})`
-            }}
+             style={{
+                 backgroundImage: user.role == 'student' ? `url(${bg})` : null
+             }}
         >
             <Outlet/>
         </div>
     );
-};
+});
 
 export default BasePage;

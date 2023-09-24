@@ -1,8 +1,7 @@
 import React from 'react';
-import { Task, TaskBlock } from '../store/interface';
 
 type Props = {
-    taskBlock: TaskBlock
+    taskBlock: any
 }
 
 const LessonTaskBlock = ({taskBlock}: Props) => {

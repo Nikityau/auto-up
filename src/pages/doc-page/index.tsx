@@ -1,13 +1,12 @@
 import React from 'react';
 import BackBtn from '../../feature/back-btn';
-import PageTitle from '../../shared/ui/page-title';
 import DocPageProvider from './provider/doc-page-provider';
 import Doc from './ui/doc';
 import Title from './ui/title';
 
 import './style/index.scss'
 
-const Documnetation = () => {
+const Documentation = () => {
     return (
        <DocPageProvider>
          <div className='doc-page'>
@@ -23,4 +22,4 @@ const Documnetation = () => {
     );
 };
 
-export default Documnetation;
+export default Documentation;

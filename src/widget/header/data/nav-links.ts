@@ -27,27 +27,12 @@ export const lecturerLinks: NavLink[] = [
 export const studentLinks: NavLink[] = [
     {
         id: nanoid(),
-        text: 'главная',
-        link: ''
+        text: 'Курс',
+        link: 'course'
     },
     {
         id: nanoid(),
-        text: 'достижения',
-        link: ''
-    },
-    {
-        id: nanoid(),
-        text: 'расписание',
-        link: ''
-    },
-    {
-        id: nanoid(),
-        text: 'мой класс',
-        link: ''
-    },
-    {
-        id: nanoid(),
-        text: 'мои дипломы',
-        link: ''
+        text: 'Расписание',
+        link: 'timetable'
     },
 ]

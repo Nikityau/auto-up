@@ -16,7 +16,7 @@ const LesssonTasks = observer(({ schedule }: Props) => {
             <div className='schedule-day__tasks'>
                 <TaskBlock
                     taskBlock={
-                        schedule.currentSchedule.tasks
+                        schedule.currentSchedule?.tasks
                     }
                 />
             </div>

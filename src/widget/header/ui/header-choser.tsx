@@ -2,16 +2,17 @@ import React from 'react';
 import { observer } from 'mobx-react-lite';
 import HeaderStudent from './header-student';
 import HeaderLecturer from './header-lecturer';
+import {UserStore} from "../../../local-store/user/user-store";
 
 type Props = {
-    role: string
+    user: UserStore
 }
 
-const HeaderChoser = observer(({role}:Props) => {
+const HeaderChoser = observer(({user}:Props) => {
     return (
         <>
             {
-                role == 'student' 
+                user.role == 'student'
                 ? <HeaderStudent/>
                 : <HeaderLecturer/>
             }

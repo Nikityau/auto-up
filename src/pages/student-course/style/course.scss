@@ -1,0 +1,9 @@
+.student-course {
+  padding-top: 120px;
+
+  .student-course__container {
+    display: grid;
+    grid-template-columns: 270px auto;
+    gap: 20px;
+  }
+}

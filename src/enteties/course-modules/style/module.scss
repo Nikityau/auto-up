@@ -1,0 +1,24 @@
+.course-modules__module {
+  padding: 14px 24px;
+
+  text-align: left;
+
+  border-radius: 3.2px;
+  border: 1.6px solid #F9F9F9;
+
+  cursor: pointer;
+
+  color: #000;
+  font-family: Montserrat, sans-serif;
+  font-size: 12.8px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.course-modules__module_current {
+  background: #000;
+
+  color: #fff;
+  font-size: 14px;
+}

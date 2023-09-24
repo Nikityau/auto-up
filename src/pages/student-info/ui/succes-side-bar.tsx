@@ -16,6 +16,7 @@ const SuccessSideBar = () => {
                 ]}
             />
             <InfoBlock
+                isOpen={true}
                 title={
                     <span>
                         Информация
@@ -25,7 +26,7 @@ const SuccessSideBar = () => {
                     'tasks-info'
                 ]}
             >
-                <TaskInfo/>
+                <TaskInfo />
             </InfoBlock>
         </div>
     );
