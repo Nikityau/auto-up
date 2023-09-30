@@ -1,0 +1,29 @@
+.test-page__btn {
+  justify-self: flex-end;
+
+  width: fit-content;
+
+  padding: 15px 30px;
+
+  border-radius: 6px;
+  background: #191617;
+
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+  color: #FFF;
+  font-family: Montserrat, sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+
+  cursor: pointer;
+
+  .test-page__btn-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

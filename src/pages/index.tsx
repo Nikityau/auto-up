@@ -15,7 +15,8 @@ import StudentCourse from "./student-course";
 import StudentTimetable from "./student-timetable";
 
 import {userStore} from "../local-store/user/user-store";
-import CodeEditor from "./code-editor";
+import Test from "./test";
+import TestFinished from "./test-finish";
 
 const AppRouter = () => {
     return (
@@ -38,7 +39,8 @@ const AppRouter = () => {
                 <Route path={AppRoutes.student} element={<Platform/>}>
                     <Route path={AppRoutes.course} element={<StudentCourse/>}/>
                     <Route path={AppRoutes.timetable} element={<StudentTimetable/>}/>
-                    <Route path={'code-editor'} element={<CodeEditor/>}/>
+                    <Route path={`${AppRoutes.course}/test/:id`} element={<Test/>}/>
+                    <Route path={`${AppRoutes.course}/test/:id/finished`} element={<TestFinished/>}/>
 
                     <Route path={''} element={<Navigate to={AppRoutes.course}/>}/>
                 </Route>

@@ -1,0 +1,29 @@
+.test-page__task-num {
+  width: 32px;
+  height: 32px;
+
+  border-radius: 4.8px;
+  border: 1px solid #4F4B5C;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+
+  color: #4F4B5C;
+  text-align: center;
+  font-family: Montserrat, sans-serif;
+  font-size: 15.36px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+
+  cursor: pointer;
+}
+
+.test-page__task-num_current {
+  color: #FFF;
+}

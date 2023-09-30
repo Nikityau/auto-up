@@ -1,0 +1,31 @@
+.test-finished {
+  padding-top: 110px;
+
+  .test-finished__container {
+    padding: 40px;
+
+    border-radius: 25px;
+    background: #FFF;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+}
+
+.test-finished__btn {
+  width: fit-content;
+
+  border-radius: 4px;
+  background: #191617;
+
+  padding: 17px 101px;
+
+  color: #FFF;
+  text-align: center;
+  font-family: Montserrat,sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}

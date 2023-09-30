@@ -1,6 +1,6 @@
 import React from 'react';
 import cn from 'classnames'
-import { FType } from '../../../shared/helpers/types/f-types';
+import { FType } from '../../helpers/types/f-types';
 
 import './style/index.scss'
 

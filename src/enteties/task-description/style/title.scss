@@ -1,0 +1,17 @@
+.task-description__title {
+  display: flex;
+  flex-direction: column;
+
+  color: #191617;
+  font-family: Montserrat, sans-serif;
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+
+  span {
+    &:nth-child(2) {
+      font-size: 16px;
+    }
+  }
+}
