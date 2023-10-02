@@ -15,7 +15,7 @@ const BasePage = observer(({user}:Props) => {
     return (
         <div className='app'
              style={{
-                 backgroundImage: user.role == 'student' ? `url(${bg})` : null
+                 backgroundImage: user.role == 'lecturer' ? null : `url(${bg})`
              }}
         >
             <Outlet/>

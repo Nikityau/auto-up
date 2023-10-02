@@ -9,7 +9,8 @@ export const AppRoutes = {
     "week": "week",
     "day": "day",
     "student": "student",
-    "course": "course"
+    "course": "course",
+    "test": "test"
 }
 
 export const baseLecturer = `/${AppRoutes.skillget}/${AppRoutes.lecturer}`

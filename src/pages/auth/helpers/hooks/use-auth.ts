@@ -1,4 +1,4 @@
-import {useEffect} from "react"
+import { Key, useEffect } from "react";
 import {useNavigate} from "react-router-dom"
 import {authStore} from "../../store"
 import {AppRoutes} from "../../../../shared/app-routes"
@@ -7,6 +7,21 @@ import {userStore} from "../../../../local-store/user/user-store";
 export const useAuth = () => {
 
     const nav = useNavigate()
+
+    useEffect(() => {
+        const keyEvent = (e: KeyboardEvent) => {
+            if(e.key == 'Enter') {
+                authStore.auth()
+            }
+        }
+
+        window.addEventListener('keydown', keyEvent)
+
+        return () => {
+            window.removeEventListener('keydown', keyEvent)
+        }
+
+    }, [])
 
     useEffect(() => {
         authStore.setAuthCb(auth)

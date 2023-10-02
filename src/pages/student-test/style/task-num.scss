@@ -1,0 +1,28 @@
+.student-test__task-num {
+  width: 32px;
+  height: 32px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  border-radius: 4.8px;
+  border: 1px solid #4F4B5C;
+
+  color: #4F4B5C;
+  text-align: center;
+  font-family: Montserrat, sans-serif;
+  font-size: 15.36px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+
+  cursor: pointer;
+}
+
+.student-test__task-num_current {
+  color: #fff;
+}

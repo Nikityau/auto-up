@@ -1,0 +1,16 @@
+.student-test {
+  padding-top: 110px;
+
+  .student-test__container {
+   display: grid;
+    grid-template-columns: 35px auto;
+    grid-template-rows: 640px;
+    gap: 24px;
+  }
+
+  .student-test__tasks-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+}

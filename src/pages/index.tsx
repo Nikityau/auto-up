@@ -1,53 +1,60 @@
-import React from 'react';
-import {Routes, Route, Navigate} from 'react-router-dom'
+import React, {Suspense} from 'react';
+import {
+    Routes,
+    Route,
+    Navigate,
+} from "react-router-dom";
 import { AppRoutes } from '../shared/app-routes';
-import AuthPage from './auth';
 import BasePage from './base';
 import Platform from './platform';
-import Timetable from './timetable';
-import Groups from './groups';
-import KnowledgeBase from './knowledge-base';
-import Group from './group';
-import ScheduleDay from './schedule-day';
-import Documentation from './doc-page';
-import StudentInfo from './student-info';
-import StudentCourse from "./student-course";
-import StudentTimetable from "./student-timetable";
 
 import {userStore} from "../local-store/user/user-store";
-import CodeEditor from "./code-editor";
+import StudentTest from "./student-test";
+
+const StudentCourseLazy = React.lazy(() => import('./student-course'))
+const StudentTimetableLazy = React.lazy(() => import('./student-timetable'))
+const AuthPageLazy = React.lazy(() => import('./auth'))
+const TimetableLazy = React.lazy(() => import('./timetable'))
+const GroupsLazy = React.lazy(() => import('./groups'))
+const GroupLazy = React.lazy(() => import('./group'))
+const KnowledgeBaseLazy = React.lazy(() => import('./knowledge-base'))
+const ScheduleDayLazy = React.lazy(() => import('./schedule-day'))
+const DocumentationLazy = React.lazy(() => import('./doc-page'))
+const StudentInfoLazy = React.lazy(() => import('./student-info'))
 
 const AppRouter = () => {
     return (
-        <Routes>
-            <Route path={AppRoutes.skillget} element={<BasePage user={userStore}/>}>
-                <Route path={AppRoutes.auth} element={<AuthPage/>}/>
+       <Suspense fallback={'...loading'}>
+           <Routes>
+               <Route path={AppRoutes.skillget} element={<BasePage user={userStore}/>} >
+                   <Route path={AppRoutes.auth} element={<AuthPageLazy/>}/>
 
-                <Route path={AppRoutes.lecturer} element={<Platform/>}>
-                    <Route path={AppRoutes.timetable} element={<Timetable/>}/>
-                    <Route path={`${AppRoutes.timetable}/day/:id`} element={<ScheduleDay/>}/>
-                    <Route path={AppRoutes.groups} element={<Groups/>}/>
-                    <Route path={`${AppRoutes.groups}/:id`} element={<Group/>}/>
-                    <Route path={`${AppRoutes.groups}/:groupId/students/:studentId`} element={<StudentInfo/>}/>
-                    <Route path={AppRoutes.knowledgeBase} element={<KnowledgeBase/>}/>
-                    <Route path={`${AppRoutes.knowledgeBase}/:id`} element={<Documentation/>}/>
+                   <Route path={AppRoutes.lecturer} element={<Platform/>}>
+                       <Route path={AppRoutes.timetable} element={<TimetableLazy/>}/>
+                       <Route path={`${AppRoutes.timetable}/day/:id`} element={<ScheduleDayLazy/>}/>
+                       <Route path={AppRoutes.groups} element={<GroupsLazy/>}/>
+                       <Route path={`${AppRoutes.groups}/:id`} element={<GroupLazy/>}/>
+                       <Route path={`${AppRoutes.groups}/:groupId/students/:studentId`} element={<StudentInfoLazy/>}/>
+                       <Route path={AppRoutes.knowledgeBase} element={<KnowledgeBaseLazy/>}/>
+                       <Route path={`${AppRoutes.knowledgeBase}/:id`} element={<DocumentationLazy/>}/>
 
-                    <Route path={''} element={<Navigate to={AppRoutes.timetable}/>}/>
-                </Route>
+                       <Route path={''} element={<Navigate to={AppRoutes.timetable}/>}/>
+                   </Route>
 
-                <Route path={AppRoutes.student} element={<Platform/>}>
-                    <Route path={AppRoutes.course} element={<StudentCourse/>}/>
-                    <Route path={AppRoutes.timetable} element={<StudentTimetable/>}/>
-                    <Route path={'code-editor'} element={<CodeEditor/>}/>
+                   <Route path={AppRoutes.student} element={<Platform/>}>
+                       <Route path={AppRoutes.course} element={<StudentCourseLazy/>}/>
+                       <Route path={AppRoutes.timetable} element={<StudentTimetableLazy/>}/>
+                       <Route path={`${AppRoutes.course}/${AppRoutes.test}/:id`} element={<StudentTest/>}/>
 
-                    <Route path={''} element={<Navigate to={AppRoutes.course}/>}/>
-                </Route>
+                       <Route path={''} element={<Navigate to={AppRoutes.course}/>}/>
+                   </Route>
 
-                <Route path={''} element={<Navigate to={AppRoutes.auth}/>}/>
-            </Route> 
+                   <Route path={''} element={<Navigate to={AppRoutes.auth}/>}/>
+               </Route>
 
-            <Route path={''} element={<Navigate to={AppRoutes.skillget}/>}/>
-        </Routes>
+               <Route path={''} element={<Navigate to={AppRoutes.skillget}/>}/>
+           </Routes>
+       </Suspense>
     );
 };
 

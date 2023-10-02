@@ -71,6 +71,7 @@ module.exports = (env) => {
             }),
             new MiniCssExtractPlugin({
                 filename: 'css/[name].[contenthash].bundle.css',
+                ignoreOrder: true
             }),
         ],
         module: {
