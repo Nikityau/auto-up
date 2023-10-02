@@ -1,5 +1,5 @@
 import React from 'react';
-import { AddonFile } from '../../pages/schedule-day/store/interface.ts';
+import { AddonFile } from '../../pages/schedule-day/store/interface.ts.ts';
 
 import './style/index.scss'
 

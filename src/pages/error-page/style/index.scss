@@ -1,0 +1,31 @@
+.error-page {
+  padding-top: 110px;
+
+  .page-title {
+    font-size: 50px;
+  }
+
+  .error-page__home,
+  .error-page__text {
+    color: #191617;
+    font-family: Montserrat,sans-serif;
+    font-size: 22px;
+    font-style: normal;
+  }
+
+  .error-page__home {
+    width: fit-content;
+
+    margin-top: 50px;
+
+    padding: 5px 20px;
+
+    color: #fff;
+    
+    border: 1px solid #000;
+    background: #000;
+    border-radius: 10px;
+
+    cursor: pointer;
+  }
+}

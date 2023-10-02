@@ -9,7 +9,7 @@ import BasePage from "./base";
 import Platform from "./platform";
 
 import { userStore } from "../local-store/user/user-store";
-import { QueryClient, QueryClientProvider } from "react-query";
+import ErrorPage from "./error-page";
 
 const StudentCourseLazy = React.lazy(() => import("./student-course"));
 const StudentTimetableLazy = React.lazy(() => import("./student-timetable"));
@@ -30,6 +30,7 @@ const AppRouter = () => {
       <Routes>
         <Route path={AppRoutes.skillget} element={<BasePage user={userStore} />}>
           <Route path={AppRoutes.auth} element={<AuthPageLazy />} />
+          <Route path={`error/:name`} element={<ErrorPage/>}/>
 
           <Route path={AppRoutes.lecturer} element={<Platform />}>
             <Route path={AppRoutes.timetable} element={<TimetableLazy />} />
@@ -52,6 +53,8 @@ const AppRouter = () => {
           </Route>
 
           <Route path={""} element={<Navigate to={AppRoutes.auth} />} />
+
+
         </Route>
 
         <Route path={""} element={<Navigate to={AppRoutes.skillget} />} />

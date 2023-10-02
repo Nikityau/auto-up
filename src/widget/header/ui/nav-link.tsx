@@ -8,8 +8,6 @@ type Props = {
 }
 
 const NavLinkApp = ({ link, text }: Props) => {
-
-
     return (
         <NavLink to={link}
             className={({isActive}) => isActive ? 'nav-link__current' : ''}

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import logo_img from '../assets/logo-icon.png'
+import logo_img from '../assets/logo3.svg'
 
 const PlatformLogo = () => {
     return (

@@ -1,0 +1,30 @@
+.support-icon__list {
+  position: absolute;
+  top: 0;
+
+  height: 100%;
+
+  z-index: -1;
+}
+
+.support-icon__link-icon {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 45px;
+  height: 45px;
+
+  background: #000;
+
+  border-radius: 50%;
+
+  opacity: 0;
+
+  transition: all .3s;
+}
+
+.support-icon__link-icon_open {
+  opacity: 1;
+}

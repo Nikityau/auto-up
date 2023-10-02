@@ -14,7 +14,7 @@ const Block = ({ block, number }: Props) => {
                 <span>
                     Б-{
                         number < 10 
-                        ? `0${number}`
+                        ? number == 1 ? `01 ` : `0${number}`
                         : number
                     }
                 </span>
