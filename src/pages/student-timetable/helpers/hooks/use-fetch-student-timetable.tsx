@@ -1,17 +1,29 @@
 import React, {useEffect, useState} from "react"
 import {nanoid} from "nanoid"
+
+
 import {Content} from "../../../../feature/timetable-month"
 import {TimetableStore} from "../../../../local-store/timetable/timtetable-store"
 import CalendarLesson from "../../../../feature/calendar-lesson"
 
+
+type Timetable = {
+    dates: Date[],
+    content: Content[]
+}
+
 export const useFetchStudentTimetable = (timetable: TimetableStore) => {
-    const [state, setState] = useState<Content[]>(null)
+    const [state, setState] = useState<Timetable>(null)
 
     useEffect(() => {
+        const dates = [
+          new Date()
+        ]
+
         const content: Content[] = [
             {
                 id: nanoid(),
-                date: new Date(),
+                date: dates[0],
                 content:
                     <CalendarLesson
                         id={nanoid()}
@@ -27,7 +39,7 @@ export const useFetchStudentTimetable = (timetable: TimetableStore) => {
             },
             {
                 id: nanoid(),
-                date: new Date(2023, 8, 1),
+                date: new Date(dates[0].getFullYear(), dates[0].getMonth(), dates[0].getDate() + 1),
                 content:
                     <CalendarLesson
                         id={nanoid()}
@@ -42,7 +54,10 @@ export const useFetchStudentTimetable = (timetable: TimetableStore) => {
             }
         ]
 
-        setState(content)
+        setState({
+            content: content,
+            dates: dates
+        })
     }, [])
 
     return state

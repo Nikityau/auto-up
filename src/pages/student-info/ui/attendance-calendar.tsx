@@ -53,7 +53,7 @@ const AttendanceCalendar = observer(({timetable}:Props) => {
                 date={timetable.timetable.activeDate}
             >
                 {
-                    timetable.timetable.dates.map(t => (
+                    timetable.timetable.month.map(t => (
                         <DateGrid
                             date={t}
                             key={nanoid()}

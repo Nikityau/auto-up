@@ -1,8 +1,8 @@
 import React from 'react';
 import cn from 'classnames'
 
-import { FType } from '../../../shared/helpers/types/f-types';
-import { useToggle } from '../../../shared/helpers/hooks/use-toggle';
+import { FType } from "../../helpers/types/f-types";
+import { useToggle } from "../../helpers/hooks/use-toggle";
 
 import './style/index.scss'
 

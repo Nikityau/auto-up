@@ -10,7 +10,7 @@ const weekdays = [
 
 
 export const toWeekDayStr = (day: number) => {
-    if(!day) return "null"
+    if(day == null) return "null"
 
     return weekdays[day]
 }

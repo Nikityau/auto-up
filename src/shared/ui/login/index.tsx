@@ -6,10 +6,11 @@ import './style/index.scss'
 type Props = {
     onChange: FType<string, void>
     type?: 'text' | 'password',
-    placeholder?: string
+    placeholder?: string,
+    title?: string
 }
 
-const Login = ({ onChange, type = 'text', placeholder = 'Логин' }: Props) => {
+const Login = ({ onChange, type = 'text', placeholder = 'Логин',title = 'Логин' }: Props) => {
     const [state, setState] = useState<string>("")
 
     const onTextChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -21,13 +22,18 @@ const Login = ({ onChange, type = 'text', placeholder = 'Логин' }: Props) =
     }
 
     return (
-        <input
-            className='input'
-            onChange={onTextChange}
-            type={type}
-            value={state}
-            placeholder={placeholder}
-        />
+        <div className={'input-ui'}>
+            <input
+              className='input'
+              onChange={onTextChange}
+              type={type}
+              value={state}
+              placeholder={null}
+            />
+            <div className={'input-ui__title'}>
+                <span>{title}</span>
+            </div>
+        </div>
     );
 };
 

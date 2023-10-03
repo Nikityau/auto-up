@@ -1,0 +1,21 @@
+.week-switcher__arrow {
+  border-right: 1px solid #000;
+
+  padding: 0 20px;
+
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+
+  cursor: pointer;
+}
+
+.week-switcher__arrow_right {
+  border-right: unset;
+  border-left: 1px solid #000;
+
+  svg {
+    transform: rotate(180deg);
+  }
+}

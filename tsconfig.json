@@ -27,7 +27,7 @@
     "strictNullChecks": false,
     "strictFunctionTypes": true,
     "strictPropertyInitialization": false,
-    "module": "esnext",
+    "module": "ES6",
     "moduleResolution": "node",
     "target": "ES5",
     "resolveJsonModule": true,
@@ -37,6 +37,7 @@
     "outDir": "./dist/",
     "removeComments": true,
     "baseUrl": "./",
+    "experimentalDecorators": true,
 
     "declaration": false
   },

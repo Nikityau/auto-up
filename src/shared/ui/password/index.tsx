@@ -5,7 +5,7 @@ import { FType } from '../../helpers/types/f-types';
 
 import './style/index.scss'
 
-import img from './assets/eye.png'
+import img from './assets/eye-open.svg'
 
 type Props = {
     onChange: FType<string, void>
@@ -18,12 +18,13 @@ const Password = ({onChange}: Props) => {
         <div className='password'>
             <Login 
                 onChange={onChange}
-                placeholder='Пароль'
+                placeholder={null}
+                title={'Пароль'}
                 type={
                     is ? 'text' : 'password'
                 }
             />
-            <div className='password__swticher' onClick={f.swtch}> 
+            <div className='password__switcher' onClick={()=> f.swtch()}>
                 <img src={img} alt={'switch'}/>
             </div>
         </div>

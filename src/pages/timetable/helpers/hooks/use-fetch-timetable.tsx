@@ -1,18 +1,30 @@
 import React, { useEffect, useState } from "react"
 import { nanoid } from "nanoid"
-import { Content } from "../../../../feature/timetable-month"
-import { TimetableStore } from "../../../../local-store/timetable/timtetable-store"
-import CalendarLesson from "../../../../feature/calendar-lesson"
 import { Link } from "react-router-dom"
 
+import { Content } from "../../../../feature/timetable-month"
+import CalendarLesson from "../../../../feature/calendar-lesson"
+
+import { TimetableStore } from "../../../../local-store/timetable/timtetable-store"
+
+type Timetable = {
+    dates: Date[],
+    content: Content[]
+}
+
 export const useFetchTimetable = (timetable: TimetableStore) => {
-    const [state, setState] = useState<Content[]>(null)
+    const [state, setState] = useState<Timetable>(null)
 
     useEffect(() => {
+        const dates = [
+          new Date(),
+          new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate() + 2)
+        ]
+
         const content: Content[] = [
             {
                 id: nanoid(),
-                date: new Date(),
+                date: dates[0],
                 content:
                     <Link to={`day/${nanoid()}`}>
                         <CalendarLesson
@@ -24,13 +36,13 @@ export const useFetchTimetable = (timetable: TimetableStore) => {
                             endTime="20:00"
                             type={'online'}
                             isCurrent={true}
-                            lessonPerDay={10000}
+                            lessonPerDay={2}
                         />
                     </Link>
             },
             {
                 id: nanoid(),
-                date: new Date(2023, 8, 1),
+                date: new Date(dates[0].getFullYear(), dates[0].getMonth(), dates[0].getDate() + 2),
                 content:
                     <Link to={`day/${nanoid()}`}>
                         <CalendarLesson
@@ -41,13 +53,16 @@ export const useFetchTimetable = (timetable: TimetableStore) => {
                             startTime="11:00"
                             endTime="15:00"
                             type="offline"
-                            lessonPerDay={500}
+                            lessonPerDay={1}
                         />
                     </Link>
             }
         ]
 
-        setState(content)
+        setState({
+            content: content,
+            dates: dates
+        })
     }, [])
 
     return state

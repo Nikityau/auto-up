@@ -9,7 +9,7 @@
       "functionBind": false,
       "exportDefaultFrom": false,
       "exportNamespaceFrom": false,
-      "decorators": false,
+      "decorators": true,
       "decoratorsBeforeExport": false,
       "topLevelAwait": false,
       "importMeta": false

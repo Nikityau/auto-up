@@ -1,0 +1,33 @@
+.checkbox-ui {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  cursor: pointer;
+
+  .checkbox-ui__box {
+    width: 16px;
+    height: 16px;
+
+    border-radius: 3px;
+    border: 1px solid #484644;
+
+    transition: all .3s;
+  }
+
+  .checkbox-ui__text {
+    color: #191617;
+    text-align: center;
+    font-family: Montserrat, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+  }
+}
+
+.checkbox-ui_checked {
+  .checkbox-ui__box {
+    background: #049dff;
+  }
+}
+

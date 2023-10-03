@@ -8,6 +8,7 @@ import {TimetableStore} from "../../../local-store/timetable/timtetable-store";
 import {useFetchStudentTimetable} from "../helpers/hooks/use-fetch-student-timetable";
 import {datesCompare} from "../../../shared/helpers/dates/dates-compare";
 import {observer} from "mobx-react-lite";
+import { infoByDate } from "../../../shared/helpers/dates/info-by-date";
 
 type Props = {
     timetable: TimetableStore
@@ -17,55 +18,39 @@ const Calendar = observer(({timetable}:Props) => {
 
     const content = useFetchStudentTimetable(timetable)
 
-    const getInfoByDate = (date: Date): JSX.Element => {
-        if (!content) return null
-
-        for (let i = 0; i < content.length; ++i) {
-            if (!content[i].content) continue
-
-            if (datesCompare(date, content[i].date)) {
-                return content[i].content
-            }
-        }
-
-        return null
-    }
-
-    const getTimetableByType = () => {
-        switch (timetable.type) {
-            case "month":
-                return (
-                    <TimetableMonth
-                        showCurrentDay={true}
-                        date={timetable.timetable.activeDate}
+    if(timetable.type == 'month') {
+        return (
+          <TimetableMonth
+            showCurrentDay={true}
+            date={timetable.timetable.activeDate}
+          >
+              {
+                  timetable.timetable.month.map(d => (
+                    <DateGrid
+                      key={nanoid()}
+                      date={d}
                     >
                         {
-                            timetable.timetable.dates.map(d => (
-                                <DateGrid
-                                    key={nanoid()}
-                                    date={d}
-                                >
-                                    {
-                                        getInfoByDate(d)
-                                    }
-                                </DateGrid>
-                            ))
+                            infoByDate(d, content?.dates, (d) => {
+                                return content?.content.find(dc => datesCompare(dc.date, d)).content
+                            })
                         }
-                    </TimetableMonth>
-                )
-            case "week": return <TimetableWeek />
-            case "day": return <TimetableDay />
-            default: return null
-        }
+                    </DateGrid>
+                  ))
+              }
+          </TimetableMonth>
+        )
     }
 
-    return (
-        <>
-            {
-                getTimetableByType()
-            }
-        </>
-    );
+    if(timetable.type == 'week') {
+        return <TimetableWeek />
+    }
+
+    if(timetable.type == 'day') {
+        return <TimetableDay />
+    }
+
+    return null
 });
 
 export default Calendar;

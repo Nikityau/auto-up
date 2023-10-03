@@ -1,0 +1,22 @@
+.timetable-week__day {
+  position: relative;
+
+  width: 100%;
+  min-height: 311px;
+  height: 100%;
+  border-radius: 13px;
+  border: 1px solid #000;
+  background: #F8F9FD;
+
+  .timetable-week__day-title {
+    position: absolute;
+    top: 37px;
+    left: 19px;
+
+    color: #4F4B5C;
+    font-family: Montserrat, sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+  }
+}

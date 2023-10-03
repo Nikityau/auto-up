@@ -13,6 +13,7 @@ export class AuthStore {
             password: observable,
             isRemember: observable,
             switchRemember: action,
+            setIsRemember: action,
             setLogin: action,
             setPassword: action,
             auth: action
@@ -29,6 +30,10 @@ export class AuthStore {
 
     setPassword(password: string) {
         this.password = password
+    }
+
+    setIsRemember(value: boolean) {
+        this.isRemember = value
     }
 
     auth() {
