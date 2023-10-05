@@ -1,0 +1,26 @@
+.time-gap {
+  position: relative;
+  
+  width: 100%;
+  height: 86px;
+
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+
+  .time-gap__time {
+    color: #000;
+    font-family: Montserrat, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+  }
+
+  .time-gap__lines {
+    width: 100%;
+    height: 100%;
+
+    border-bottom: 1px solid #000;
+  }
+}
+

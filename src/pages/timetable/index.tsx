@@ -3,7 +3,7 @@ import Filters from './ui/filters';
 
 import TimetableProvider from './provider/timetable-provider';
 import { lecturerTimetable } from '../../local-store/timetable/timtetable-store';
-import PageTitle from '../../shared/ui/page-title';
+import TitleUi from '../../shared/ui/page-title';
 
 import './style/index.scss'
 
@@ -11,7 +11,7 @@ const Timetable = () => {
     return (
         <div className='timetable-page'>
             <div className='timetable-page__container app-container'>
-                <PageTitle
+                <TitleUi
                     title='Расписание'
                 />
                 <div className='timetable-page__tt-zone'>

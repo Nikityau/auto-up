@@ -10,3 +10,17 @@ export const infoByDate = (date: Date, dates: Date[], cb: FType<Date, any>) => {
     }
   }
 }
+
+export const infosByDate = (date: Date, dates: Date[], cb: FType<Date, any>) => {
+  if(!dates) return null
+
+  const infos: any[] = []
+
+  for(let d of dates) {
+    if(datesCompare(d, date)) {
+      infos.push(cb(d))
+    }
+  }
+
+  return infos
+}

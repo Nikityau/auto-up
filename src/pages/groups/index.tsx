@@ -1,7 +1,7 @@
 import React from 'react';
 import GroupsList from './ui/groups-list';
 import GroupsProvider from './provider/groups-provider';
-import PageTitle from '../../shared/ui/page-title';
+import TitleUi from '../../shared/ui/page-title';
 
 import './style/index.scss'
 
@@ -10,7 +10,7 @@ const Groups = () => {
         <GroupsProvider>
             <div className='groups-page'>
                 <div className='groups-page__container app-container'>
-                   <PageTitle
+                   <TitleUi
                     title='Группы'
                    />
                     <GroupsList />

@@ -1,56 +1,74 @@
-import React from 'react';
+import React from "react";
 import TimetableMonth from "../../../feature/timetable-month";
 import DateGrid from "../../../feature/timetable-month/ui/date-grid";
-import {nanoid} from "nanoid";
+import { nanoid } from "nanoid";
+import { observer } from "mobx-react-lite";
+
 import TimetableWeek from "../../../feature/timetable-week";
 import TimetableDay from "../../../feature/timetable-day";
-import {TimetableStore} from "../../../local-store/timetable/timtetable-store";
-import {useFetchStudentTimetable} from "../helpers/hooks/use-fetch-student-timetable";
-import {datesCompare} from "../../../shared/helpers/dates/dates-compare";
-import {observer} from "mobx-react-lite";
+import DayGrid from "../../../feature/timetable-week/ui/day";
+
+import { TimetableStore } from "../../../local-store/timetable/timtetable-store";
+import { useFetchStudentTimetable } from "../helpers/hooks/use-fetch-student-timetable";
+import { datesCompare } from "../../../shared/helpers/dates/dates-compare";
 import { infoByDate } from "../../../shared/helpers/dates/info-by-date";
 
 type Props = {
-    timetable: TimetableStore
+  timetable: TimetableStore
 }
 
-const Calendar = observer(({timetable}:Props) => {
+const Calendar = observer(({ timetable }: Props) => {
 
-    const content = useFetchStudentTimetable(timetable)
+  const content = useFetchStudentTimetable(timetable);
 
-    if(timetable.type == 'month') {
-        return (
-          <TimetableMonth
-            showCurrentDay={true}
-            date={timetable.timetable.activeDate}
-          >
+  if (timetable.type == "month") {
+    return (
+      <TimetableMonth
+        showCurrentDay={true}
+        date={timetable.timetable.activeDate}
+      >
+        {
+          timetable.timetable.month.map(d => (
+            <DateGrid
+              key={nanoid()}
+              date={d}
+            >
               {
-                  timetable.timetable.month.map(d => (
-                    <DateGrid
-                      key={nanoid()}
-                      date={d}
-                    >
-                        {
-                            infoByDate(d, content?.dates, (d) => {
-                                return content?.content.find(dc => datesCompare(dc.date, d)).content
-                            })
-                        }
-                    </DateGrid>
-                  ))
+                infoByDate(d, content?.dates, (d) => {
+                  return content?.content.find(dc => datesCompare(dc.date, d)).content;
+                })
               }
-          </TimetableMonth>
-        )
-    }
+            </DateGrid>
+          ))
+        }
+      </TimetableMonth>
+    );
+  }
 
-    if(timetable.type == 'week') {
-        return <TimetableWeek />
-    }
+  if (timetable.type == "week") {
+    return (
+      <TimetableWeek>
+        {
+          timetable.week.map(t => (
+            <DayGrid
+              key={nanoid()}
+              date={t}
+            />
+          ))
+        }
+      </TimetableWeek>
+    );
+  }
 
-    if(timetable.type == 'day') {
-        return <TimetableDay />
-    }
+  if (timetable.type == "day") {
+    return (
+      <div className={'timetable-day__wrapper'}>
+        <TimetableDay />
+      </div>
+    );
+  }
 
-    return null
+  return null;
 });
 
 export default Calendar;

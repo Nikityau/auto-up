@@ -1,0 +1,27 @@
+.timetable-day {
+  width: 100%;
+  height: 100%;
+
+  position: relative;
+
+  .swiper {
+    width: 100%;
+    height: 100%;
+
+    padding-bottom: 10px;
+
+    .swiper-wrapper {
+      position: relative;
+    }
+
+    .swiper-slide {
+      position: static;
+
+      height: 86px;
+    }
+
+    .timetable-day__plug {
+      height: 0;
+    }
+  }
+}

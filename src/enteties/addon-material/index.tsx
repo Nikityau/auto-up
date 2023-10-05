@@ -1,7 +1,7 @@
 import React from 'react';
-import { AddonFile } from '../../pages/schedule-day/store/interface.ts.ts';
 
 import './style/index.scss'
+import { AddonFile } from "../../shared/data/interface/addon-file.interface";
 
 type Props = {
     addon: AddonFile[]

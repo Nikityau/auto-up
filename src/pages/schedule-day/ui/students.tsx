@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import PageTitle from '../../../shared/ui/page-title';
+import TitleUi from '../../../shared/ui/page-title';
 import StudentsList from './students-list';
 import { dayScheduleStore } from '../store/day-schedule-store';
 import { NavHistoryContext } from '../../../procceses/nav-history';
@@ -11,7 +11,7 @@ const Students = () => {
     return (
         <div className='schedule-day__students'>
             <div className='schedule-day__up-info'>
-                <PageTitle
+                <TitleUi
                     title='Посещаемость'
                 />
                 <div className='schedule-day__close-btn' onClick={back}>

@@ -1,0 +1,18 @@
+.day-schedule-card {
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  width: calc(100% - 59px - 48px);
+  height: calc(86px * 1.5 - 66px);
+
+  border-radius: 13px;
+  border: 1px solid #191617;
+  background: #FFF;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  padding: 56px 24px 10px 24px;
+}

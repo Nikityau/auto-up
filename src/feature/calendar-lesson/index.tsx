@@ -1,19 +1,12 @@
 import React from 'react';
 import cn from 'classnames'
+import { CourseInterface } from "../../shared/helpers/types/course.interface";
 
 import './style/index.scss'
 
 type Props = {
-    id: string
-    groupTitle: string,
-    courseTitle: string,
-    theme: string,
-    startTime: string,
-    endTime: string,
-    type: 'online' | 'offline'
-    lessonPerDay?: number,
-    isCurrent?: boolean
-}
+
+} & CourseInterface
 
 const CalendarLesson = ({
     id,

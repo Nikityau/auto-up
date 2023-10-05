@@ -1,5 +1,7 @@
 import React from 'react';
 
+import WeekProvider from "./provider/week-provider";
+
 import './style/index.scss'
 
 type Props = {
@@ -8,11 +10,13 @@ type Props = {
 
 const TimetableWeek = ({showCurrentDay = false,children}:Props) => {
     return (
-        <div className='timetable-week'>
-            {
-                children
-            }
-        </div>
+        <WeekProvider showCurrentDay={showCurrentDay}>
+            <div className='timetable-week'>
+                {
+                    children
+                }
+            </div>
+        </WeekProvider>
     );
 };
 

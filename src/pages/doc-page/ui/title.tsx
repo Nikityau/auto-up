@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import PageTitle from '../../../shared/ui/page-title';
+import TitleUi from '../../../shared/ui/page-title';
 import { DocPageContext } from '../provider/doc-page-provider';
 
 const Title = () => {
@@ -8,7 +8,7 @@ const Title = () => {
 
 
     return (
-        <PageTitle
+        <TitleUi
             title={context.doc.title}
         />
     );

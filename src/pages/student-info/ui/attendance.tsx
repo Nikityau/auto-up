@@ -2,7 +2,7 @@ import React from 'react';
 import AttendanceProvider from '../provider/attendance-provider';
 import AttendanceSideBar from './attendce-side-bar';
 import AttendanceCalendar from './attendance-calendar';
-import PageTitle from '../../../shared/ui/page-title';
+import TitleUi from '../../../shared/ui/page-title';
 import { studentAttendanceCalendar } from '..';
 
 const Attendance = () => {
@@ -10,7 +10,7 @@ const Attendance = () => {
         <AttendanceProvider>
             <div className='student-attendce'>
                 <div className='student-attendce__title'>
-                    <PageTitle title='Посещаемость'/>
+                    <TitleUi title='Посещаемость'/>
                 </div>
                 <div className='student-attendce__container'>
                     <AttendanceSideBar />

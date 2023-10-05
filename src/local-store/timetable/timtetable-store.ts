@@ -60,6 +60,11 @@ export class TimetableStore {
     this.setMonth(
       now
     );
+    this.initWeek();
+    this.timetable.day = new Date(now)
+  }
+
+  initWeek() {
     this.setWeek(
       this.timetable.month[0],
       this.timetable.month[6]
@@ -110,7 +115,7 @@ export class TimetableStore {
     }
     if (indexInMonth > 6) {
       this.setWeek(
-        this.month[0],
+        this.month[indexInMonth - 7],
         this.month[indexInMonth - 1]
       );
 
@@ -144,7 +149,7 @@ export class TimetableStore {
 
     this.setWeek(
       this.month[indexInMonth + 1],
-      this.month[this.month.length - 1 - (this.month.length - 1 - indexInMonth)]
+      this.month[this.month.length - 1]
     );
   }
 

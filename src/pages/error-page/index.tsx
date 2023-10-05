@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import PageTitle from "../../shared/ui/page-title";
+import TitleUi from "../../shared/ui/page-title";
 
 import './style/index.scss'
 
@@ -23,7 +23,7 @@ const Error = () => {
   return (
     <div className={"error-page"}>
       <div className={"error-page__container app-container"}>
-        <PageTitle title={`Error ${name}`} />
+        <TitleUi title={`Error ${name}`} />
         <div className={"error-page__text"}>
           <span>{error[name]}</span>
         </div>
