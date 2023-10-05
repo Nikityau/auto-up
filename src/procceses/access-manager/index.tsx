@@ -2,14 +2,16 @@ import React from "react";
 import { useManage } from "./helpers/hooks/use-manage";
 import { observer } from "mobx-react-lite";
 import { UserStore } from "../../local-store/user/user-store";
+import { CookieStore } from "../../local-store/cookie/cookie-store";
 
 type Props = {
-  userStore: UserStore
+  userStore: UserStore,
+  cookieStore: CookieStore
 } & React.PropsWithChildren
 
-const AccessManger = observer(({children, userStore}:Props) => {
+const AccessManger = observer(({children, userStore, cookieStore}:Props) => {
 
-  useManage(userStore)
+  useManage(userStore, cookieStore)
 
   return (
     <>

@@ -2,6 +2,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { UserStore } from "../../../../local-store/user/user-store";
 import { AppRoutes } from "../../../../shared/app-routes";
+import { CookieStore } from "../../../../local-store/cookie/cookie-store";
 
 const accessRoutes = {
   "lecturer": [
@@ -17,9 +18,16 @@ const accessRoutes = {
 };
 
 
-export const useManage = (userStore: UserStore) => {
+export const useManage = (userStore: UserStore, cookieStore: CookieStore) => {
   const location = useLocation();
   const nav = useNavigate();
+
+  useEffect(() => {
+    if(!cookieStore.token) {
+      nav(`/${AppRoutes.skillget}`)
+    }
+
+  }, [cookieStore])
 
   useEffect(() => {
     if (location.pathname.includes("lecturer")) {

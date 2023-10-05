@@ -1,73 +1,58 @@
-import { Key, useEffect } from "react";
-import {useNavigate} from "react-router-dom"
-import {authStore} from "../../store"
-import {AppRoutes} from "../../../../shared/app-routes"
-import {userStore} from "../../../../local-store/user/user-store";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
-export const useAuth = () => {
+import { useEnter } from "./use-enter";
+import { AuthStore } from "../../store/auth-store";
+import { AppRoutes } from "../../../../shared/app-routes";
+import { CookieStore } from "../../../../local-store/cookie/cookie-store";
 
-    const nav = useNavigate()
+export const useAuth = (authStore: AuthStore, cookieStore: CookieStore) => {
 
-    useEffect(() => {
-        const keyEvent = (e: KeyboardEvent) => {
-            if(e.key == 'Enter') {
-                authStore.auth()
-            }
-        }
+  const nav = useNavigate();
 
-        window.addEventListener('keydown', keyEvent)
+  async function auth() {
+    authStore.validate();
+    if (authStore.error.length != 0) {
 
-        return () => {
-            window.removeEventListener('keydown', keyEvent)
-        }
-
-    }, [])
-
-    useEffect(() => {
-        authStore.setAuthCb(auth)
-    }, [])
-
-    const adminResponse = () => {
-        return {
-            role: 'admin'
-        }
+      return;
     }
 
-    const userResponse = () => {
-        return {
-            role: 'user'
+    try {
+      const resAuth = await axios.post(`https://rstu-skillget.ddns.net/auth/token/login/`, {
+        username: authStore.login,
+        password: authStore.password
+      });
+
+      const token = resAuth.data["token"];
+
+      const resMe = await axios.get("https://rstu-skillget.ddns.net/auth/users/me/", {
+        headers: {
+          Authorization: `Token ${token}`
         }
+      });
+
+      const roles = resMe.data["roles"];
+
+      if (authStore.isRem) {
+        cookieStore.setCookie(token, roles, 7);
+      } else {
+        cookieStore.setCookie(token, roles, 0.006);
+      }
+
+      if (roles.find(r => r == "student")) {
+        nav(`${AppRoutes.skillget}/${AppRoutes.student}`);
+      } else {
+        nav(`${AppRoutes.skillget}/${AppRoutes.lecturer}`);
+      }
+
+    } catch (err) {
+      console.log("incorrect auth data");
     }
+  }
 
-    const auth = ({login, password}) => {
-        let res = null
+  useEnter(auth);
 
-        if (login == 'admin') {
-            res = adminResponse()
-        }
-
-        if (login == 'user') {
-            res = userResponse()
-        }
-
-        if (res.role == 'admin') {
-            userStore.setUser({
-                role: 'lecturer',
-                name: 'Jack',
-                surname: 'Sparrow',
-                avatar: ''
-            })
-            nav(`/${AppRoutes.skillget}/${AppRoutes.lecturer}`, {replace: true})
-        }
-
-        if (res.role == 'user') {
-            userStore.setUser({
-                role: 'student',
-                name: 'Jack',
-                surname: 'Sparrow',
-                avatar: ''
-            })
-            nav(`/${AppRoutes.skillget}/${AppRoutes.student}`, {replace: true})
-        }
-    }
-}
+  return {
+    auth: auth
+  };
+};
