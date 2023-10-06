@@ -2,7 +2,7 @@ import React from "react";
 import { observer } from "mobx-react-lite";
 
 import Checkbox from "../../../shared/ui/checkbox";
-import { AuthStore } from "../store";
+import { AuthStore } from "../store/auth-store";
 
 type Props = {
   authStore: AuthStore
@@ -15,7 +15,7 @@ const Addons = observer(({ authStore }: Props) => {
         state={false}
         text={'Запомнить'}
         onChange={(value) => {
-          authStore.setIsRemember(value);
+          authStore.setIsRem(value);
         }} />
       <div className="auth-form__forgot-password">
         <span>Забыли пароль?</span>

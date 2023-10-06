@@ -5,6 +5,7 @@ import { useEnter } from "./use-enter";
 import { AuthStore } from "../../store/auth-store";
 import { AppRoutes } from "../../../../shared/app-routes";
 import { CookieStore } from "../../../../local-store/cookie/cookie-store";
+import { accessRoutes } from "../../../../procceses/access-manager/helpers/hooks/use-manage";
 
 export const useAuth = (authStore: AuthStore, cookieStore: CookieStore) => {
 
@@ -23,7 +24,7 @@ export const useAuth = (authStore: AuthStore, cookieStore: CookieStore) => {
         password: authStore.password
       });
 
-      const token = resAuth.data["token"];
+      const token = resAuth.data["auth_token"];
 
       const resMe = await axios.get("https://rstu-skillget.ddns.net/auth/users/me/", {
         headers: {
@@ -40,9 +41,13 @@ export const useAuth = (authStore: AuthStore, cookieStore: CookieStore) => {
       }
 
       if (roles.find(r => r == "student")) {
-        nav(`${AppRoutes.skillget}/${AppRoutes.student}`);
-      } else {
-        nav(`${AppRoutes.skillget}/${AppRoutes.lecturer}`);
+        nav(`/${AppRoutes.skillget}/${AppRoutes.student}`);
+
+        return
+      }
+      if(roles.find(r => accessRoutes['lecturer'].find(lr => lr == r)))
+      {
+        nav(`/${AppRoutes.skillget}/${AppRoutes.lecturer}`);
       }
 
     } catch (err) {

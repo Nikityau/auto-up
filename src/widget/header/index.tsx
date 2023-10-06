@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 import HeaderChoser from "./ui/header-choser";
 import PlatformLogo from "./ui/platform-logo";
 import { AppRoutes } from "../../shared/app-routes";
-import { userStore } from "../../local-store/user/user-store";
 import UserBar from "../user-bar";
 
 import "./style/index.scss";
+import { cookieStore } from "../../local-store/cookie/cookie-store";
 
 const Header = () => {
   return (
@@ -17,7 +17,7 @@ const Header = () => {
         </Link>
         <div className="header__nav-links">
           <HeaderChoser
-            user={userStore}
+              cookieStore={cookieStore}
           />
           <UserBar />
         </div>

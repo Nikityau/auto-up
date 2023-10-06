@@ -4,7 +4,7 @@ import { UserStore } from "../../../../local-store/user/user-store";
 import { AppRoutes } from "../../../../shared/app-routes";
 import { CookieStore } from "../../../../local-store/cookie/cookie-store";
 
-const accessRoutes = {
+export const accessRoutes = {
   "lecturer": [
     "admin",
     "lecturer",
@@ -23,14 +23,31 @@ export const useManage = (userStore: UserStore, cookieStore: CookieStore) => {
   const nav = useNavigate();
 
   useEffect(() => {
-    if(!cookieStore.token) {
-      nav(`/${AppRoutes.skillget}`)
-    }
+    if (location.pathname.includes("auth")) {
+      if (!cookieStore.token) {
+        return
+      }
 
-  }, [cookieStore])
+      if (cookieStore.roles == "student") {
+        nav(`/${AppRoutes.skillget}/${AppRoutes.student}`)
+      }
+      if (accessRoutes.lecturer.find(ar => ar == cookieStore.roles)) {
+        nav(`/${AppRoutes.skillget}/${AppRoutes.lecturer}`)
+      }
+    }
+  }, []);
 
   useEffect(() => {
-    if (location.pathname.includes("lecturer")) {
+    if (!cookieStore.token) {
+      nav(`/${AppRoutes.skillget}`);
+    }
+  }, [cookieStore]);
+
+  useEffect(() => {
+    const roles = cookieStore.roles;
+    const token = cookieStore.token;
+
+    /*if (location.pathname.includes("lecturer")) {
       if (accessRoutes.lecturer.find(el => el == userStore.role)) {
         return;
       } else {
@@ -45,6 +62,6 @@ export const useManage = (userStore: UserStore, cookieStore: CookieStore) => {
         nav(`/${AppRoutes.skillget}/error/403`);
         return;
       }
-    }
+    }*/
   }, [location]);
 };
