@@ -1,8 +1,18 @@
 import React from 'react';
+import { useFetchStInfo } from "../helpers/hooks/use-fetch-st-info";
+import { CookieStore } from "../../../local-store/cookie/cookie-store";
 
 export const StudentInfoContext = React.createContext(null)
 
-const StudentInfoProvider = ({children}:React.PropsWithChildren) => {
+type Props = {
+    cookie: CookieStore
+} & React.PropsWithChildren
+
+
+const StudentInfoProvider = ({children, cookie}:Props) => {
+
+    const stInfo = useFetchStInfo(cookie)
+
     return (
         <StudentInfoContext.Provider value={null}>
             {children}

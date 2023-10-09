@@ -1,19 +1,20 @@
-import React from 'react';
+import React from "react";
 
-import './style/index.scss'
+import "./style/index.scss";
 import { AddonFile } from "../../shared/data/interface/addon-file.interface";
+import { nanoid } from "nanoid";
 
 type Props = {
-    addon: AddonFile[]
+  addon: AddonFile[]
 }
 
 const AddonMaterial = ({ addon }: Props) => {
-    return (
-        <div className='addon-material'>
-            <div className='addon-material__title'>
-                <span>Дополнительные материалы</span>
-            </div>
-            {
+  return (
+    <div className="addon-material">
+      <div className="addon-material__title">
+        <span>Дополнительные материалы</span>
+      </div>
+      {/*{
                 addon.map(m => (
                     <div className='addon-material__material'
                         key={m.id}
@@ -23,9 +24,23 @@ const AddonMaterial = ({ addon }: Props) => {
                         </a>
                     </div>
                 ))
-            }
-        </div>
-    );
+            }*/}
+      <div className="addon-material__material"
+           key={nanoid()}
+      >
+        <a href={addon[0]["presentation"]}>
+          <span>Презентация</span>
+        </a>
+      </div>
+      <div className="addon-material__material"
+           key={nanoid()}
+      >
+        <a href={addon[0]["manual"]}>
+          <span>Мануал</span>
+        </a>
+      </div>
+    </div>
+  );
 };
 
 export default AddonMaterial;

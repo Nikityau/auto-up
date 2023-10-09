@@ -30,7 +30,6 @@ export const useNavHistory = () => {
 
     useEffect(() => {
         history.add(location)
-        console.log(history);
     }, [location])
 
     const goBack = () => {    

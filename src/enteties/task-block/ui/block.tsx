@@ -19,7 +19,7 @@ const Block = ({ block, number }: Props) => {
                     }
                 </span>
             </div>
-            <Tasks block={block}/>
+            {/*<Tasks block={block}/>*/}
         </div>
     );
 };

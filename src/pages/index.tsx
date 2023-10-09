@@ -7,9 +7,9 @@ import {
 import { AppRoutes } from "../shared/app-routes";
 import BasePage from "./base";
 import Platform from "./platform";
+import ErrorPage from "./error-page";
 
 import { userStore } from "../local-store/user/user-store";
-import ErrorPage from "./error-page";
 
 const StudentCourseLazy = React.lazy(() => import("./student-course"));
 const StudentTimetableLazy = React.lazy(() => import("./student-timetable"));

@@ -3,6 +3,7 @@ import { DocModule } from '../helpers/hooks/interface';
 import InfoBlock from '../../../enteties/info-block';
 import TaskBlock from '../../../enteties/task-block';
 import AddonMaterial from '../../../enteties/addon-material';
+import cn from "classnames";
 
 type Props = {
     module: DocModule,
@@ -11,14 +12,17 @@ type Props = {
 
 const DocModule = ({ module, number }: Props) => {
     return (
-        <div className='doc-page__module'>
+        <div className={cn(
+          'doc-page__module'
+        )}>
             <div className='doc-page__module-title'>
                 <span>Модуль {number}. </span>
                 <span>{module.title}</span>
             </div>
             <div className='doc-page__module-lessons'>
                 {
-                    module.lessons.map((l, i) => (
+                    module && module.lessons &&
+                    module?.lessons?.map((l, i) => (
                         <InfoBlock
                             key={l.id}
                             classNames={[
@@ -36,9 +40,12 @@ const DocModule = ({ module, number }: Props) => {
                                     <div className='dock-page__task-block-title'>
                                         <span>Задания</span>
                                     </div>
-                                    <TaskBlock taskBlock={l.tasks} />
+                                  {
+                                    l && l?.tasks &&
+                                    <TaskBlock taskBlock={l?.tasks} />
+                                  }
                                 </div>
-                                <AddonMaterial addon={l.addonMaterial} />
+                                <AddonMaterial addon={l?.addonMaterial} />
                             </div>
                         </InfoBlock>
                     ))

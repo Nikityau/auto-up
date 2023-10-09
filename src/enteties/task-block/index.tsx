@@ -1,24 +1,30 @@
 import React from 'react';
-import Block from './ui/block';
+
+import Tasks from "./ui/tasks";
+import { TasksBlock } from "../../shared/data/interface/tasks-block.interface";
 
 import './style/index.scss'
 
 type Props = {
-    taskBlock: any[]
+    taskBlock: TasksBlock[]
 }
 
 const TaskBlock = ({ taskBlock }: Props) => {
-    return (
+   return (
         <div className='task-block'>
-            {
+            {/*{
+                taskBlock && taskBlock.length > 0 &&
                 taskBlock?.map((tb, i) => (
                     <Block
-                        key={tb.id}
+                        key={tb?.id}
                         block={tb}
                         number={i + 1}
                     />
                 ))
-            }
+            }*/}
+            <Tasks
+              block={taskBlock}
+            />
         </div>
     );
 };

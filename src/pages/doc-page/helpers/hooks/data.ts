@@ -1,7 +1,7 @@
 import { nanoid } from "nanoid";
-import { Doc } from "./interface";
+import { IDoc } from "./interface";
 
-export const docData: Doc = {
+export const docData: IDoc = {
     id: nanoid(),
     title: 'Python pro',
     modules: [

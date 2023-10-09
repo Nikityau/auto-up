@@ -14,37 +14,40 @@ const Students = () => {
 
     return (
         <div className='group-page__students'>
+          {
+            context.group?.students &&
             <Swiper
-                //@ts-ignore
-                direction='vertical'
-                slidesPerView={'auto'}
-                mousewheel={true}
-                modules={[Mousewheel]}
+              //@ts-ignore
+              direction='vertical'
+              slidesPerView={'auto'}
+              mousewheel={true}
+              modules={[Mousewheel]}
             >
-                {
-                    context.group.students.map((s, i) => (
-                        <SwiperSlide
-                            key={s.id}
-                        >
-                            <Link to={`students/${s.id}`}>
-                                <StudentGroupCard
-                                    id={s.id}
-                                    avatar={s.avatar}
-                                    attendance={s.attendance}
-                                    enrolled={s.enrolled}
-                                    login={s.login}
-                                    name={s.name}
-                                    password={s.password}
-                                    position={i + 1}
-                                    status={s.status}
-                                    surname={s.surname}
-                                    patronymic={s.patronymic}
-                                />
-                            </Link>
-                        </SwiperSlide>
-                    ))
-                }
+              {
+                context.group?.students?.map((s, i) => (
+                  <SwiperSlide
+                    key={s.id}
+                  >
+                    <Link to={`students/${s.id}`}>
+                      <StudentGroupCard
+                        id={s.id}
+                        avatar={s.avatar}
+                        attendance={s.attendance}
+                        enrolled={s.enrolled}
+                        login={s.login}
+                        name={s.name}
+                        password={s.password}
+                        position={i + 1}
+                        status={s.status}
+                        surname={s.surname}
+                        patronymic={s.patronymic}
+                      />
+                    </Link>
+                  </SwiperSlide>
+                ))
+              }
             </Swiper>
+          }
         </div>
     );
 };

@@ -74,7 +74,7 @@ const StudentGroupCard = ({
                 title='Зачислен'
                 data={toNormalNum(enrolled)}
             />
-            <div className='student-group-card__note'/>
+           {/* <div className='student-group-card__note'/>*/}
         </div>
     );
 };

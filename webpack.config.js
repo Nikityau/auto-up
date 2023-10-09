@@ -21,7 +21,7 @@ module.exports = (env) => {
     const device = env.DEVICE
 
     return {
-        entry: path.resolve(__dirname, 'src', 'index.tsx'),
+        entry: path.resolve(__dirname, 'src', 'index.scss'),
         resolve: {
             extensions: ['.js', '.jsx', '.ts', '.tsx'],
             alias: {

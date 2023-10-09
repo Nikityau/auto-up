@@ -1,6 +1,8 @@
 import React from 'react';
 import TitleUi from '../../shared/ui/page-title';
 import CourseList from './ui/course-list';
+import { cookieStore } from "../../local-store/cookie/cookie-store";
+import { loaderStore } from "../../local-store/loader/loader-store";
 
 import './style/index.scss'
 
@@ -11,7 +13,10 @@ const KnowledgeBase = () => {
                 <TitleUi
                     title='Курс'
                 />
-                <CourseList/>
+                <CourseList
+                  cookieStore={cookieStore}
+                  loader={loaderStore}
+                />
             </div>
         </div>
     );

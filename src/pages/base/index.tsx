@@ -4,6 +4,8 @@ import {observer} from "mobx-react-lite";
 
 import bg from './assets/grid.svg'
 import {UserStore} from "../../local-store/user/user-store";
+import { loaderStore } from "../../local-store/loader/loader-store";
+import Loader from "../../widget/loader";
 
 import './style/index.scss'
 
@@ -19,6 +21,7 @@ const BasePage = observer(({user}:Props) => {
              }}
         >
             <Outlet/>
+          <Loader loader={loaderStore}/>
         </div>
     );
 });

@@ -1,53 +1,53 @@
-import { nanoid } from "nanoid"
-import { useState } from "react"
+import { nanoid } from "nanoid";
+import { useEffect, useState } from "react";
+import { LoaderStore } from "../../../../local-store/loader/loader-store";
+import { baseUrl } from "../../../../shared/api/base-url";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import { cookieStore } from "../../../../local-store/cookie/cookie-store";
+import { groupAdapter } from "../adapter/group-adapter";
 
 
 export interface Student {
-    id: string,
-    avatar: string,
-    login: string,
-    password: string,
-    name: string,
-    surname: string,
-    patronymic?: string,
-    status: 'active' | 'disable',
-    attendance: number,
-    enrolled: Date
+  id: string,
+  avatar: string,
+  login: string,
+  password: string,
+  name: string,
+  surname: string,
+  patronymic?: string,
+  status: "active" | "disable",
+  attendance: number,
+  enrolled: Date
 }
 
 export interface Group {
-    id: string,
-    groupTitle: string,
-    courseTitle: string,
-    students: Student[]
+  id: string,
+  groupTitle: string,
+  courseTitle: string,
+  students: Student[]
 }
 
 
-export const useFetchGroup = () => {
-    const [group, setGroup] = useState<Group>(() => {
-        const group: Group = {
-            id: nanoid(),
-            courseTitle: 'python start',
-            groupTitle: 'Python 1',
-            students: (() => {
-                return Array.from({length: 12}, () => {
-                    return {
-                        id: nanoid(),
-                        login: 'Veresovoi',
-                        password: '9665',
-                        avatar: '',
-                        name: 'Вересовой',
-                        surname: 'Максим',
-                        status: 'active',
-                        attendance: 82,
-                        enrolled: new Date()        
-                    } as Student
-                })
-            })()
+
+export const useFetchGroup = (loader: LoaderStore) => {
+  const { id } = useParams();
+  const [group, setGroup] = useState<Group>(null);
+
+  useEffect(() => {
+    (async () => {
+      loader.add(`${baseUrl}/api/v1/study_groups/${id}/`);
+      const { data } = await axios.get(`${baseUrl}/api/v1/study_groups/${id}/`, {
+        headers: {
+          Authorization: `Token ${cookieStore.token}`
         }
+      });
+      const adapted = await groupAdapter(data);
+      setGroup(adapted)
 
-        return group
-    })
+      loader.remove(`${baseUrl}/api/v1/study_groups/${id}/`);
+    })();
+  }, []);
 
-    return group
-}
+  return group;
+};

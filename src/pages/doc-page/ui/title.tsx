@@ -9,7 +9,7 @@ const Title = () => {
 
     return (
         <TitleUi
-            title={context.doc.title}
+            title={context?.doc?.title}
         />
     );
 };

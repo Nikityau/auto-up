@@ -3,12 +3,13 @@ import BackBtn from '../../feature/back-btn';
 import Title from './ui/title';
 import Students from './ui/students';
 import GroupProvider from './provider/group-provider';
+import { loaderStore } from "../../local-store/loader/loader-store";
 
 import './style/index.scss'
 
 const Group = () => {
     return (
-        <GroupProvider>
+        <GroupProvider loader={loaderStore}>
             <div className='group-page'>
             <div className='group-page__container app-container'>
                 <BackBtn/>

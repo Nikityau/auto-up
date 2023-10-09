@@ -1,16 +1,24 @@
 import React from 'react';
+import { observer } from "mobx-react-lite";
 import { useFetchDoc } from '../helpers/hooks/use-fetch-doc';
-import { Doc } from '../helpers/hooks/interface';
+import { IDoc } from '../helpers/hooks/interface';
+import { CookieStore } from "../../../local-store/cookie/cookie-store";
+import { LoaderStore } from "../../../local-store/loader/loader-store";
 
 interface DocContext {
-    doc: Doc
+    doc: IDoc
 }
 
 export const DocPageContext = React.createContext<DocContext>(null)
 
-const DocPageProvider = ({children}:React.PropsWithChildren) => {
+type Props = {
+    cookieStore: CookieStore,
+    loaderStore: LoaderStore
+} & React.PropsWithChildren
 
-    const doc = useFetchDoc()
+const DocPageProvider = ({children, cookieStore, loaderStore}:Props) => {
+
+    const doc = useFetchDoc(cookieStore, loaderStore)
 
     return (
         <DocPageContext.Provider value={{
@@ -21,4 +29,4 @@ const DocPageProvider = ({children}:React.PropsWithChildren) => {
     );
 };
 
-export default DocPageProvider;
+export default observer(DocPageProvider);

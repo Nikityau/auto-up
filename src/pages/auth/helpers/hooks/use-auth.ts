@@ -6,6 +6,7 @@ import { AuthStore } from "../../store/auth-store";
 import { AppRoutes } from "../../../../shared/app-routes";
 import { CookieStore } from "../../../../local-store/cookie/cookie-store";
 import { accessRoutes } from "../../../../procceses/access-manager/helpers/hooks/use-manage";
+import { baseUrl } from "../../../../shared/api/base-url";
 
 export const useAuth = (authStore: AuthStore, cookieStore: CookieStore) => {
 
@@ -19,14 +20,14 @@ export const useAuth = (authStore: AuthStore, cookieStore: CookieStore) => {
     }
 
     try {
-      const resAuth = await axios.post(`https://rstu-skillget.ddns.net/auth/token/login/`, {
+      const resAuth = await axios.post(`${baseUrl}/auth/token/login/`, {
         username: authStore.login,
         password: authStore.password
       });
 
       const token = resAuth.data["auth_token"];
 
-      const resMe = await axios.get("https://rstu-skillget.ddns.net/auth/users/me/", {
+      const resMe = await axios.get(`${baseUrl}/auth/users/me/`, {
         headers: {
           Authorization: `Token ${token}`
         }

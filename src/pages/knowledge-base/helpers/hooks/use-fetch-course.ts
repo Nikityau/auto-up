@@ -1,31 +1,49 @@
-import { nanoid } from "nanoid"
-import { useState } from "react"
+import { nanoid } from "nanoid";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
-import p1_img from '../../assets/p1.png'
-import p2_img from '../../assets/p2.png'
+import p1_img from "../../assets/p1.png";
+import p2_img from "../../assets/p2.png";
+import { CookieStore } from "../../../../local-store/cookie/cookie-store";
+import { baseUrl } from "../../../../shared/api/base-url";
+import { LoaderStore } from "../../../../local-store/loader/loader-store";
 
 interface Course {
-    id: string,
-    title: string,
-    preview: string,
+  id: string,
+  title: string,
+  preview: string,
 }
 
 const courseList: Course[] = [
-    {
-        id: nanoid(),
-        title: 'python start',
-        preview: p1_img
-    },
-    {
-        id: nanoid(),
-        title: 'python pro',
-        preview: p2_img
-    }
-]
+  {
+    id: nanoid(),
+    title: "python start",
+    preview: p1_img
+  },
+  {
+    id: nanoid(),
+    title: "python pro",
+    preview: p2_img
+  }
+];
 
-export const useFetchCourses = () => {
-    const [courses, setCourses] = useState<Course[]>(() => courseList)
+export const useFetchCourses = (cookieStore: CookieStore, loader: LoaderStore) => {
+  const [courses, setCourses] = useState<Course[]>(null);
+
+  useEffect(() => {
+    (async () => {
+      loader.add(`${baseUrl}/api/v1/courses/`)
+      const { data } = await axios.get(`${baseUrl}/api/v1/courses/`, {
+        headers: {
+          Authorization: `Token ${cookieStore.token}`
+        }
+      });
+
+      setCourses(data);
+      loader.remove(`${baseUrl}/api/v1/courses/`)
+    })();
+  }, []);
 
 
-    return courses
-}
+  return courses;
+};

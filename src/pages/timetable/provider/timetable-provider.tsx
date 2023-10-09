@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 import { nanoid } from "nanoid";
 
@@ -7,22 +8,27 @@ import TimetableWeek from "../../../feature/timetable-week";
 import TimetableDay from "../../../feature/timetable-day";
 import DateGrid from "../../../feature/timetable-month/ui/date-grid";
 import DayGrid from "../../../feature/timetable-week/ui/day";
+import CalendarLesson from "../../../feature/calendar-lesson";
 
-import { TimetableStore } from "../../../local-store/timetable/timtetable-store";
 import { useFetchTimetable } from "../helpers/hooks/use-fetch-timetable";
 import { datesCompare } from "../../../shared/helpers/dates/dates-compare";
 import { infoByDate, infosByDate } from "../../../shared/helpers/dates/info-by-date";
+
 import DayScheduleCard from "../../../enteties/day-schedule-card";
-import CalendarLesson from "../../../feature/calendar-lesson";
-import { Link } from "react-router-dom";
+
+import { TimetableStore } from "../../../local-store/timetable/timtetable-store";
+import { CookieStore } from "../../../local-store/cookie/cookie-store";
+import { LoaderStore } from "../../../local-store/loader/loader-store";
 
 type Props = {
-  timetable: TimetableStore
+  timetable: TimetableStore,
+  cookieStore: CookieStore,
+  loaderStore: LoaderStore
 }
 
-const TimetableProvider = observer(({ timetable }: Props) => {
+const TimetableProvider = observer(({ timetable, cookieStore, loaderStore}: Props) => {
 
-  const content = useFetchTimetable(timetable);
+  const content = useFetchTimetable(timetable, cookieStore, loaderStore);
 
   if (timetable.type == "month") {
     return <TimetableMonth
@@ -91,7 +97,7 @@ const TimetableProvider = observer(({ timetable }: Props) => {
                   type={el.type}
                 />
               </Link>
-            ))
+            ));
 
           })
         }

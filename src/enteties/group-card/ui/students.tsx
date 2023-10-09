@@ -10,7 +10,7 @@ const Students = ({ students }: Props) => {
         <div className='group-card__students'>
             <div className='group-card__remain-circle group-card__circle'>
                 <div className='group-card__circle-inner'>
-                    <span>+13</span>
+                    <span>{ students.length }</span>
                 </div>
             </div>
             {

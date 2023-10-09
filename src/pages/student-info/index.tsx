@@ -4,6 +4,7 @@ import StudentInfoProvider from './provider';
 import { TimetableStore } from '../../local-store/timetable/timtetable-store';
 import Attendance from './ui/attendance';
 import StudentSuccess from './ui/student-success';
+import { cookieStore } from "../../local-store/cookie/cookie-store";
 
 import './style/index.scss'
 
@@ -11,7 +12,7 @@ export const studentAttendanceCalendar = new TimetableStore('st-att')
 
 const StudentInfo = () => {
     return (
-        <StudentInfoProvider>
+        <StudentInfoProvider cookie={cookieStore}>
             <div className='student-info'>
                 <div className='student-info__container app-container'>
                     <StudentMiniInfo />

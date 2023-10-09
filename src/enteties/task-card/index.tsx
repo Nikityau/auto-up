@@ -2,10 +2,9 @@ import React from 'react';
 import Title from "./ui/title";
 import Description from "./ui/description";
 import Tasks from "./ui/tasks";
+import ButtonWithIcon from "../../shared/ui/btn-with-icon";
 
 import './style/index.scss'
-import Btn from "../../shared/ui/btn";
-import ButtonWithIcon from "../../shared/ui/btn-with-icon";
 
 export type TaskCardProps = {
     id?: string,
