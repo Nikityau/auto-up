@@ -1,8 +1,9 @@
 import React from "react";
+import { nanoid } from "nanoid";
+
+import { AddonFile } from "../../shared/data/interface/addon-file.interface";
 
 import "./style/index.scss";
-import { AddonFile } from "../../shared/data/interface/addon-file.interface";
-import { nanoid } from "nanoid";
 
 type Props = {
   addon: AddonFile[]
@@ -36,7 +37,7 @@ const AddonMaterial = ({ addon }: Props) => {
            key={nanoid()}
       >
         <a href={addon[0]["manual"]}>
-          <span>Мануал</span>
+          <span>Методические указания</span>
         </a>
       </div>
     </div>

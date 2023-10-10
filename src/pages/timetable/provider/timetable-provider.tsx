@@ -19,6 +19,8 @@ import DayScheduleCard from "../../../enteties/day-schedule-card";
 import { TimetableStore } from "../../../local-store/timetable/timtetable-store";
 import { CookieStore } from "../../../local-store/cookie/cookie-store";
 import { LoaderStore } from "../../../local-store/loader/loader-store";
+import { dayTime } from "../../../feature/timetable-day/data/time";
+import DayInfo from "../../../feature/timetable-week/ui/day-info";
 
 type Props = {
   timetable: TimetableStore,
@@ -76,7 +78,24 @@ const TimetableProvider = observer(({ timetable, cookieStore, loaderStore}: Prop
           <DayGrid
             key={nanoid()}
             date={t}
-          />
+          >
+            {
+              infosByDate(t, content?.dates, (d) => {
+                return content?.content.filter(el => datesCompare(el.date, d)).map(el => (
+                  <Link to={`day/${el.id}`} key={el.id}>
+                    <DayInfo
+                      group={el.groupTitle}
+                      course={el.courseTitle}
+                      theme={el.theme}
+                      startTime={el.startTime}
+                      endTime={el.endTime}
+                      type={el.type}
+                    />
+                  </Link>
+                ));
+              })
+            }
+          </DayGrid>
         ))
       }
     </TimetableWeek>;
@@ -90,6 +109,14 @@ const TimetableProvider = observer(({ timetable, cookieStore, loaderStore}: Prop
             return content?.content.filter(el => datesCompare(el.date, d)).map(el => (
               <Link to={`day/${el.id}`} key={el.id}>
                 <DayScheduleCard
+                  offsetTop={(() => {
+                    const [h, min] = el.startTime.split(':')
+                    const time = dayTime.findIndex(d => {
+                      return d.time.split(':')[0] == h
+                    })
+
+                    return time * 86 + 86 * Number(min) / 60
+                  })()}
                   groupTitle={el.groupTitle}
                   theme={el.theme}
                   timeStart={el.startTime}
@@ -98,9 +125,29 @@ const TimetableProvider = observer(({ timetable, cookieStore, loaderStore}: Prop
                 />
               </Link>
             ));
-
           })
         }
+      {/*  {
+          content?.content.filter(el => true).map(el => (
+            <Link to={`day/${el.id}`} key={el.id}>
+              <DayScheduleCard
+                offsetTop={(() => {
+                  const [h, min] = el.startTime.split(':')
+                  const time = dayTime.findIndex(d => {
+                    return d.time.split(':')[0] == h
+                  })
+
+                  return time * 86 + 86 * Number(min) / 60
+                })()}
+                groupTitle={el.groupTitle}
+                theme={el.theme}
+                timeStart={el.startTime}
+                timeEnd={el.endTime}
+                type={el.type}
+              />
+            </Link>
+          ))
+        }*/}
       </TimetableDay>
     </div>;
   }

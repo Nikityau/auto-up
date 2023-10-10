@@ -26,6 +26,8 @@
 
     .timetable-types__type {   
         border-color: transparent;
+
+        background: #F8F9FD;
     }
 
     .timetable-types__type_border_r {
@@ -45,5 +47,7 @@
         color: #7E5EFF;
         border-color: #9E9CFF;
         background: #EBEBFF;
+
+        font-weight: 500;
     }
 }

@@ -10,6 +10,8 @@ import Platform from "./platform";
 import ErrorPage from "./error-page";
 
 import { userStore } from "../local-store/user/user-store";
+import Loader from "../widget/loader";
+import { loaderStore } from "../local-store/loader/loader-store";
 
 const StudentCourseLazy = React.lazy(() => import("./student-course"));
 const StudentTimetableLazy = React.lazy(() => import("./student-timetable"));
@@ -26,7 +28,7 @@ const TestLazy = React.lazy(() => import("./test"));
 
 const AppRouter = () => {
   return (
-    <Suspense fallback={"...loading"}>
+    <Suspense fallback={<Loader loader={loaderStore}/>}>
       <Routes>
         <Route path={AppRoutes.skillget} element={<BasePage user={userStore} />}>
           <Route path={AppRoutes.auth} element={<AuthPageLazy />} />

@@ -15,9 +15,13 @@ const Loader = observer(({loader}:Props) => {
   }
 
   return (
-    <div className={'loader'}>
-      L.O.A.D.I.N.G. ...
-    </div>
+   <div className={'loader-page'}>
+     <div className={'loader'}>
+       <div className={'loader__bal loader__ball_black'}/>
+       <div className={'loader__bal loader__ball_red'}/>
+       <div className={'loader__bal loader__ball_blue'}/>
+     </div>
+   </div>
   );
 });
 

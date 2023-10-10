@@ -4,12 +4,6 @@ import { datesCompare } from "../../shared/helpers/dates/dates-compare";
 
 export type TimetableType = "month" | "week" | "day"
 
-function decorator(value: boolean) {
-  return (target: any, propKey: string, descriptor: PropertyDescriptor) => {
-    console.log("here");
-  };
-}
-
 type Timetable = {
   now: Date,
   activeDate: Date;
@@ -61,13 +55,26 @@ export class TimetableStore {
       now
     );
     this.initWeek();
-    this.timetable.day = new Date(now)
+    this.timetable.day = new Date(now);
   }
 
   initWeek() {
+    const index = this.month.findIndex(d => datesCompare(this.timetable.now, d))
+
+    let startIndex = 0;
+    let endIndex = 0;
+
+    if(index < this.month.length - 7) {
+      startIndex = index
+      endIndex = index + 6
+    } else {
+      startIndex = index - 2
+      endIndex = index + 4
+    }
+
     this.setWeek(
-      this.timetable.month[0],
-      this.timetable.month[6]
+      this.timetable.month[startIndex],
+      this.timetable.month[endIndex]
     );
   }
 

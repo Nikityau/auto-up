@@ -19,11 +19,11 @@ const TimetableInfo = () => {
       <div className={"type-lessons__container"}>
         <TaskSquare
           type={"right"}
-          text={"Очно"}
+          text={"Онлайн"}
         />
         <TaskSquare
           type={"not_solve"}
-          text={"Онлайн"}
+          text={"Очно"}
         />
       </div>
     </InfoBlock>

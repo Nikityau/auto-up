@@ -23,7 +23,7 @@ const Doc = () => {
           //@ts-ignore
           direction={"vertical"}
           slidesPerView={"auto"}
-          spaceBetween={140}
+          spaceBetween={60}
           mousewheel={true}
           freeMode={true}
           modules={[

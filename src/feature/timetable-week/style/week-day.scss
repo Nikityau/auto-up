@@ -20,3 +20,15 @@
     font-weight: 600;
   }
 }
+
+.timetable-week__day-content_empty {
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+
+  img {
+    margin-bottom: 20px;
+  }
+}
