@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { observer } from 'mobx-react-lite';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Mousewheel } from 'swiper/modules'
@@ -6,12 +6,16 @@ import { DayScheduleStore } from '../store/day-schedule-store';
 import StudentDayCard from '../../../enteties/student-day-card';
 
 import 'swiper/css'
+import {SchDayContext} from "../provider/schedule-day.provider";
 
 type Props = {
-    schedule: DayScheduleStore
+    schedule: DayScheduleStore,
 }
 
 const StudentsList = observer(({ schedule }: Props) => {
+
+    const cntx = useContext(SchDayContext)
+
     return (
         <div className='schedule-day__students-list'>
           {
@@ -40,7 +44,7 @@ const StudentsList = observer(({ schedule }: Props) => {
                       isIn={st.isIn}
                       position={i + 1}
                       onSetStatus={({status, studentId}) => {
-                        schedule.setStudentStatus(studentId, status)
+                        cntx.updAtt(status, studentId)
                       }}
                     />
                   </SwiperSlide>

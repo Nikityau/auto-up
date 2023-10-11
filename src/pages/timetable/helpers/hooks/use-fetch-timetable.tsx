@@ -28,7 +28,7 @@ export const useFetchTimetable = (timetable: TimetableStore, cookieStore: Cookie
         }
       })
 
-      const adapted = await scheduleAdapter(data)
+      const adapted = await scheduleAdapter(data, cookieStore.token)
 
       setState({
         dates: adapted.dates,

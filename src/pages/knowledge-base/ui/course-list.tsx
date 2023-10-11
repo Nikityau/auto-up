@@ -7,6 +7,7 @@ import { CookieStore } from "../../../local-store/cookie/cookie-store";
 import { LoaderStore } from "../../../local-store/loader/loader-store";
 
 import img from "../assets/p1.png";
+import {nanoid} from "nanoid";
 
 type Props = {
   cookieStore: CookieStore
@@ -23,7 +24,7 @@ const CourseList = observer(({ cookieStore, loader }: Props) => {
         courses?.map(c => (
           <Link
             to={`${c.id}`}
-            key={c.id}
+            key={nanoid()}
           >
             <CourseDocCard
               id={c.id}

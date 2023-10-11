@@ -4,6 +4,8 @@ import { ResSchedule } from "./interface/res-schedule";
 
 import { CourseInterface } from "../../../../shared/helpers/types/course.interface";
 import { datesCompare } from "../../../../shared/helpers/dates/dates-compare";
+import axios from "axios";
+import {baseUrl} from "../../../../shared/api/base-url";
 
 
 export type LessonAdapted = {
@@ -18,14 +20,28 @@ type Res = {
   dates: Date[]
 }
 
-export const scheduleAdapter = async (data: ResSchedule[]): Promise<Res> => {
+export const scheduleAdapter = async (data: ResSchedule[], token: string): Promise<Res> => {
   const schedule: LessonAdapted[] = [];
   const dates: Date[] = [];
 
+  const groupCache = {
+
+  }
+
   for (let sch of data) {
+    if(!groupCache[sch.group]) {
+      const resGroup = await axios.get(`${baseUrl}/api/v1/study_groups/${sch.group}`, {
+        headers: {
+          Authorization: `Token ${token}`
+        }
+      })
+
+      groupCache[sch.group] = resGroup.data
+    }
+
     schedule.push({
       id: nanoid(),
-      courseId: sch.id,
+      courseId: sch.course.id,
       groupId: sch.group,
       lessonId: sch.lesson.id,
       courseTitle: sch.course.title,
@@ -35,7 +51,7 @@ export const scheduleAdapter = async (data: ResSchedule[]): Promise<Res> => {
       endTime: new Date(new Date(sch.start_time).getTime() + sch.duration_minutes * 60 * 1000).toLocaleTimeString().slice(0,5),
       startTime: new Date(sch.start_time).toLocaleTimeString().slice(0,5),
       date: new Date(sch.start_time),
-      type: "offline"
+      type: groupCache[sch.group]['lesson_format']
     });
 
     if (dates.length == 0) {

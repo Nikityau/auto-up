@@ -2,6 +2,8 @@ import React from 'react';
 import {studentBaseInfo} from "../data/student-info";
 
 const StudentName = () => {
+
+
     return (
         <div className='student-info__mini-data'>
             <div className='student-info__name'>

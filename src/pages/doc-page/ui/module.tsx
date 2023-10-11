@@ -1,19 +1,23 @@
 import React from 'react';
-import { DocModule } from '../helpers/hooks/interface';
+import cn from "classnames";
+import {nanoid} from "nanoid";
+
+import {DocModule} from '../helpers/hooks/interface';
+
 import InfoBlock from '../../../enteties/info-block';
 import TaskBlock from '../../../enteties/task-block';
 import AddonMaterial from '../../../enteties/addon-material';
-import cn from "classnames";
 
 type Props = {
     module: DocModule,
     number: number
 }
 
-const DocModule = ({ module, number }: Props) => {
+const DocModule = ({module, number}: Props) => {
+    console.log('md', module)
     return (
         <div className={cn(
-          'doc-page__module'
+            'doc-page__module'
         )}>
             <div className='doc-page__module-title'>
                 <span>Модуль {number}. </span>
@@ -40,12 +44,17 @@ const DocModule = ({ module, number }: Props) => {
                                     <div className='dock-page__task-block-title'>
                                         <span>Задания</span>
                                     </div>
-                                  {
-                                    l && l?.tasks &&
-                                    <TaskBlock taskBlock={l?.tasks} />
-                                  }
+                                    {
+                                        l && l?.tasks &&
+                                        <TaskBlock
+                                            key={nanoid()}
+                                            taskBlock={l?.tasks}
+                                            courseId={module.id}
+                                            lessonId={l.id}
+                                        />
+                                    }
                                 </div>
-                                <AddonMaterial addon={l?.addonMaterial} />
+                                <AddonMaterial addon={l?.addonMaterial}/>
                             </div>
                         </InfoBlock>
                     ))

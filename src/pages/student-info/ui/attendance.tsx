@@ -4,10 +4,11 @@ import AttendanceSideBar from './attendce-side-bar';
 import AttendanceCalendar from './attendance-calendar';
 import TitleUi from '../../../shared/ui/page-title';
 import { studentAttendanceCalendar } from '..';
+import {cookieStore} from "../../../local-store/cookie/cookie-store";
 
 const Attendance = () => {
     return (
-        <AttendanceProvider>
+        <AttendanceProvider cookie={cookieStore}>
             <div className='student-attendce'>
                 <div className='student-attendce__title'>
                     <TitleUi title='Посещаемость'/>

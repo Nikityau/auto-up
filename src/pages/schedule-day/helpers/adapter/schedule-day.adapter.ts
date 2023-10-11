@@ -10,8 +10,6 @@ import { ResLesson } from "../interface/res";
 export const scheduleDayAdapter = async (lessons: LessonAdapted[], token: string): Promise<StudentSchedule[]> => {
   const schedule: StudentSchedule[] = []
 
-  console.log('lessons',lessons);
-
   for(let lesson of lessons) {
     const ls:StudentSchedule = {
       id: lesson.lessonId,
@@ -45,7 +43,6 @@ export const scheduleDayAdapter = async (lessons: LessonAdapted[], token: string
     const taskBlocks = []
 
     for(let taskBlock of lessonData.task_blocks) {
-      console.log('tb', taskBlock);
       const tbResData = {}
 
       const taskBlockRes = await axios.get(`${baseUrl}/api/v1/courses/${ls.courseId}/lessons/${ls.lessonId}/tasks/?task_block=${taskBlock.id}`, {
@@ -61,7 +58,6 @@ export const scheduleDayAdapter = async (lessons: LessonAdapted[], token: string
       taskBlocks.push(tbResData)
     }
     ls.tasks = taskBlocks
-
 
     schedule.push(ls)
   }

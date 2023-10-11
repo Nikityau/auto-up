@@ -5,17 +5,18 @@ import { TasksBlock } from "../../shared/data/interface/tasks-block.interface";
 import Block from "./ui/block";
 
 import "./style/index.scss";
+import {nanoid} from "nanoid";
 
 type Props = {
   courseId: string
   lessonId: string
-  taskBlock: TasksBlock[]
+  taskBlock: any[]
 }
 
 export const TbContext = React.createContext<Omit<Props, "taskBlock">>(null)
 
 const TaskBlock = ({ taskBlock, lessonId, courseId }: Props) => {
-  console.log(taskBlock);
+  console.log('taskblock',taskBlock);
 
   return (
    <TbContext.Provider value={{
@@ -27,7 +28,7 @@ const TaskBlock = ({ taskBlock, lessonId, courseId }: Props) => {
          taskBlock && taskBlock.length > 0 &&
          taskBlock?.map((tb, i) => (
            <Block
-             key={tb?.id}
+             key={nanoid()}
              block={tb.tasks}
              number={i + 1}
              title={tb.title}

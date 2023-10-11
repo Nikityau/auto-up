@@ -12,14 +12,19 @@ type Props = {
   loader: LoaderStore
 } & React.PropsWithChildren
 
+
+export const SchDayContext = React.createContext(null)
+
 const ScheduleDayProvider = observer(({children,cookie, daySchedule, loader}:Props) => {
 
-  useFetchDay(cookie, daySchedule, loader)
+  const updAtt = useFetchDay(cookie, daySchedule, loader)
 
   return (
-    <>
+    <SchDayContext.Provider value={{
+      updAtt
+    }}>
       {children}
-    </>
+    </SchDayContext.Provider>
   );
 });
 

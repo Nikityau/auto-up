@@ -1,0 +1,48 @@
+.day-control-panel {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.day-control-panel__date {
+  color: #4F4B5C;
+  text-align: center;
+  font-family: Montserrat, sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+
+  span {
+    &:nth-child(1) {
+      margin-right: 10px;
+    }
+  }
+}
+
+.day-control-panel__control {
+  display: flex;
+  align-items: center;
+}
+
+.day-control-panel__control-btn {
+  padding: 14px 15px;
+
+  border: 1px solid #000;
+
+  cursor: pointer;
+}
+
+.day-control-panel__control_left {
+  border-right: unset;
+
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.day-control-panel__control_right {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  svg {
+    transform: rotate(180deg);
+  }
+}

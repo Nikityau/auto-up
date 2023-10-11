@@ -25,6 +25,19 @@ interface ResGroup {
     }[]
 }
 
+interface LessonRes {
+    id: string,
+    lesson: {
+        id: string,
+        title: string
+    }
+}
+
+interface StatGroupRes {
+    previous_lesson: LessonRes | null
+    next_lesson: LessonRes
+}
+
 const groupsData: GroupData[] = [
     {
         id: nanoid(),
@@ -70,12 +83,22 @@ export const useFetchGroups = (loader: LoaderStore, cookie: CookieStore) => {
                     Authorization: `Token ${cookie.token}`
                 }
             })
+
             for(let group of data as ResGroup[]) {
+                const sttatRes = await axios.get(`${baseUrl}/api/v1/study_groups/${group.id}/statistics/`, {
+                    headers: {
+                        Authorization: `Token ${cookie.token}`
+                    }
+                })
+
+                console.log(sttatRes.data)
+                const statData = sttatRes.data as StatGroupRes
+
                 grps.push({
                     id: group.id,
                     groupTitle: group.name,
                     courseTitle: group.course,
-                    status: null,
+                    status: statData.previous_lesson ? statData.previous_lesson?.lesson?.title : statData.next_lesson?.lesson?.title,
                     students: group.students
                 })
             }

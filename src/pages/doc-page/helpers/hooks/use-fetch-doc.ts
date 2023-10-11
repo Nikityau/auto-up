@@ -20,7 +20,10 @@ export const useFetchDoc = (cookieStore: CookieStore, loader: LoaderStore) => {
         }
       });
 
+      console.log('course', data)
+
       const doc_adapted = await adapterDoc(data, cookieStore.token);
+      console.log('adapted', doc_adapted)
       setDoc(doc_adapted)
       loaderStore.remove(`${baseUrl}/api/v1/courses/${id}/`)
     })();

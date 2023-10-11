@@ -9,6 +9,8 @@ import TimetableDay from "../../../feature/timetable-day";
 import DateGrid from "../../../feature/timetable-month/ui/date-grid";
 import DayGrid from "../../../feature/timetable-week/ui/day";
 import CalendarLesson from "../../../feature/calendar-lesson";
+import DayInfo from "../../../feature/timetable-week/ui/day-info";
+import { dayTime } from "../../../feature/timetable-day/data/time";
 
 import { useFetchTimetable } from "../helpers/hooks/use-fetch-timetable";
 import { datesCompare } from "../../../shared/helpers/dates/dates-compare";
@@ -19,8 +21,7 @@ import DayScheduleCard from "../../../enteties/day-schedule-card";
 import { TimetableStore } from "../../../local-store/timetable/timtetable-store";
 import { CookieStore } from "../../../local-store/cookie/cookie-store";
 import { LoaderStore } from "../../../local-store/loader/loader-store";
-import { dayTime } from "../../../feature/timetable-day/data/time";
-import DayInfo from "../../../feature/timetable-week/ui/day-info";
+import DayControlPanel from "../../../feature/day-control-panel";
 
 type Props = {
   timetable: TimetableStore,
@@ -106,7 +107,13 @@ const TimetableProvider = observer(({ timetable, cookieStore, loaderStore }: Pro
 
   if (timetable.type == "day") {
     return <div className={"timetable-day__wrapper"}>
-      <TimetableDay>
+      <TimetableDay
+        ControlPanel={
+          <DayControlPanel
+            timetable={timetable}
+          />
+        }
+      >
         {
           infosByDate(timetable.day, content?.dates, (d) => {
             return content?.content.filter(el => datesCompare(el.date, d)).map(el => (

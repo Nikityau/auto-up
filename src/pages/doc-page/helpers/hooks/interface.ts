@@ -2,7 +2,7 @@ export interface Lesson {
   id: string,
   title: string,
   tasks: any[],
-  addonMaterial: any[]
+  addonMaterial: any
 }
 
 export interface DocModule {
@@ -29,7 +29,11 @@ export interface ResDoc {
         id: string,
         title: string,
         number: string,
-        manual: string
+        manual: string,
+        task_blocks: {
+          id: string,
+          name: string
+        }[]
     }[]
   }[]
 }

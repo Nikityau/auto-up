@@ -1,9 +1,8 @@
-import { nanoid } from "nanoid";
+import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import axios from "axios";
 import { LoaderStore } from "../../../../local-store/loader/loader-store";
 import { baseUrl } from "../../../../shared/api/base-url";
-import { useParams } from "react-router-dom";
-import axios from "axios";
 import { cookieStore } from "../../../../local-store/cookie/cookie-store";
 import { groupAdapter } from "../adapter/group-adapter";
 
@@ -42,7 +41,7 @@ export const useFetchGroup = (loader: LoaderStore) => {
           Authorization: `Token ${cookieStore.token}`
         }
       });
-      const adapted = await groupAdapter(data);
+      const adapted = await groupAdapter(data, cookieStore.token);
       setGroup(adapted)
 
       loader.remove(`${baseUrl}/api/v1/study_groups/${id}/`);

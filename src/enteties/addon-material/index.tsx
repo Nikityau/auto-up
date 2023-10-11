@@ -29,14 +29,14 @@ const AddonMaterial = ({ addon }: Props) => {
       <div className="addon-material__material"
            key={nanoid()}
       >
-        <a href={addon[0]["presentation"]}>
+        <a href={addon?.[0]?.["presentation"]}>
           <span>Презентация</span>
         </a>
       </div>
       <div className="addon-material__material"
            key={nanoid()}
       >
-        <a href={addon[0]["manual"]}>
+        <a href={addon?.[0]?.["manual"]}>
           <span>Методические указания</span>
         </a>
       </div>

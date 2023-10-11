@@ -33,6 +33,8 @@ export class TimetableStore {
       prevMonth: action,
       prevWeek: action,
       nextWeek: action,
+      nextDay: action,
+      prevDay: action,
       week: computed,
       month: computed,
       day: computed
@@ -95,6 +97,7 @@ export class TimetableStore {
       this.month[0],
       this.month[6]
     );
+    this.setDay(this.month[0])
   }
 
   prevMonth() {
@@ -109,6 +112,7 @@ export class TimetableStore {
       this.month[this.month.length - 1 - 6],
       this.month[this.month.length - 1]
     );
+    this.setDay(this.month[this.month.length - 1])
   }
 
   prevWeek() {
@@ -160,6 +164,25 @@ export class TimetableStore {
     );
   }
 
+  nextDay() {
+    const dIndex = this.month.findIndex(d => datesCompare(d, this.day))
+
+    if(dIndex == this.month.length - 1) {
+      this.nextMonth()
+    } else {
+      this.setDay(this.month[dIndex + 1])
+    }
+  }
+  prevDay() {
+    const dIndex = this.month.findIndex(d => datesCompare(d, this.day))
+
+    if(dIndex == 0) {
+      this.prevMonth()
+    } else {
+      this.setDay(this.month[dIndex - 1])
+    }
+  }
+
   get month() {
     return this.timetable.month;
   }
@@ -184,6 +207,10 @@ export class TimetableStore {
       start: new Date(date.getFullYear(), date.getMonth(), 1),
       end: new Date(date.getFullYear(), date.getMonth() + 1, 0)
     });
+  }
+
+  private setDay(date: Date) {
+    this.timetable.day = date
   }
 }
 
