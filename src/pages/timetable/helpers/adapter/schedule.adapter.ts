@@ -1,19 +1,33 @@
+import { nanoid } from "nanoid";
+
 import { ResSchedule } from "./interface/res-schedule";
+
 import { CourseInterface } from "../../../../shared/helpers/types/course.interface";
 import { datesCompare } from "../../../../shared/helpers/dates/dates-compare";
 
 
-export const scheduleAdapter = async (data: ResSchedule[]) => {
-  const schedule: Omit<CourseInterface, "isCurrent">[] = [];
+export type LessonAdapted = {
+  courseId: string,
+  lessonId: string,
+  groupId: string
+} & Omit<CourseInterface, "isCurrent">
+
+
+type Res = {
+  schedule: LessonAdapted[],
+  dates: Date[]
+}
+
+export const scheduleAdapter = async (data: ResSchedule[]): Promise<Res> => {
+  const schedule: LessonAdapted[] = [];
   const dates: Date[] = [];
 
   for (let sch of data) {
-    console.log(sch);
-
-
-
     schedule.push({
-      id: sch.id,
+      id: nanoid(),
+      courseId: sch.id,
+      groupId: sch.group,
+      lessonId: sch.lesson.id,
       courseTitle: sch.course.title,
       groupTitle: sch.group_name,
       lessonPerDay: 1,

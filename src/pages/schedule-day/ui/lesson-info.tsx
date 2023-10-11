@@ -11,7 +11,13 @@ const LessonInfo = observer(({ schedule }: Props) => {
     return (
         <div className='schedule-day__lesson-info'>
             <div className='schedule-day__day'>
-                <span>0{schedule.currentSchedule?.date?.getDay() || "null"}</span>
+                <span>
+                    {
+                        schedule.currentSchedule?.date?.getDate() < 10
+                          ? `0${schedule.currentSchedule?.date?.getDate()}`
+                          : schedule.currentSchedule?.date?.getDate()
+                    }
+                </span>
                 <span>{toWeekDayStr(schedule.currentSchedule?.date?.getDay())}</span>
             </div>
             <div className='schedule-day__lesson-container'>
@@ -33,17 +39,16 @@ const LessonInfo = observer(({ schedule }: Props) => {
                     <div className='schedule-day__addon-title'>
                         <span>Дополнительные материалы</span>
                     </div>
-                    {
-                        schedule.currentSchedule?.addonFiles.map(f => (
-                            <div className='schedule-day__addon-file'
-                                key={f.id}
-                            >
-                                <a href={f.url}>
-                                    <span>{f.title}</span>
-                                </a>
-                            </div>
-                        ))
-                    }
+                    <div className='schedule-day__addon-file'>
+                        <a href={schedule.currentSchedule?.addonFiles?.presentation}>
+                            <span>Презентация</span>
+                        </a>
+                    </div>
+                    <div className='schedule-day__addon-file'>
+                        <a href={schedule.currentSchedule?.addonFiles?.manual}>
+                            <span>Методоческие указания</span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

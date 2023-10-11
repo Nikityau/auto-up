@@ -3,3 +3,9 @@ export interface AddonFile {
     url: string,
     title: string
 }
+
+export interface Materials {
+    id: string,
+    presentation: string,
+    manual: string
+}

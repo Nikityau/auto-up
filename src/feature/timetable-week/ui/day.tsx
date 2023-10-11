@@ -33,12 +33,14 @@ const DayGrid = ({ date, children}:Props) => {
     }
   }
 
-  console.log(Children.count(children));
-
   return (
     <div className={cn(
       'timetable-week__day',
-    )}>
+    )}
+      style={{
+        gridRowEnd: `span ${Children.count(children)}`
+      }}
+    >
       <div className={'timetable-week__day-title'}>
         <span>{date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()} {toWeekDayStr(date.getDay())}</span>
       </div>

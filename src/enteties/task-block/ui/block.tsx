@@ -1,27 +1,31 @@
-import React from 'react';
-import Tasks from './tasks';
-import {TasksBlock} from "../../../shared/data/interface/tasks-block.interface";
+import React from "react";
+import Tasks from "./tasks";
+import { TasksBlock } from "../../../shared/data/interface/tasks-block.interface";
 
 type Props = {
-    block: TasksBlock,
-    number: number
+  block: any[],
+  number: number,
+  title: string
 }
 
-const Block = ({ block, number }: Props) => {
-    return (
-        <div className='task-block__block'>
-            <div className='task-block__title'>
+const Block = ({ block, number, title }: Props) => {
+  return (
+    <div className="task-block__block">
+      <div className="task-block__title">
                 <span>
                     Б-{
-                        number < 10 
-                        ? number == 1 ? `01 ` : `0${number}`
-                        : number
-                    }
+                  number < 10
+                    ? number == 1 ? `01 ` : `0${number}`
+                    : number
+                }
                 </span>
-            </div>
-            {/*<Tasks block={block}/>*/}
-        </div>
-    );
+      </div>
+      <Tasks
+        block={block}
+        title={title}
+      />
+    </div>
+  );
 };
 
 export default Block;

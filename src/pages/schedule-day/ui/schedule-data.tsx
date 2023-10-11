@@ -1,7 +1,7 @@
 import React from 'react';
 import { dayScheduleStore } from '../store/day-schedule-store';
 import LessonInfo from './lesson-info';
-import LesssonTasks from './lesson-tasks';
+import LessonTasks from './lesson-tasks';
 
 const ScheduleData = () => {
     return (
@@ -9,7 +9,7 @@ const ScheduleData = () => {
             <LessonInfo
                 schedule={dayScheduleStore}
             />
-            <LesssonTasks
+            <LessonTasks
                 schedule={dayScheduleStore}
             />
         </div>

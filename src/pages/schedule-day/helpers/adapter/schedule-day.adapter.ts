@@ -1,0 +1,70 @@
+import axios from "axios";
+import { nanoid } from "nanoid";
+
+import { StudentSchedule } from "../../../../shared/data/interface/student-schedule.interface";
+import { LessonAdapted } from "../../../timetable/helpers/adapter/schedule.adapter";
+import { baseUrl } from "../../../../shared/api/base-url";
+import { ResLesson } from "../interface/res";
+
+
+export const scheduleDayAdapter = async (lessons: LessonAdapted[], token: string): Promise<StudentSchedule[]> => {
+  const schedule: StudentSchedule[] = []
+
+  console.log('lessons',lessons);
+
+  for(let lesson of lessons) {
+    const ls:StudentSchedule = {
+      id: lesson.lessonId,
+      courseId: lesson.courseId,
+      lessonId: lesson.lessonId,
+      groupId: lesson.groupId,
+      addonFiles: null,
+      tasks: [],
+      students: [],
+      date: lesson.date,
+      groupTitle: lesson.groupTitle,
+      courseTitle: lesson.courseTitle,
+      lessonTitle: lesson.theme,
+      timeEnd: lesson.endTime,
+      timeStart: lesson.startTime
+    }
+
+    const lessonRes = await axios.get(`${baseUrl}/api/v1/courses/${lesson.courseId}/lessons/${lesson.lessonId}/`, {
+      headers: {
+        Authorization: `Token ${token}`
+      },
+    })
+    const lessonData: ResLesson = lessonRes.data as ResLesson
+
+    ls.addonFiles = {
+      id: nanoid(),
+      manual: lessonData.manual,
+      presentation: lessonData.presentation
+    }
+
+    const taskBlocks = []
+
+    for(let taskBlock of lessonData.task_blocks) {
+      console.log('tb', taskBlock);
+      const tbResData = {}
+
+      const taskBlockRes = await axios.get(`${baseUrl}/api/v1/courses/${ls.courseId}/lessons/${ls.lessonId}/tasks/?task_block=${taskBlock.id}`, {
+        headers: {
+          Authorization: `Token ${token}`
+        }
+      })
+
+      tbResData['id'] = taskBlock.id
+      tbResData['title'] = taskBlock.name
+      tbResData['tasks'] = taskBlockRes.data
+
+      taskBlocks.push(tbResData)
+    }
+    ls.tasks = taskBlocks
+
+
+    schedule.push(ls)
+  }
+
+  return schedule
+}

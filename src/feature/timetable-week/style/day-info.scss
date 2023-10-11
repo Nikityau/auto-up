@@ -1,5 +1,9 @@
 .day-info {
+  position: relative;
+
   padding: 70px 30px 40px 50px;
+
+
 
   .day-info__title {
     color: #191617;
@@ -47,7 +51,7 @@
 
     color: #000;
     text-align: center;
-    font-family: Montserrat,sans-serif;
+    font-family: Montserrat, sans-serif;
     font-size: 16px;
     font-style: normal;
     font-weight: 700;
@@ -60,4 +64,13 @@
       }
     }
   }
+
+  .day-info__delimiter {
+    position: absolute;
+    top: 0;
+    left: 50%;
+
+    transform: translate(-50%, 0);
+  }
 }
+

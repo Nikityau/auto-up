@@ -11,7 +11,8 @@ const Tabs = observer(({schedule}:Props) => {
     return (
         <div className='schedule-day__tabs'>
             {
-                schedule.schedule.map((sc, i) => (
+                schedule.schedule &&
+                schedule.schedule?.map((sc, i) => (
                     <Tab
                         key={sc.id}
                         isCurrent={schedule.tab == sc.id}

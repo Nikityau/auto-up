@@ -23,6 +23,7 @@ export const useManage = (userStore: UserStore, cookieStore: CookieStore) => {
   const nav = useNavigate();
 
   useEffect(() => {
+    console.log('here');
     if (location.pathname.includes("auth")) {
       if (!cookieStore.token) {
         return

@@ -1,6 +1,5 @@
 import { action, computed, makeObservable, observable } from "mobx"
 import {StudentSchedule} from "../../../shared/data/interface/student-schedule.interface";
-import {studentSchedule} from "../../../shared/data/student-schedule";
 
 export class DayScheduleStore {
     tab: string = null
@@ -11,13 +10,14 @@ export class DayScheduleStore {
             tab: observable,
             schedule: observable,
             setTab: action,
+            setSchedule: action,
             students: computed,
             currentSchedule: computed,
             tasks: computed
         })
 
-        this.schedule = studentSchedule
-        this.tab = this.schedule[0]?.id || null
+        //this.schedule = studentSchedule
+        //this.tab = this.schedule[0]?.id || null
     }
 
     setTab(tab: string) {
@@ -25,15 +25,24 @@ export class DayScheduleStore {
     }
 
     get students() {
+        if(!this.schedule) return null
+
         return this.schedule.find((s) => s.id == this.tab)?.students
     }
 
     get currentSchedule() {
+        if(!this.schedule) return null
+
         return this.schedule.find(s => s.id == this.tab)
     }
 
     get tasks() {
         return this.currentSchedule.tasks
+    }
+
+    setSchedule(sch: StudentSchedule[]) {
+        this.schedule = sch
+        this.tab = this.schedule[0].id
     }
 
     setStudentStatus(studentId: string, status: boolean) {

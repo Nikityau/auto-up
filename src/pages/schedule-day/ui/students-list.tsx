@@ -14,37 +14,40 @@ type Props = {
 const StudentsList = observer(({ schedule }: Props) => {
     return (
         <div className='schedule-day__students-list'>
+          {
+            schedule.schedule &&
             <Swiper
-                //@ts-ignore
-                direction={'vertical'}
-                slidesPerView={'auto'}
-                spaceBetween={16}
-                mousewheel={true}
-                modules={[
-                    Mousewheel
-                ]}
+              //@ts-ignore
+              direction={'vertical'}
+              slidesPerView={'auto'}
+              spaceBetween={16}
+              mousewheel={true}
+              modules={[
+                Mousewheel
+              ]}
             >
-                {
-                    schedule?.students?.map((st, i) => (
-                        <SwiperSlide
-                            key={st.id}
-                        >
-                            <StudentDayCard
-                                id={st.id}
-                                avatar={st.avatar}
-                                name={st.name}
-                                surname={st.surname}
-                                patronymic={st.patronymic}
-                                isIn={st.isIn}
-                                position={i + 1}
-                                onSetStatus={({status, studentId}) => {
-                                    schedule.setStudentStatus(studentId, status)
-                                }}
-                            />
-                        </SwiperSlide>
-                    ))
-                }
+              {
+                schedule?.students?.map((st, i) => (
+                  <SwiperSlide
+                    key={st.id}
+                  >
+                    <StudentDayCard
+                      id={st.id}
+                      avatar={st.avatar}
+                      name={st.name}
+                      surname={st.surname}
+                      patronymic={st.patronymic}
+                      isIn={st.isIn}
+                      position={i + 1}
+                      onSetStatus={({status, studentId}) => {
+                        schedule.setStudentStatus(studentId, status)
+                      }}
+                    />
+                  </SwiperSlide>
+                ))
+              }
             </Swiper>
+          }
         </div>
     );
 });

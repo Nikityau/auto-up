@@ -28,7 +28,7 @@ type Props = {
   loaderStore: LoaderStore
 }
 
-const TimetableProvider = observer(({ timetable, cookieStore, loaderStore}: Props) => {
+const TimetableProvider = observer(({ timetable, cookieStore, loaderStore }: Props) => {
 
   const content = useFetchTimetable(timetable, cookieStore, loaderStore);
 
@@ -47,22 +47,24 @@ const TimetableProvider = observer(({ timetable, cookieStore, loaderStore}: Prop
               infoByDate(d, content?.dates, (d) => {
                 const el = content.content?.find(c => datesCompare(c.date, d));
 
-                return <Link to={`day/${el.id}`}
-                             key={el.id}
-                >
-                  <CalendarLesson
-                    id={nanoid()}
-                    date={el.date}
-                    courseTitle={el.courseTitle}
-                    groupTitle={el.groupTitle}
-                    theme={el.theme}
-                    startTime={el.startTime}
-                    endTime={el.endTime}
-                    type={el.type}
-                    isCurrent={true}
-                    lessonPerDay={el.lessonPerDay}
-                  />
-                </Link>;
+                return (
+                  <Link to={`day/${el.date.getFullYear()}-${el.date.getMonth() + 1}-${el.date.getDate()}`}
+                        key={el.id}
+                  >
+                    <CalendarLesson
+                      id={nanoid()}
+                      date={el.date}
+                      courseTitle={el.courseTitle}
+                      groupTitle={el.groupTitle}
+                      theme={el.theme}
+                      startTime={el.startTime}
+                      endTime={el.endTime}
+                      type={el.type}
+                      isCurrent={true}
+                      lessonPerDay={el.lessonPerDay}
+                    />
+                  </Link>
+                );
               })
             }
           </DateGrid>
@@ -81,9 +83,10 @@ const TimetableProvider = observer(({ timetable, cookieStore, loaderStore}: Prop
           >
             {
               infosByDate(t, content?.dates, (d) => {
-                return content?.content.filter(el => datesCompare(el.date, d)).map(el => (
-                  <Link to={`day/${el.id}`} key={el.id}>
+                return content?.content.filter(el => datesCompare(el.date, d)).map((el, i) => (
+                  <Link to={`day/${el.date.getFullYear()}-${el.date.getMonth() + 1}-${el.date.getDate()}`} key={el.id}>
                     <DayInfo
+                      number={i}
                       group={el.groupTitle}
                       course={el.courseTitle}
                       theme={el.theme}
@@ -107,15 +110,15 @@ const TimetableProvider = observer(({ timetable, cookieStore, loaderStore}: Prop
         {
           infosByDate(timetable.day, content?.dates, (d) => {
             return content?.content.filter(el => datesCompare(el.date, d)).map(el => (
-              <Link to={`day/${el.id}`} key={el.id}>
+              <Link to={`day/${el.date.getFullYear()}-${el.date.getMonth() + 1}-${el.date.getDate()}`} key={el.id}>
                 <DayScheduleCard
                   offsetTop={(() => {
-                    const [h, min] = el.startTime.split(':')
+                    const [h, min] = el.startTime.split(":");
                     const time = dayTime.findIndex(d => {
-                      return d.time.split(':')[0] == h
-                    })
+                      return d.time.split(":")[0] == h;
+                    });
 
-                    return time * 86 + 86 * Number(min) / 60
+                    return time * 86 + 86 * Number(min) / 60;
                   })()}
                   groupTitle={el.groupTitle}
                   theme={el.theme}
@@ -127,7 +130,7 @@ const TimetableProvider = observer(({ timetable, cookieStore, loaderStore}: Prop
             ));
           })
         }
-      {/*  {
+        {/*{
           content?.content.filter(el => true).map(el => (
             <Link to={`day/${el.id}`} key={el.id}>
               <DayScheduleCard
