@@ -1,0 +1,26 @@
+.task-page {
+  padding-top: 110px;
+
+
+  .task-page__wrapper {
+    display: grid;
+    grid-template-columns: auto 415px;
+    gap: 20px;
+
+    margin-top: 20px;
+  }
+
+  .task-page__container {
+
+  }
+
+  .task-page__code-editor {
+    height: 700px;
+  }
+
+  .task-description {
+    height: fit-content;
+  }
+
+  padding-bottom: 50px;
+}

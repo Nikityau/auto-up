@@ -22,7 +22,7 @@ const Error = () => {
 
   return (
     <div className={"error-page"}>
-      <div className={"error-page__container app-container"}>
+      <div className={"error-handler-page__container app-container"}>
         <TitleUi title={`Error ${name}`} />
         <div className={"error-page__text"}>
           <span>{error[name]}</span>

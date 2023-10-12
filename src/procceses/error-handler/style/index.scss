@@ -1,0 +1,36 @@
+.error-bar {
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  background: #F8F9FD;
+  border-radius: 10px;
+
+  border: 1px solid #F54;
+  height: calc(70px - 40px);
+
+  padding: 20px;
+
+  color: #191617;
+  font-family: Montserrat, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+
+  z-index: 10;
+
+  p {
+  }
+
+  .error-bar__close {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+
+    cursor: pointer;
+  }
+}

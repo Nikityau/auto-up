@@ -6,10 +6,11 @@ import GroupProvider from './provider/group-provider';
 import { loaderStore } from "../../local-store/loader/loader-store";
 
 import './style/index.scss'
+import {errorStore} from "../../local-store/error-store";
 
 const Group = () => {
     return (
-        <GroupProvider loader={loaderStore}>
+        <GroupProvider loader={loaderStore} error={errorStore}>
             <div className='group-page'>
             <div className='group-page__container app-container'>
                 <BackBtn/>

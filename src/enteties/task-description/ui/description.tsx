@@ -1,9 +1,10 @@
 import React from 'react';
-import {TaskData} from "../../../pages/test/data/interface/task.inteface";
+import {TaskDescProps} from "../index";
+import Markdown from "react-markdown";
 
 type Props = {
     
-} & Pick<TaskData, 'description'>
+} & Pick<TaskDescProps, 'description'>
 
 const Description = (
     {
@@ -11,11 +12,16 @@ const Description = (
     }:Props) => {
     return (
         <div className={'task-description__description'}>
-            {
+            {/*{
                 description.map((d,i) => (
                     <span key={i}>{d}</span>
                 ))
-            }
+            }*/}
+            <Markdown
+                className={"task-description__md"}
+            >
+                {description}
+            </Markdown>
         </div>
     );
 };

@@ -8,15 +8,17 @@ import { LoaderStore } from "../../../local-store/loader/loader-store";
 
 import img from "../assets/p1.png";
 import {nanoid} from "nanoid";
+import {ErrorStore} from "../../../local-store/error-store";
 
 type Props = {
   cookieStore: CookieStore
-  loader: LoaderStore
+  loader: LoaderStore,
+  error: ErrorStore
 }
 
-const CourseList = observer(({ cookieStore, loader }: Props) => {
+const CourseList = observer(({ cookieStore, loader, error}: Props) => {
 
-  const courses = useFetchCourses(cookieStore, loader);
+  const courses = useFetchCourses(cookieStore, loader, error);
 
   return (
     <div className="knowledge-base-page__course-list">

@@ -1,0 +1,15 @@
+.verify-test-page {
+  padding-top: 110px;
+
+  .verify-test-page__wrapper {
+    margin-top: 10px;
+
+    display: grid;
+    grid-template-columns: auto 400px;
+    gap: 10px;
+  }
+}
+
+.verify__code-editor {
+  height: 700px;
+}

@@ -9,11 +9,12 @@ import TaskBlock from '../../../enteties/task-block';
 import AddonMaterial from '../../../enteties/addon-material';
 
 type Props = {
+    courseId: string
     module: DocModule,
     number: number
 }
 
-const DocModule = ({module, number}: Props) => {
+const DocModule = ({module, number, courseId}: Props) => {
     console.log('md', module)
     return (
         <div className={cn(
@@ -47,9 +48,11 @@ const DocModule = ({module, number}: Props) => {
                                     {
                                         l && l?.tasks &&
                                         <TaskBlock
+                                            path={'/skillget/lecturer/course/:courseId/lesson/:lessonId/task/:taskId'}
                                             key={nanoid()}
+                                            groupId={null}
                                             taskBlock={l?.tasks}
-                                            courseId={module.id}
+                                            courseId={courseId}
                                             lessonId={l.id}
                                         />
                                     }

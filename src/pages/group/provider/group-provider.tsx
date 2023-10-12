@@ -1,6 +1,7 @@
 import React from 'react';
 import { Group, useFetchGroup } from '../helpers/hooks/use-fetch-group';
 import { LoaderStore } from "../../../local-store/loader/loader-store";
+import {ErrorStore} from "../../../local-store/error-store";
 
 interface GroupContext {
     group: Group
@@ -9,12 +10,13 @@ interface GroupContext {
 export const GroupContext = React.createContext<GroupContext>(null)
 
 type Props = {
-    loader: LoaderStore
+    loader: LoaderStore,
+    error: ErrorStore
 } & React.PropsWithChildren
 
-const GroupProvider = ({ children, loader }: Props) => {
+const GroupProvider = ({ children, loader, error }: Props) => {
 
-    const group = useFetchGroup(loader)
+    const group = useFetchGroup(loader, error)
 
     return (
         <GroupContext.Provider value={{

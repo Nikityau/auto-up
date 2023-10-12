@@ -1,0 +1,29 @@
+.verify-test-page__btn {
+  margin-top: 20px;
+
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+  .verify-btn {
+    padding: 10px 20px;
+
+    cursor: pointer;
+
+    border-radius: 6px;
+
+    color: #FFF;
+    font-family: Montserrat, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+}
+
+.verify_right {
+  background: #20B57F;
+}
+.verify_not_right {
+  background: #191617;
+}

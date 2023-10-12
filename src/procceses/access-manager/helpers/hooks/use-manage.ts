@@ -52,7 +52,7 @@ export const useManage = (userStore: UserStore, cookieStore: CookieStore) => {
       if (accessRoutes.lecturer.find(el => el == userStore.role)) {
         return;
       } else {
-        nav(`/${AppRoutes.skillget}/error/403`);
+        nav(`/${AppRoutes.skillget}/error-handler/403`);
         return;
       }
     }
@@ -60,7 +60,7 @@ export const useManage = (userStore: UserStore, cookieStore: CookieStore) => {
       if (accessRoutes.student.find(el => el == userStore.role)) {
         return;
       } else {
-        nav(`/${AppRoutes.skillget}/error/403`);
+        nav(`/${AppRoutes.skillget}/error-handler/403`);
         return;
       }
     }*/

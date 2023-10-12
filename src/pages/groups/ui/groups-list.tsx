@@ -6,15 +6,17 @@ import { useFetchGroups } from "../helpers/hooks/use-fetch-groups";
 import GroupCard from "../../../enteties/group-card";
 import { LoaderStore } from "../../../local-store/loader/loader-store";
 import { CookieStore } from "../../../local-store/cookie/cookie-store";
+import {ErrorStore} from "../../../local-store/error-store";
 
 type Props = {
   loader: LoaderStore,
-  cookie: CookieStore
+  cookie: CookieStore,
+  error: ErrorStore
 }
 
-const GroupsList = observer(({ loader, cookie }: Props) => {
+const GroupsList = observer(({ loader, cookie, error }: Props) => {
 
-  const groups = useFetchGroups(loader, cookie);
+  const groups = useFetchGroups(loader, cookie, error);
 
   return (
     <div className="groups-list">

@@ -7,10 +7,11 @@ import Doc from './ui/doc';
 import Title from './ui/title';
 
 import './style/index.scss'
+import {errorStore} from "../../local-store/error-store";
 
 const Documentation = () => {
     return (
-       <DocPageProvider cookieStore={cookieStore} loaderStore={loaderStore}>
+       <DocPageProvider cookieStore={cookieStore} loaderStore={loaderStore} error={errorStore}>
          <div className='doc-page'>
             <div className='doc-page__container app-container'>
                 <div className='doc-page__title'>

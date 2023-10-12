@@ -3,6 +3,7 @@ import TitleUi from '../../shared/ui/page-title';
 import CourseList from './ui/course-list';
 import { cookieStore } from "../../local-store/cookie/cookie-store";
 import { loaderStore } from "../../local-store/loader/loader-store";
+import {errorStore} from "../../local-store/error-store";
 
 import './style/index.scss'
 
@@ -16,6 +17,7 @@ const KnowledgeBase = () => {
                 <CourseList
                   cookieStore={cookieStore}
                   loader={loaderStore}
+                  error={errorStore}
                 />
             </div>
         </div>

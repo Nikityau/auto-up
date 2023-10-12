@@ -7,28 +7,35 @@ import Description from "./ui/description";
 import Tips from "./ui/tips";
 
 import './style/index.scss'
+import {MarkDown} from "../../pages/task/provider/task.provider";
 
-type Props = {
+type Img = string
+
+export type TaskDescProps = {
     number: number
-} & Omit<TaskData, 'codeExample' | 'userCode' | 'id'>
+    description: MarkDown,
+    title: string,
+    ioData: Img
+}
 
 const TaskDescription = (
     {
         description,
         title,
-        tips,
         ioData,
         number
-    }: Props) => {
+    }: TaskDescProps) => {
     return (
         <div className={'task-description'}>
             <Title
                 title={title}
                 number={number}
             />
-            <IoData ioData={ioData}/>
+            {
+                ioData &&
+                <IoData ioData={ioData}/>
+            }
             <Description description={description}/>
-            <Tips tips={tips}/>
         </div>
     );
 };
