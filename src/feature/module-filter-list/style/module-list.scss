@@ -4,6 +4,8 @@
 
     padding: 26px 35px;
 
+    background: #F8F9FD;
+
     .module-list__course-title {
         color: #000;
         font-family: Montserrat, sans-serif;
@@ -40,12 +42,10 @@
             gap: 10px;
 
             .module-list__module {
-                width: 100%;
-                padding: 14px 0;
+                width: calc(100% - 20px);
+                padding: 14px 10px;
 
-                text-align: center;
-
-                font-family: Montserrat;
+                font-family: Montserrat, sans-serif;
                 font-size: 12.8px;
                 font-style: normal;
                 font-weight: 400;

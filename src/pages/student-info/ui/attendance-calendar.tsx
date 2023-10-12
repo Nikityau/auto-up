@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from "react";
 import { nanoid } from 'nanoid';
 import { observer } from 'mobx-react-lite';
 
@@ -9,6 +9,7 @@ import { TimetableStore } from '../../../local-store/timetable/timtetable-store'
 import { datesCompare } from '../../../shared/helpers/dates/dates-compare';
 
 import {studentAttendance} from "../data/student-info";
+import { StudentInfoContext } from "../provider";
 
 type Props = {
     timetable: TimetableStore
@@ -16,14 +17,16 @@ type Props = {
 
 const AttendanceCalendar = observer(({timetable}:Props) => {
 
-    const byDate = (d: Date): JSX.Element => {
-       const el = studentAttendance.attendance.find(el => datesCompare(el.date, d))
+    const {att} = useContext(StudentInfoContext)
+  
+    const byDate = (date: Date): JSX.Element => {
+      const el = att?.find(d => datesCompare(d.startDate, date))
 
        if(el) {
         return (
             <span>
                 {
-                    el.theme
+                    el.lesson
                 } 
             </span>
         )
@@ -32,14 +35,14 @@ const AttendanceCalendar = observer(({timetable}:Props) => {
         return null
     }
 
-    const isWas = (d: Date) => {
-        const el = studentAttendance.attendance.find(el => datesCompare(el.date, d))
+    const isWas = (date: Date) => {
+        const el = att?.find(d => datesCompare(d.startDate, date))
 
         if(!el) {
             return null
         }
 
-        if(el.was) {
+        if(el.studentAttend) {
             return 'date_bg_green'
         }
 

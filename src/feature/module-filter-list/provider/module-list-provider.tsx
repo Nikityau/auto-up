@@ -1,18 +1,24 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from "react";
 import { FType } from '../../../shared/helpers/types/f-types';
+import { Module } from "../index";
 
 type Props = {
-    modules: string[],
-    onChange: FType<string, void>
+    modules: Module[],
+    onChange: FType<Module, void>
 } & React.PropsWithChildren
 
 export const ModuleListContext = React.createContext(null)
 
 const ModuleListProvider = ({children, modules, onChange}: Props) => {
 
-    const [current, setCurrent] = useState<string>(() => modules[0])
+    const [current, setCurrent] = useState<Module>(() => modules?.[0])
 
-    const setCurrentModule = (value: typeof modules[0]) => {
+    useEffect(() => {
+        if(!modules) return
+        setCurrent(modules[0])
+    }, [modules])
+
+    const setCurrentModule = (value: Module) => {
         setCurrent(value)
         onChange?.(value)
     }

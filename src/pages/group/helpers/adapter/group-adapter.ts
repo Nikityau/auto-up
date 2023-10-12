@@ -28,6 +28,13 @@ export const groupAdapter = async (data: ResGroup, token: string): Promise<Group
     students: []
   }
 
+  const courseRes = await axios.get(`${baseUrl}/api/v1/courses/${data.course}/`, {
+    headers: {
+      Authorization: `Token ${token}`
+    }
+  })
+  adapted.courseTitle = courseRes.data['title']
+
   for(let st of data.students) {
     const attStats = await axios.get(`${baseUrl}/api/v1/study_groups/${adapted.id}/attend_status/`, {
       headers: {
@@ -52,7 +59,7 @@ export const groupAdapter = async (data: ResGroup, token: string): Promise<Group
       avatar: null,
       name: st.first_name,
       surname: st.last_name,
-      login: 'empty',
+      login: st['username'],
       enrolled: null,
       status: 'active',
       attendance: Math.round(attendedCount / dataAtt.length * 100),

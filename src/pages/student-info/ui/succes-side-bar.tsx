@@ -1,19 +1,21 @@
-import React from 'react';
+import React, { useContext } from "react";
 import ModuleFilterList from '../../../feature/module-filter-list';
 import InfoBlock from '../../../enteties/info-block';
 import TaskInfo from '../../../enteties/task-info';
+import { StudentInfoContext } from "../provider";
 
 const SuccessSideBar = () => {
+
+    const {user, module, success} = useContext(StudentInfoContext)
+
     return (
         <div className='success-side-bar'>
             <ModuleFilterList
-                course='python start'
-                modules={[
-                    'Модуль 1. Типы данных',
-                    'Модуль 2. Типы данных',
-                    'Модуль 3. Типы данных',
-                    'Модуль 4. Типы данных',
-                ]}
+                course={user?.course}
+                modules={module}
+                onChange={(value) => {
+                  success.onChangeModule(value)
+                }}
             />
             <InfoBlock
                 isOpen={true}

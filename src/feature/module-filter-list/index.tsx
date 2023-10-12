@@ -6,10 +6,15 @@ import ModuleListProvider from './provider/module-list-provider';
 
 import './style/index.scss'
 
+export interface Module {
+    id: string,
+    title: string
+}
+
 type Props = {
     course: string,
-    modules: string[],
-    onChange?: FType<string, void>
+    modules: Module[],
+    onChange?: FType<Module, void>
 }
 
 const ModuleFilterList = ({ course, modules, onChange }: Props) => {

@@ -9,11 +9,31 @@ interface GroupRes {
         id: string
         first_name: string,
         last_name: string
-    }[]
+    }[],
+    course: string,
+    id: string,
+    name: string
+}
+
+interface SchRes {
+    course: {
+        id: string,
+        title: string
+    }
+}
+
+export interface UserInfo {
+    id: string,
+    first_name: string,
+    last_name: string,
+    groupId:string,
+    courseId: string,
+    course: string,
+    groupName: string
 }
 
 export const useFetchUserInfo = (token: string, loader: LoaderStore) => {
-    const [user, setUser] = useState<any>()
+    const [user, setUser] = useState<UserInfo>()
     const {groupId, studentId} = useParams()
 
     useEffect(() => {
@@ -24,10 +44,28 @@ export const useFetchUserInfo = (token: string, loader: LoaderStore) => {
                     Authorization: `Token ${token}`
                 }
             })
+            const groupData = groupRes.data as GroupRes
 
-            for(let user of (groupRes.data as GroupRes).students) {
+            const sch = await axios.get(`${baseUrl}/api/v1/study_groups/schedule/`, {
+                headers: {
+                    Authorization: `Token ${token}`
+                },
+                params: {
+                    group: groupData.id
+                }
+            })
+
+            for(let user of groupData.students) {
                 if(user.id == studentId) {
-                    setUser(user)
+                    setUser({
+                        id: user.id,
+                        first_name: user.first_name,
+                        last_name: user.last_name,
+                        groupId: groupData.id,
+                        course: (sch.data as SchRes[])?.[0].course.title,
+                        groupName: groupData.name,
+                        courseId: (sch.data as SchRes[])?.[0].course.id
+                    })
 
                     break
                 }

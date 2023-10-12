@@ -35,6 +35,7 @@ const StudentGroupCard = ({
                 />
                 <TitleData
                     title='Ф.И.О.'
+                    classNames={["student-group-card_fio"]}
                     data={`${surname} ${name}`}
                 />
             </div>

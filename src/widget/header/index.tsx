@@ -6,9 +6,14 @@ import { AppRoutes } from "../../shared/app-routes";
 import UserBar from "../user-bar";
 
 import "./style/index.scss";
-import { cookieStore } from "../../local-store/cookie/cookie-store";
+import { CookieStore, cookieStore } from "../../local-store/cookie/cookie-store";
+import { observer } from "mobx-react-lite";
 
-const Header = () => {
+type Props = {
+  cookie: CookieStore
+}
+
+const Header = observer(({cookie}:Props) => {
   return (
     <div className="header">
       <div className="header__container app-container">
@@ -17,13 +22,13 @@ const Header = () => {
         </Link>
         <div className="header__nav-links">
           <HeaderChoser
-              cookieStore={cookieStore}
+            cookieStore={cookie}
           />
           <UserBar />
         </div>
       </div>
     </div>
   );
-};
+});
 
 export default Header;

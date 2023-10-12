@@ -1,13 +1,16 @@
-import React from 'react';
-import {studentAttendance, studentBaseInfo} from "../data/student-info";
+import React, { useContext } from "react";
+import { StudentInfoContext } from "../provider";
 
 const CourseInfo = () => {
+
+    const {user} = useContext(StudentInfoContext)
+
     return (
         <div className='course-info'>
-            <p>{studentBaseInfo.group}</p>
+            <p>{user?.groupName}</p>
             <p>Курс: 
                 <span>
-                    {studentAttendance.course}
+                    {user?.course}
                 </span>
             </p>
         </div>

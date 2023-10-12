@@ -42,7 +42,7 @@ function Tasks({ block, title}: Props) {
             >
               <TaskSquare
                 number={i + 1}
-                type={"empty"}
+                type={task?.['type'] || 'empty'}
                 id={task.id}
                 isSpec={false}
                 text={null}

@@ -11,10 +11,10 @@ const TitleData = ({classNames, data, title}: Props) => {
     return (
         <div className={cn('student-group-card__info', classNames)}>
             <div className='student-group-card__title'>
-                <span>{title}</span>
+                <p>{title}</p>
             </div>
             <div className='student-group-card__data'>
-                <span>{data}</span>
+                <p>{data}</p>
             </div>
         </div>
     );

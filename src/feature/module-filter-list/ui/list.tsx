@@ -2,9 +2,10 @@ import { nanoid } from 'nanoid';
 import React, { useContext } from 'react';
 import cn from 'classnames'
 import { ModuleListContext } from '../provider/module-list-provider';
+import { Module } from "../index";
 
 type Props = {
-    modules: string[]
+    modules: Module[]
 }
 
 const ModuleList = ({modules}:Props) => {
@@ -18,7 +19,7 @@ const ModuleList = ({modules}:Props) => {
             </div>
             <div className='module-list__container'>
                 {
-                    modules.map(el => (
+                    modules?.map(el => (
                         <div className={cn(
                             'module-list__module',
                             current == el && 'module-list__module_curr'
@@ -28,7 +29,7 @@ const ModuleList = ({modules}:Props) => {
                                 setCurrentModule(el)
                             }}
                         >
-                            <span>{el}</span>
+                            <span>{el.title}</span>
                         </div>
                     ))
                 }

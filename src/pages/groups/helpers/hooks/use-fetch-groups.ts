@@ -91,13 +91,18 @@ export const useFetchGroups = (loader: LoaderStore, cookie: CookieStore) => {
                     }
                 })
 
-                console.log(sttatRes.data)
                 const statData = sttatRes.data as StatGroupRes
+
+                const courseRes = await axios.get(`${baseUrl}/api/v1/courses/${group.course}/`, {
+                    headers: {
+                        Authorization: `Token ${cookie.token}`
+                    }
+                })
 
                 grps.push({
                     id: group.id,
                     groupTitle: group.name,
-                    courseTitle: group.course,
+                    courseTitle: courseRes.data['title'],
                     status: statData.previous_lesson ? statData.previous_lesson?.lesson?.title : statData.next_lesson?.lesson?.title,
                     students: group.students
                 })
