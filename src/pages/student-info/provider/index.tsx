@@ -1,23 +1,31 @@
 import React from 'react';
-import { useFetchStInfo } from "../helpers/hooks/use-fetch-st-info";
-import { CookieStore } from "../../../local-store/cookie/cookie-store";
+import {observer} from "mobx-react-lite";
+
+import {CookieStore} from "../../../local-store/cookie/cookie-store";
+import {useFetchUserInfo} from "../helpers/hooks/use-fetch-user-info";
+import {LoaderStore} from "../../../local-store/loader/loader-store";
+import {useFetchAtt} from "../helpers/hooks/use-fetch-att";
 
 export const StudentInfoContext = React.createContext(null)
 
 type Props = {
-    cookie: CookieStore
+    cookie: CookieStore,
+    loader: LoaderStore
 } & React.PropsWithChildren
 
 
-const StudentInfoProvider = ({children, cookie}:Props) => {
+const StudentInfoProvider = observer(({children, cookie, loader}: Props) => {
 
-    const stInfo = useFetchStInfo(cookie)
+    const user = useFetchUserInfo(cookie.token, loader)
+    const att = useFetchAtt(cookie.token, loader)
 
     return (
-        <StudentInfoContext.Provider value={null}>
+        <StudentInfoContext.Provider value={{
+            user
+        }}>
             {children}
         </StudentInfoContext.Provider>
     );
-};
+});
 
 export default StudentInfoProvider;
