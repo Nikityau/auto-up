@@ -13,16 +13,20 @@ type Props = {
     cookie: CookieStore
 } & React.PropsWithChildren
 
+export const TaskContext = React.createContext(null)
+
 const TaskCompleteWatcher = observer(({testStore, children, cookie, loader, error}: Props) => {
 
-    useTasksWatcher(testStore, cookie, loader, error)
+    const {onChangeCode} = useTasksWatcher(testStore, cookie, loader, error)
 
     return (
-        <>
+        <TaskContext.Provider value={{
+            onChangeCode
+        }}>
             {
                 children
             }
-        </>
+        </TaskContext.Provider>
     );
 });
 

@@ -1,5 +1,4 @@
 import React from 'react';
-import {TaskData} from "../../pages/test/data/interface/task.inteface";
 import Title from "./ui/title";
 
 import IoData from "./ui/io-data";

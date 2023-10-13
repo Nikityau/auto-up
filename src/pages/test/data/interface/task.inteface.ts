@@ -1,9 +1,8 @@
-export interface TaskData {
+import {TaskDescProps} from "../../../../enteties/task-description";
+
+export interface TaskData extends TaskDescProps {
     id: string,
-    title: string,
-    description: string[]
-    tips: string[]
-    codeExample: string
-    userCode: string
-    ioData: string[]
+    code_example: string,
+    user_code: string,
+    status: string
 }

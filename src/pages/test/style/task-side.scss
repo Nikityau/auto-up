@@ -1,5 +1,26 @@
 .test-page__task-side {
+  position: relative;
+
   display: grid;
   grid-template-columns: 1228px 410px;
   gap: 20px;
+
+  .code-editor {
+    height: 500px;
+  }
+
+  .task-status {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+
+    color: #191617;
+    font-family: Montserrat, sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+
+    z-index: 10;
+  }
 }

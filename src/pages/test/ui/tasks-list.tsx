@@ -10,7 +10,7 @@ type Props = {
 const TasksList = observer(({testStore}:Props) => {
     return (
         <div className={'test-page__tasks-list'}>
-           {/* {
+            {
                 testStore.test &&
                 testStore.tasks?.map((t, i) => (
                     <TaskNum
@@ -22,7 +22,7 @@ const TasksList = observer(({testStore}:Props) => {
                         }}
                     />
                 ))
-            }*/}
+            }
         </div>
     );
 });

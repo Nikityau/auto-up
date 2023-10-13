@@ -90,13 +90,14 @@ export const successAdapted = async (lessons: {
             case "done": return "check"
             case "wrong": return "not_right"
             case "approved": return "right"
+            default: return 'empty'
           }
         }
 
         tbTemp.tasks.push({
           id: task.id,
           isSpec: false,
-          type: typeByStatus(taskInfoData[0].solution_status)
+          type: typeByStatus(taskInfoData[0]?.solution_status)
         });
       }
 

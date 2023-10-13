@@ -43,6 +43,8 @@ export const useVerify = (token: string, loader: LoaderStore, error: ErrorStore)
                     }
                 })
 
+                if(stRes.data.length == 0) return null
+
                 const studentSolution = await axios.get(`${baseUrl}/api/v1/study_groups/${groupId}/solutions/${stRes.data[0]['id']}/`, {
                     headers: {
                         Authorization: `Token ${token}`
@@ -55,10 +57,11 @@ export const useVerify = (token: string, loader: LoaderStore, error: ErrorStore)
                 setSolution(studentSolution.data['solution'])
             } catch (e) {
                 const err = e as AxiosError
+                console.log(err, err.message)
                 error.addError({
                     id: nanoid(),
                     title: err['code'],
-                    description: `${err['message']}\n${err['config']['url']}`
+                    description: err.message + '\n' + (err?.config?.url || err)
                 })
             } finally {
                 loader.remove(key)
@@ -82,7 +85,11 @@ export const useVerify = (token: string, loader: LoaderStore, error: ErrorStore)
                 }
             })
 
+            if(stRes.data.length == 0) return null
+
             const stData = (stRes.data as SolStatRes[])[0]
+
+
 
             const resolutionRes = await axios.put(`${baseUrl}/api/v1/study_groups/${groupId}/solutions/${stData.id}/resolution/`, {
                 solution_status: status
@@ -97,7 +104,7 @@ export const useVerify = (token: string, loader: LoaderStore, error: ErrorStore)
             error.addError({
                 id: nanoid(),
                 title: err['code'],
-                description: err.message + '\n' + err.config.url
+                description: err.message + '\n' + (err?.config?.url || err)
             })
         } finally {
             loader.remove(key)
