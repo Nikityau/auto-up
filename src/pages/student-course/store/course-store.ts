@@ -1,10 +1,9 @@
-import {action, computed, makeObservable, observable} from "mobx";
+import {action, computed, makeAutoObservable, makeObservable, observable} from "mobx";
 
 import {CourseModule} from "../data/interface/course-module.interface";
 import {CourseLesson} from "../data/interface/course-lesson.interface";
 import {CourseTask} from "../data/interface/course-task.interface";
 
-import {algModule, course, tdModule, tDTasks} from "../data/course";
 import {Course} from "../data/interface/course.interface";
 
 export class CourseStore {
@@ -17,23 +16,14 @@ export class CourseStore {
     tasks: CourseTask[] = null
 
     constructor() {
-        makeObservable(this, {
-            currentModule: observable,
-            currentLesson: observable,
-            modules: observable,
-            lessons: observable,
-            tasks: observable,
-            setModule: action,
-            setLesson: action,
-            setLessons: action
-        })
+        makeAutoObservable(this)
 
-        this.currentCourse = course
+        /*this.currentCourse = course
         this.modules = course.modules
         this.currentModule = course.modules[0]
         this.currentLesson = tdModule.lessons[0]
         this.lessons = tdModule.lessons
-        this.tasks = tDTasks.tasks
+        this.tasks = tDTasks.tasks*/
     }
 
     setModule(moduleId: string) {
@@ -49,6 +39,13 @@ export class CourseStore {
         }
 
         this.currentLesson = lessons[0]
+    }
+
+    setCourse(course: Course) {
+        this.currentCourse = course
+    }
+    setModules(modules: CourseModule[]) {
+        this.modules = modules
     }
 
     setLesson(lessonId: string) {

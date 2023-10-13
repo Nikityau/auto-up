@@ -1,7 +1,6 @@
 import React from 'react';
 import {observer} from "mobx-react-lite";
 
-import TaskDescription from "../../../enteties/task-description";
 import {TestStore} from "../store/test-store";
 
 type Props = {
@@ -11,7 +10,7 @@ type Props = {
 const TaskDescriptionProvider = observer(({testStore}:Props) => {
     return (
         <>
-          {
+         {/* {
             testStore.test &&
             <TaskDescription
               number={testStore.taskNumber + 1}
@@ -20,7 +19,7 @@ const TaskDescriptionProvider = observer(({testStore}:Props) => {
               title={testStore.currentTask.title}
               ioData={testStore.currentTask.ioData}
             />
-          }
+          }*/}
         </>
     );
 });

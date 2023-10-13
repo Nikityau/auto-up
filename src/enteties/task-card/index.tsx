@@ -6,6 +6,8 @@ import ButtonWithIcon from "../../shared/ui/btn-with-icon";
 
 import './style/index.scss'
 
+import task_img from './assets/task.png'
+
 export type TaskCardProps = {
     id?: string,
     title: string,
@@ -27,11 +29,11 @@ const TaskCard = (
     return (
         <div className={'task-card'}>
             <div className={'task-card__icon'}>
-                <img src={icon} alt={'icon'}/>
+                <img src={task_img} alt={'icon'}/>
             </div>
             <div className={'task-card__wrapper'}>
-                <Title title={title}/>
-                <Description description={description}/>
+                <Title title={title || 'title'}/>
+                <Description description={description || ['null']}/>
                 <div className={'task-card__lower-wrapper'}>
                     <Tasks
                         tasksCount={tasksCount}

@@ -10,7 +10,7 @@ const Tasks = ({tasksCount, solvedCount}:Props) => {
         <div className={'task-card__tasks'}>
             <span>
                 {
-                    solvedCount == 0
+                    solvedCount == 0 || solvedCount == null
                         ? tasksCount + ' '
                         : `${solvedCount}/${tasksCount} `
                 }

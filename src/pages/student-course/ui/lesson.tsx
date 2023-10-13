@@ -8,12 +8,12 @@ type Props = {
     onClick: FType<void, void>
 }
 
-const Lesson = ({number, classNames, onClick}:Props) => {
+const Lesson = ({number, classNames, onClick}: Props) => {
     return (
         <div className={cn(
             'lesson',
             classNames
-        )}onClick={() => onClick()}
+        )} onClick={() => onClick()}
         >
             <span>Урок {number}</span>
         </div>

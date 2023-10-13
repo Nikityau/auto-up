@@ -7,7 +7,7 @@ import axios from "axios";
 import { baseUrl } from "../../../../shared/api/base-url";
 import { CookieStore } from "../../../../local-store/cookie/cookie-store";
 import { scheduleAdapter } from "../adapter/schedule.adapter";
-import { loaderStore, LoaderStore } from "../../../../local-store/loader/loader-store";
+import { LoaderStore } from "../../../../local-store/loader/loader-store";
 
 type Timetable = {
   dates: Date[],
@@ -21,7 +21,7 @@ export const useFetchTimetable = (timetable: TimetableStore, cookieStore: Cookie
     if(!cookieStore?.token) return
 
     (async () => {
-      loaderStore.add(`${baseUrl}/api/v1/study_groups/schedule/`)
+      loader.add(`${baseUrl}/api/v1/study_groups/schedule/`)
       const {data} = await axios.get(`${baseUrl}/api/v1/study_groups/schedule/`, {
         headers: {
           Authorization: `Token ${cookieStore.token}`
@@ -34,7 +34,7 @@ export const useFetchTimetable = (timetable: TimetableStore, cookieStore: Cookie
         dates: adapted.dates,
         content: adapted.schedule
       })
-      loaderStore.remove(`${baseUrl}/api/v1/study_groups/schedule/`)
+      loader.remove(`${baseUrl}/api/v1/study_groups/schedule/`)
     })()
   }, [cookieStore])
 

@@ -55,7 +55,7 @@ const AppRouter = () => {
           <Route path={AppRoutes.student} element={<Platform />}>
             <Route path={AppRoutes.course} element={<StudentCourseLazy />} />
             <Route path={AppRoutes.timetable} element={<StudentTimetableLazy />} />
-            <Route path={`${AppRoutes.course}/test/:id`} element={<TestLazy />} />
+            <Route path={`${AppRoutes.course}/test/course/:courseId/lesson/:lessonId/task-block/:taskBlockId`} element={<TestLazy />} />
             <Route path={`${AppRoutes.course}/test/:id/finished`} element={<TestFinishedLazy />} />
             <Route path={""} element={<Navigate to={AppRoutes.course} />} />
           </Route>

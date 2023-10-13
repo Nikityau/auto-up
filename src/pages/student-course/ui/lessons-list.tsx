@@ -14,12 +14,12 @@ const LessonsList = observer(({course}: Props) => {
                 !course.lessons
                     ? "null"
                     :
-               course.lessons.map((l, i) => (
+               course?.lessons?.map((l, i) => (
                    <Lesson
                     key={l.id}
                     number={i + 1}
                     classNames={[
-                        course.currentLesson.id == l.id &&
+                        course.currentLesson?.id == l.id &&
                             'lesson_current'
                     ]}
                     onClick={() => {

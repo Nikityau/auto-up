@@ -16,12 +16,12 @@ const Modules = observer(({course}:Props) => {
             </div>
             <div className={'course-modules__list'}>
                 {
-                    course.modules.map((m,i) => (
+                    course.modules?.map((m,i) => (
                         <Module
                             key={m.id}
                             title={`Модуль ${i + 1}.${m.title}`}
                             classNames={[
-                                m.id == course.currentModule.id &&
+                                m.id == course.currentModule?.id &&
                                 'course-modules__module_current'
                             ]}
                             onClick={() => {

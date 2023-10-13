@@ -13,22 +13,36 @@ const TasksList = observer(({course}:Props) => {
     return (
         <div className={'tasks-list'}>
             {
-                !course.tasks
-                    ? "null"
-                    :
-                course.tasks.map(t => (
+
+                course.currentLesson && course.currentLesson.tasks &&
+                course.currentLesson?.tasks?.map(t => (
+                    <Link to={`test/course/${course.currentCourse.id}/lesson/${course.currentLesson.id}/task-block/${t.id}`}
+                          key={t.id}
+                    >
+                        <TaskCard
+                            title={t?.title}
+                            description={t.description}
+                            tasksCount={t.tasksCount}
+                            solvedTasks={t.solvedTasks}
+                            icon={t.icon}
+                        />
+                    </Link>
+                ))
+
+               /* course.tasks &&
+                course?.tasks?.map(t => (
                    <Link to={`test/${t.id}`}
                          key={t.id}
                    >
                        <TaskCard
-                           title={t.title}
+                           title={t?.title}
                            description={t.description}
                            tasksCount={t.tasksCount}
                            solvedTasks={t.solvedTasks}
                            icon={t.icon}
                        />
                    </Link>
-                ))
+                ))*/
             }
         </div>
     );

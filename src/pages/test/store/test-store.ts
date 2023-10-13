@@ -52,8 +52,10 @@ export class TestStore {
         }
     }
 
-    setTest(test: TestData = testData) {
+    setTest(test: TestData) {
         this.test = test
+        if(!test) return
+
         this.currentTask = test.tasks[0]
     }
 

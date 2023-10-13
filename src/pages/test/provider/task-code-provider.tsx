@@ -13,7 +13,7 @@ const TaskCodeProvider = observer(({ testStore }: Props) => {
 
   return (
     <CodeEditor
-      code={testStore.test && testStore.currentTask.codeExample}
+      code={''}
       onChange={() => {
       }}
     />
