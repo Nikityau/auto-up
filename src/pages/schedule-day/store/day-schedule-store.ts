@@ -27,13 +27,13 @@ export class DayScheduleStore {
     get students() {
         if(!this.schedule) return null
 
-        return this.schedule.find((s) => s.id == this.tab)?.students
+        return this.schedule.find((s) => s.groupId == this.tab)?.students
     }
 
     get currentSchedule() {
         if(!this.schedule) return null
 
-        return this.schedule.find(s => s.id == this.tab)
+        return this.schedule.find(s => s.groupId == this.tab)
     }
 
     get tasks() {
@@ -42,7 +42,9 @@ export class DayScheduleStore {
 
     setSchedule(sch: StudentSchedule[]) {
         this.schedule = sch
-        this.tab = this.schedule[0].id
+        this.tab = this.schedule[0].groupId
+
+        console.log(sch)
     }
 
     setStudentStatus(studentId: string, status: boolean) {

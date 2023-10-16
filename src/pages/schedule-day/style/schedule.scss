@@ -1,7 +1,7 @@
 .schedule-day__schedule {
     display: grid;
-    grid-template-columns: 50px 850px;
-    gap: 70px;
+    grid-template-columns: 32px auto;
+    gap: 20px;
 
     transform: translate(0, 50px);
 }

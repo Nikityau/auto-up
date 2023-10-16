@@ -1,0 +1,34 @@
+@media print {
+  body {
+    width: 210mm;
+  }
+
+  .header {
+    display: none;
+  }
+  .app-container {
+    width: 210mm;
+  }
+
+  .group-page {
+    width: 210mm;
+    height: auto;
+
+    padding-top: 0;
+
+    .group-page__info {
+      margin-top: 0;
+
+      display: flex;
+      flex-direction: column;
+    }
+  }
+  .group-page__up-container {
+    display: none;
+  }
+
+  .group-page__title {
+    width: 200mm;
+  }
+
+}

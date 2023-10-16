@@ -1,6 +1,7 @@
 import axios from "axios";
-import {DocModule, IDoc, Lesson, ResDoc} from "../hooks/interface";
 import {nanoid} from "nanoid";
+
+import {DocModule, IDoc, Lesson, ResDoc} from "../hooks/interface";
 
 import {baseUrl} from "../../../../shared/api/base-url";
 
@@ -15,6 +16,7 @@ export const adapterDoc = async (doc: ResDoc, token: string) => {
         const md: DocModule = {
             id: module.id,
             title: module.title,
+            number: module.number,
             lessons: []
         }
 
@@ -22,6 +24,7 @@ export const adapterDoc = async (doc: ResDoc, token: string) => {
             const ls: Lesson = {
                 id: lesson.id,
                 title: lesson.title,
+                number: lesson.number,
                 addonMaterial: [
                     {
                         id: nanoid(),
@@ -37,7 +40,6 @@ export const adapterDoc = async (doc: ResDoc, token: string) => {
                         Authorization: `Token ${token}`
                     }
                 })
-
                 ls.tasks.push({
                     id:nanoid(),
                     title: task.name,
@@ -47,8 +49,14 @@ export const adapterDoc = async (doc: ResDoc, token: string) => {
             md.lessons.push(ls)
         }
 
+        md.lessons = md.lessons.sort((l1, l2) => l1.number - l2.number)
+        
         doc_adapted.modules.push(md)
     }
+
+    doc_adapted.modules = doc_adapted.modules.sort((a, b) => {
+        return  a.number - b.number
+    })
 
     return doc_adapted
 };

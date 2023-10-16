@@ -6,9 +6,11 @@ import './style/index.scss'
 import Control from './ui/control';
 import Avatar from './ui/avatar';
 import TitleData from './ui/title-data';
+import {FType} from "../../shared/helpers/types/f-types";
 
 type Props = {
-    position: number
+    position: number,
+    onClick?: FType<void, void>
 } & Student
 
 const StudentGroupCard = ({
@@ -22,7 +24,8 @@ const StudentGroupCard = ({
     status,
     surname,
     patronymic,
-    position
+    position,
+    onClick
 }: Props) => {
     return (
         <div className='student-group-card'>

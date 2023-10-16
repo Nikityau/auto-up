@@ -1,13 +1,14 @@
+import {nanoid} from "nanoid";
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import axios, {AxiosError} from "axios";
+
 import {IDoc} from "./interface";
 import {adapterDoc} from "../adapter/adapter-doc";
 import {baseUrl} from "../../../../shared/api/base-url";
 import {CookieStore} from "../../../../local-store/cookie/cookie-store";
 import {loaderStore, LoaderStore} from "../../../../local-store/loader/loader-store";
 import {ErrorStore} from "../../../../local-store/error-store";
-import {nanoid} from "nanoid";
 
 export const useFetchDoc = (cookieStore: CookieStore, loader: LoaderStore, error: ErrorStore) => {
     const [doc, setDoc] = useState<IDoc>(null);
@@ -23,10 +24,7 @@ export const useFetchDoc = (cookieStore: CookieStore, loader: LoaderStore, error
                     }
                 });
 
-                console.log('course', data)
-
                 const doc_adapted = await adapterDoc(data, cookieStore.token);
-                console.log('adapted', doc_adapted)
                 setDoc(doc_adapted)
             } catch (e) {
                 const err = e as AxiosError

@@ -1,5 +1,7 @@
+import {nanoid} from "nanoid";
 import { observer } from 'mobx-react-lite';
 import React from 'react';
+
 import { DayScheduleStore } from '../store/day-schedule-store';
 import Tab from './tab';
 
@@ -14,11 +16,11 @@ const Tabs = observer(({schedule}:Props) => {
                 schedule.schedule &&
                 schedule.schedule?.map((sc, i) => (
                     <Tab
-                        key={sc.id}
-                        isCurrent={schedule.tab == sc.id}
+                        key={nanoid()}
+                        isCurrent={schedule.tab == sc.groupId}
                         number={i + 1}
                         onClick={() => {
-                            schedule.setTab(sc.id)
+                            schedule.setTab(sc.groupId)
                         }}
                     />
                 ))
