@@ -11,7 +11,7 @@ import './style/index.scss'
 const UserBar = () => {
     return (
         <div className={'user-bar'}>
-            <ThemeSwitcher/>
+{/*            <ThemeSwitcher/>*/}
             <UserLogged cookieStore={cookieStore}/>
         </div>
     );

@@ -24,6 +24,7 @@ interface LessonsRes {
     title: string,
     lessons: {
         id: string
+        number: number
         task_blocks: {
             id: string,
             tasks_amount: number,
@@ -72,14 +73,16 @@ export const useFetchCourse = (courseStore: CourseStore, error: ErrorStore, load
                     modules: null,
                     icon: null
                 })
-                const modules: CourseModule[] = []
+                let modules: CourseModule[] = []
                 for (let module of courseData.modules) {
                     modules.push({
                         id: module.id,
                         title: module.title,
+                        number: module['number'],
                         lessons: null
                     })
                 }
+                modules = modules.sort((m1, m2) => m1.number - m2.number)
                 courseStore.setModules(modules)
                 courseStore.setModule(modules[0].id)
 
@@ -88,8 +91,11 @@ export const useFetchCourse = (courseStore: CourseStore, error: ErrorStore, load
                         Authorization: `Token ${cookie.token}`
                     }
                 })
-                const lessonsData = lessonsRes.data as LessonsRes
-                const lessons = await fetchLessons(lessonsData, groupData.id)
+                console.log('lessons', lessonsRes.data)
+                const lessonsData = lessonsRes.data as LessonsRes;
+                const lessons = await fetchLessons(lessonsData, groupData.id);
+
+
                 courseStore.setLessons(lessons)
             } catch (e) {
                 const err = e as AxiosError
@@ -104,8 +110,8 @@ export const useFetchCourse = (courseStore: CourseStore, error: ErrorStore, load
         })()
     }, [])
 
-    const fetchLessons = async (lessonsData, groupId: string) => {
-        const lessons: CourseLesson[] = []
+    const fetchLessons = async (lessonsData: LessonsRes, groupId: string) => {
+        let lessons: CourseLesson[] = []
 
         for (let l of lessonsData.lessons) {
             const tasks: CourseTask[] = []
@@ -158,9 +164,12 @@ export const useFetchCourse = (courseStore: CourseStore, error: ErrorStore, load
             lessons.push({
                 id: l.id,
                 title: null,
+                number: l.number,
                 tasks: tasks
             })
         }
+
+        lessons = lessons.sort((l1, l2) => l1.number - l2.number)
 
         return lessons
     }
@@ -171,7 +180,7 @@ export const useFetchCourse = (courseStore: CourseStore, error: ErrorStore, load
 
     useEffect(() => {
         (async () => {
-            if(!courseStore.currentModule?.id || !courseStore.currentModule?.id) return null
+            if (!courseStore.currentModule?.id || !courseStore.currentModule?.id) return null
 
             const key = nanoid()
             try {

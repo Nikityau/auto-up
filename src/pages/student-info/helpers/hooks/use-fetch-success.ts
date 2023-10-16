@@ -11,10 +11,11 @@ import { nanoid } from "nanoid";
 
 export interface ModuleExtRes {
   id: string,
-  title: string
+  title: string,
   lessons: {
     id: string,
     title: string,
+    number: number
   }[]
 }
 
@@ -22,6 +23,7 @@ export interface SuccessSt {
   lessonId: string,
   studentAttend: boolean,
   theme: string,
+  number: number,
   tasks: TasksBlock[]
 }
 

@@ -25,16 +25,18 @@ const TaskDescription = (
         number
     }: TaskDescProps) => {
     return (
-        <div className={'task-description'}>
-            <Title
-                title={title}
-                number={number}
-            />
-            {
-                ioData &&
-                <IoData ioData={ioData}/>
-            }
-            <Description description={description}/>
+        <div className={'task-description__wrapper-wrapper'}>
+            <div className={'task-description'}>
+                <Title
+                    title={title}
+                    number={number}
+                />
+                {
+                    ioData &&
+                    <IoData ioData={ioData}/>
+                }
+                <Description description={description}/>
+            </div>
         </div>
     );
 };

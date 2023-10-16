@@ -6,6 +6,8 @@
   cursor: pointer;
 
   .checkbox-ui__box {
+    position: relative;
+
     width: 16px;
     height: 16px;
 
@@ -13,6 +15,20 @@
     border: 1px solid #484644;
 
     transition: all .3s;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:hover {
+      box-shadow: 0 0 0 3px #19161730;
+    }
+
+    img {
+      opacity: 0;
+    }
+
+    z-index: 2;
   }
 
   .checkbox-ui__text {
@@ -27,7 +43,11 @@
 
 .checkbox-ui_checked {
   .checkbox-ui__box {
-    background: #049dff;
+    background: #191617;
+
+    img {
+      opacity: 1;
+    }
   }
 }
 

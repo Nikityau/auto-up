@@ -32,8 +32,10 @@ const TaskCard = (
                 <img src={task_img} alt={'icon'}/>
             </div>
             <div className={'task-card__wrapper'}>
-                <Title title={title || 'title'}/>
-                <Description description={description || ['null']}/>
+               <div className={'task-card__container'}>
+                   <Title title={title || 'title'}/>
+                   <Description description={description || ['null']}/>
+               </div>
                 <div className={'task-card__lower-wrapper'}>
                     <Tasks
                         tasksCount={tasksCount}

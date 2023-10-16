@@ -6,16 +6,14 @@ const StudentName = () => {
 
     const {user} = useContext(StudentInfoContext)
 
+    if(!user) {
+        return null
+    }
+
     return (
         <div className='student-info__mini-data'>
             <div className='student-info__name'>
                 <span>{user?.last_name} {user?.first_name}</span>
-            </div>
-            <div className='student-info__avatar'
-                style={{
-                    backgroundImage: `url(${studentBaseInfo.avatar})`
-                }}
-            >
             </div>
         </div>
     );

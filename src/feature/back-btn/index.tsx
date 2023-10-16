@@ -7,7 +7,7 @@ const BackBtn = () => {
     const {back} = useContext(NavHistoryContext)
 
     const onPrevClick = () => {
-        back()
+        window.history.back()
     }
 
     return (

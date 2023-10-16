@@ -22,6 +22,7 @@ const UserLogged = observer(({cookieStore}:Props) => {
 
     return (
       <div className={'user-logged'} onClick={toAuth}>
+          <span>Выйти</span>
       </div>
     );
 });

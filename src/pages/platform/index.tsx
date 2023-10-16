@@ -13,7 +13,7 @@ const Platform = () => {
       <Header cookie={cookieStore}/>
       <div className="platform">
         <Outlet />
-        <SupportIcon />
+        {/*<SupportIcon />*/}
       </div>
     </>
   );

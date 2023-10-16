@@ -9,14 +9,14 @@ const Btns = () => {
     return (
         <div className={'verify-test-page__btn'}>
             <Btn
-                text={'Верно'}
-                 onClick={() => onSetStatus('approved')}
-                 classNames={['verify_right']}
-            />
-            <Btn
                 text={"Неверно"}
                 onClick={() => onSetStatus('wrong')}
                 classNames={['verify_not_right']}
+            />
+            <Btn
+                text={'Верно'}
+                 onClick={() => onSetStatus('approved')}
+                 classNames={['verify_right']}
             />
         </div>
     );

@@ -25,11 +25,11 @@ const CalendarLesson = ({
             isCurrent && 'calendar-lesson_current'
         ])}>
             <div className='calendar-lesson__title'>
-                <p>Группа {groupTitle}</p>
+                <p>Группа {groupTitle.slice(0, 5)+'...'}</p>
                 <p>Курс: {courseTitle}</p>
             </div>
             <div className='calendar-lesson__theme'>
-                <span>{theme}</span>
+                <span>{theme.length > 10 ? theme.slice(0, 15) + '...' : theme}</span>
             </div>
             <div className='calendar-lesson__time'>
                 <span>{startTime} — {endTime}</span>

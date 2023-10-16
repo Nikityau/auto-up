@@ -6,7 +6,8 @@ import { baseUrl } from "../../../../shared/api/base-url";
 
 export interface ModuleRes {
   id: string,
-  title: string
+  title: string,
+  number: number
 }
 
 export const useFetchModule = (token: string, loader: LoaderStore, courseId: string) => {
@@ -23,7 +24,7 @@ export const useFetchModule = (token: string, loader: LoaderStore, courseId: str
           }
         });
 
-        const moduleData = modulesRes.data as ModuleRes[];
+        const moduleData = (modulesRes.data as ModuleRes[]).sort((m1,m2) => m1.number - m2.number);
         setModules(moduleData);
       } catch (e) {
 

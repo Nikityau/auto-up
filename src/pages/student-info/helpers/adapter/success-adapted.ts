@@ -1,5 +1,6 @@
-import { ModuleExtRes, SuccessSt } from "../hooks/use-fetch-success";
 import axios from "axios";
+
+import { SuccessSt } from "../hooks/use-fetch-success";
 import { baseUrl } from "../../../../shared/api/base-url";
 import { TasksBlock } from "../../../../shared/data/interface/tasks-block.interface";
 
@@ -9,6 +10,7 @@ interface AttStRes {
 
 interface TbRes {
   id: string,
+  number: number
   task_blocks: {
     id: string,
     name: string
@@ -28,9 +30,10 @@ interface TaskInfoRes {
 
 export const successAdapted = async (lessons: {
   id: string,
-  title: string
+  title: string,
+  number: number
 }[], groupId: string, studentId: string, token: string, courseId: string): Promise<SuccessSt[]> => {
-  const sc: SuccessSt[] = [];
+  let sc: SuccessSt[] = [];
 
   for (let lesson of lessons) {
     const stAttend = await axios.get(`${baseUrl}/api/v1/study_groups/${groupId}/attend_status/`, {
@@ -57,6 +60,7 @@ export const successAdapted = async (lessons: {
         id: tb.id,
         title: tb.name,
         subtitle: null,
+        number: tbData.number,
         tasks: []
       };
 
@@ -69,7 +73,6 @@ export const successAdapted = async (lessons: {
         }
       });
       const taskData = tasksRes.data as TaskRes[];
-
 
       for (let task of taskData) {
         const taskInfo = await axios.get(`${baseUrl}/api/v1/study_groups/${groupId}/solutions/`, {
@@ -101,7 +104,6 @@ export const successAdapted = async (lessons: {
         });
       }
 
-
       tasksBlocks.push(tbTemp);
     }
 
@@ -109,11 +111,14 @@ export const successAdapted = async (lessons: {
       lessonId: lesson.id,
       theme: lesson.title,
       tasks: tasksBlocks,
+      number: tbData.number,
       studentAttend: (stAttend.data as AttStRes[])[0].is_attend
     };
 
     sc.push(scTemp);
   }
+
+  sc = sc.sort((l1, l2) => l1.number - l2.number)
 
   return sc;
 };

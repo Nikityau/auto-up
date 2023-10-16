@@ -2,17 +2,17 @@
   position: relative;
 
   display: grid;
-  grid-template-columns: 1228px 410px;
+  grid-template-columns: auto 410px;
   gap: 20px;
 
   .code-editor {
-    height: 500px;
+    height: auto;
   }
 
   .task-status {
     position: absolute;
     top: 20px;
-    right: 20px;
+    right: 60px;
 
     color: #191617;
     font-family: Montserrat, sans-serif;

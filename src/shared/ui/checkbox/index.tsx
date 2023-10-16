@@ -6,6 +6,8 @@ import { FType } from "../../helpers/types/f-types";
 
 import './style/index.scss'
 
+import img from './assets/galka.svg'
+
 type Props = {
   state: boolean,
   text?: string,
@@ -27,7 +29,7 @@ const Checkbox = ({state, text, onChange}:Props) => {
     onClick={() => onChangeState()}
     >
       <div className={'checkbox-ui__box'}>
-
+        <img src={img} alt={'galka'}/>
       </div>
       {
         text &&
