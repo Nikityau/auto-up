@@ -113,7 +113,7 @@ export const useTasksWatcher = (testStore: TestStore, cookie: CookieStore, loade
                         title: taskData.name,
                         description: taskData.description,
                         code_example: taskData.code_examples.length > 0 ? taskData.code_examples[0].code : null,
-                        ioData: taskData.task_images[0].image,
+                        ioData: taskData?.task_images?.[0]?.image,
                         user_code: userCode,
                         number: 0,
                         status: status
@@ -128,7 +128,7 @@ export const useTasksWatcher = (testStore: TestStore, cookie: CookieStore, loade
                 error.addError({
                     id: nanoid(),
                     title: err['code'],
-                    description: err.message + '\n' + err.config.url
+                    description: err.message
                 })
             } finally {
                 loader.remove(key)
