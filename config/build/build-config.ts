@@ -1,27 +1,37 @@
-const path = require('path')
+import webpack  from 'webpack'
 
-const TerserPlugin = require("terser-webpack-plugin");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+import {BuildConfig} from "./types/build-config";
+import {pluginsConf} from "./plugins-conf";
+import {rulesConfig} from "./rules-config";
+import {resolveConf} from "./resolve-conf";
+import {devServer} from "./dev-server";
 
-const exclude_var = /node_modules/
+export const buildConfig = (conf:BuildConfig): webpack.Configuration => {
 
-const srcPath = path.resolve(__dirname, 'src')
-const buildPath = path.resolve(__dirname, 'build')
-
-function outputPathByDevice(device) {
-    if(device === "WEB") return path.join(buildPath, 'web')
-    if(device === "WEBVIEW") return path.join(buildPath, 'webview')
-}
-
-
-module.exports = (env) => {
-
-    const mode = env.MODE
-    const device = env.DEVICE
+    const {paths, mode, isDev} = conf
 
     return {
-        entry: path.resolve(__dirname, 'src', 'index.tsx'),
+        entry: paths.entry,
+        mode,
+        resolve: resolveConf(),
+        output: {
+            path: isDev ? paths.devServerBuild : paths.output,
+            filename: 'js/[contenthash].js',
+            assetModuleFilename: "assets/[name][ext]",
+            publicPath: '/',
+            clean: true,
+        },
+        devtool: isDev ? 'inline-source-map' : undefined,
+        devServer: devServer(conf),
+        plugins: pluginsConf(conf),
+        module: {
+            rules: rulesConfig(conf)
+        }
+    }
+}
+
+/*
+* entry: path.resolve(__dirname, 'src', 'index.tsx'),
         resolve: {
             extensions: ['.js', '.jsx', '.ts', '.tsx'],
             alias: {
@@ -103,5 +113,5 @@ module.exports = (env) => {
                 },
             ]
         }
-    }
-}
+*
+* */

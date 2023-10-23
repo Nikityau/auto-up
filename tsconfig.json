@@ -27,18 +27,23 @@
     "strictNullChecks": false,
     "strictFunctionTypes": true,
     "strictPropertyInitialization": false,
-    "module": "ES2020",
+    "module": "esnext",
     "moduleResolution": "node",
     "target": "ES5",
     "resolveJsonModule": true,
     "allowJs": true,
     "jsx": "react-jsx",
-    "rootDir": "./src",
+    "rootDir": "",
     "outDir": "./dist/",
     "removeComments": true,
-    "baseUrl": "./",
+    "baseUrl": "",
     "experimentalDecorators": true,
 
     "declaration": false
   },
+  "ts-node": {
+    "compilerOptions": {
+      "module": "CommonJS"
+    }
+  }
 }
