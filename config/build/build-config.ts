@@ -22,7 +22,7 @@ export const buildConfig = (conf:BuildConfig): webpack.Configuration => {
             clean: true,
         },
         devtool: isDev ? 'inline-source-map' : undefined,
-        devServer: devServer(conf),
+        devServer: isDev ? devServer(conf) : undefined,
         plugins: pluginsConf(conf),
         module: {
             rules: rulesConfig(conf)

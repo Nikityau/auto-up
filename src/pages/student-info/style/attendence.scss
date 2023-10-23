@@ -11,27 +11,28 @@
 
     .attendence-calendar {
         .date-month {
-            height: 80px;
+            height: 100px;
         }
     }
 
     .date_vert {
-        grid-template-columns: 196px;
-        grid-template-rows: 40px auto;
-        padding-top: unset;
-        padding-bottom: 22px;
 
         .date-month__date {
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
+            width: calc(100% - 20px);
+            padding: 4px 10px;
 
-            padding-left: 23px;
+            text-align: left;
+
+            top: 0;
+            left: 0;
         }
 
         .date-month__data {
-            padding-top: 8px;
-            padding-left: 23px;
+            padding: 20px 10px 0;
+            display: flex;
+            align-items: center;
+            height: calc(100% - 40px);
+
 
             color: #191617;
             font-family: Montserrat, sans-serif;

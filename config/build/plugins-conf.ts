@@ -1,6 +1,5 @@
 import webpack from "webpack";
 import HtmlWebpackPlugin from 'html-webpack-plugin'
-import TerserPlugin from "terser-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 
 import {BuildConfig} from "./types/build-config";
@@ -18,11 +17,6 @@ export const pluginsConf = ({mode, paths, isDev}: BuildConfig):webpack.WebpackPl
             ignoreOrder: true,
         })
     ]
-    if(mode == 'production') {
-        plugins.push(
-            new TerserPlugin()
-        )
-    }
 
 
     return plugins

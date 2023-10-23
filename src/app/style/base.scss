@@ -21,3 +21,12 @@ body {
     width: calc(100vw - 50px);
   }
 }
+
+
+:root {
+  --min-fs: 5px;
+  --val-fs: .8vw;
+  --max-fs: 16px;
+
+  --font-size: clamp(var(--min-fs), var(--val-fs), var(--max));
+}

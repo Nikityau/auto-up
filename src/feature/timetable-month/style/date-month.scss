@@ -4,9 +4,6 @@
     width: 100%;
     height: calc(130px - 22px);
 
-    display: grid;
-    grid-template-columns: 60px 136px;
-
     border-left: 1px solid #4F4B5C;
     border-bottom: 1px solid #4F4B5C;
     border-right: 1px solid #4F4B5C;
@@ -14,21 +11,30 @@
 
     overflow: hidden;
 
-    padding-top: 22px;
-
     cursor: pointer;
 
+
     .date-month__date {
-        width: 100%;
+        position: absolute;
+        top: 14px;
+        left: 20px;
 
         color: #4F4B5C;
         text-align: center;
         font-family: Montserrat, sans-serif;
-        font-size: 14px;
+        font-size: clamp(5px, 5px + .5vw, 15px);
         font-style: normal;
         font-weight: 600;
     }
+
+    .date-month__data {
+        width: calc(100% - 68px);
+
+        padding: 14px 23px 0 45px;
+    }
 }
+
+
 
 .date-month_another {
     background: #F8F9FD;

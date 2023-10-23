@@ -29,7 +29,7 @@ const CalendarLesson = ({
                 <p>Курс: {courseTitle}</p>
             </div>
             <div className='calendar-lesson__theme'>
-                <span>{theme.length > 10 ? theme.slice(0, 15) + '...' : theme}</span>
+                <span>{theme.length > 10 ? theme.slice(0, 14) + '...' : theme}</span>
             </div>
             <div className='calendar-lesson__time'>
                 <span>{startTime} — {endTime}</span>

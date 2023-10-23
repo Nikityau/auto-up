@@ -16,7 +16,7 @@
 
         color: #4F4B5C;
         font-family: Montserrat, sans-serif;
-        font-size: 18px;
+        font-size: clamp(5px, 5px + .6vw,18px);
         font-style: normal;
         font-weight: 600;
 
@@ -39,7 +39,7 @@
 
             color: #191617;
             font-family: Montserrat, sans-serif;
-            font-size: 24px;
+            font-size: clamp(5px, 5px + .9vw, 24px);
             font-style: normal;
             font-weight: 700;
             line-height: normal;
@@ -50,7 +50,7 @@
 
             color: #191617;
             font-family: Montserrat, sans-serif;
-            font-size: 14px;
+            font-size: clamp(5px, 5px + .5vw, 14px);
             font-style: normal;
             font-weight: 400;
             line-height: normal;
@@ -70,10 +70,8 @@
 
             color: #191617;
             font-family: Montserrat, sans-serif;
-            font-size: 24px;
-            font-style: normal;
+            font-size: clamp(5px, 5px + .9vw, 24px);
             font-weight: 700;
-            line-height: normal;
         }
 
         .schedule-day__addon-materials {
@@ -85,16 +83,14 @@
         .schedule-day__addon-title {
             color: #000;
             font-family: Montserrat, sans-serif;
-            font-size: 20px;
-            font-style: normal;
+            font-size: clamp(5px, 5px + .8vw, 20px);
             font-weight: 700;
         }
 
         .schedule-day__addon-file {
             color: #000;
             font-family: Montserrat, sans-serif;
-            font-size: 16px;
-            font-style: normal;
+            font-size: clamp(5px, 5px + .6vw, 14px);
             font-weight: 400;
             text-decoration-line: underline;
 
