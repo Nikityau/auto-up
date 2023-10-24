@@ -17,11 +17,12 @@ export const TaskContext = React.createContext(null)
 
 const TaskCompleteWatcher = observer(({testStore, children, cookie, loader, error}: Props) => {
 
-    const {onChangeCode} = useTasksWatcher(testStore, cookie, loader, error)
+    const {onChangeCode, onSendSolution} = useTasksWatcher(testStore, cookie, loader, error)
 
     return (
         <TaskContext.Provider value={{
-            onChangeCode
+            onChangeCode,
+            onSendSolution
         }}>
             {
                 children

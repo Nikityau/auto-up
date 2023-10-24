@@ -6,7 +6,7 @@ type Props = {
     testStore: TestStore
 }
 
-const Btn = observer(({testStore}:Props) => {
+const BtnNext = observer(({testStore}:Props) => {
     return (
         <div className={'test-page__btn'} onClick={() => testStore.setNextTask()}>
             <div className={'test-page__btn-title'}>
@@ -21,4 +21,4 @@ const Btn = observer(({testStore}:Props) => {
     );
 });
 
-export default Btn;
+export default BtnNext;

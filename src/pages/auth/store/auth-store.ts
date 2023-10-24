@@ -5,6 +5,7 @@ export class AuthStore {
   password: string = "";
   isRem: boolean = false;
   error: ErrorInterface[] = [];
+  isFetchError: boolean = false
 
   constructor() {
     makeObservable(this, {
@@ -12,10 +13,12 @@ export class AuthStore {
       password: observable,
       error: observable,
       isRem: observable,
+      isFetchError: observable,
       setIsRem: action,
       setLogin: action,
       setPassword: action,
       validate: action,
+      setIsFetchError: action
     })
   }
 
@@ -31,6 +34,10 @@ export class AuthStore {
 
   setIsRem(value: boolean) {
     this.isRem = value
+  }
+
+  setIsFetchError(value: boolean) {
+      this.isFetchError = value
   }
 
   validate() {

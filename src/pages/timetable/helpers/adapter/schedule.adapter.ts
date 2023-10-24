@@ -24,9 +24,7 @@ export const scheduleAdapter = async (data: ResSchedule[], token: string): Promi
   const schedule: LessonAdapted[] = [];
   const dates: Date[] = [];
 
-  const groupCache = {
-
-  }
+  const groupCache = {}
 
   for (let sch of data) {
     if(!groupCache[sch.group]) {

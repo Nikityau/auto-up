@@ -27,3 +27,27 @@
     align-items: center;
   }
 }
+
+.test-page__btn-wrapper {
+  margin-top: 20px;
+
+  height: auto;
+
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+
+  .test-page__btn_send {
+    width: fit-content;
+
+    background: #191617;
+    height: 100%;
+    padding: 16px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #fff;
+  }
+}

@@ -1,5 +1,5 @@
 import {useNavigate, useParams} from "react-router-dom";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import axios, {AxiosError} from "axios";
 import {nanoid} from "nanoid";
 
@@ -28,10 +28,10 @@ interface TaskExtRes {
     name: string
 }
 
-
 export const useTasksWatcher = (testStore: TestStore, cookie: CookieStore, loader: LoaderStore, error: ErrorStore) => {
     const nav = useNavigate()
     const {courseId, lessonId, taskBlockId} = useParams()
+    const [code, setCode] = useState<string>("")
 
     useEffect(() => {
         (async () => {
@@ -39,6 +39,8 @@ export const useTasksWatcher = (testStore: TestStore, cookie: CookieStore, loade
             loader.add(key)
 
             try {
+
+
                 const tasks = await axios.get(`${baseUrl}/api/v1/courses/${courseId}/lessons/${lessonId}/tasks/`, {
                     headers: {
                         Authorization: `Token ${cookie.token}`
@@ -47,7 +49,6 @@ export const useTasksWatcher = (testStore: TestStore, cookie: CookieStore, loade
                         task_block: taskBlockId
                     }
                 })
-
                 const taskData = tasks.data as TasksRes[]
                 const test: TestData = {
                     id: nanoid(),
@@ -77,34 +78,36 @@ export const useTasksWatcher = (testStore: TestStore, cookie: CookieStore, loade
 
                     let status = ''
                     const solData = solRes.data[0]
-                    if(solData['solution_status'] == 'not viewed') {
-                      status = 'Не просмотрено'
+                    if (solData['solution_status'] == 'not viewed') {
+                        status = 'Не просмотрено'
                     }
-                    if(solData['solution_status'] == 'viewed') {
+                    if (solData['solution_status'] == 'viewed') {
                         status = 'Просмотрено'
                     }
-                    if(solData['solution_status'] == 'done') {
+                    if (solData['solution_status'] == 'done') {
                         status = 'Ожидает проверки'
                     }
-                    if(solData['solution_status'] == 'approved') {
+                    if (solData['solution_status'] == 'approved') {
                         status = 'Верно'
                     }
-                    if(solData['solution_status'] == 'wrong') {
+                    if (solData['solution_status'] == 'wrong') {
                         status = 'Неверно'
                     }
 
                     let userCode = null
 
                     try {
-                        const solResExt = await axios.get(`${baseUrl}/api/v1/study_groups/${groupRes.data[0].id}/solutions/${solData['task']}/`, {
+                        const url = `${baseUrl}/api/v1/study_groups/${groupRes.data[0].id}/solutions/${solData['id']}/`
+                        const solResExt = await axios.get(url, {
                             headers: {
                                 Authorization: `Token ${cookie.token}`
                             }
                         })
 
-                        userCode = solResExt.data['solution']
+                        userCode = solResExt.data['solution']['solution_text']
                     } catch (e) {
-
+                        console.log(e['message'])
+                        console.log('err')
                     }
 
                     const taskData = taskRes.data as TaskExtRes
@@ -136,8 +139,47 @@ export const useTasksWatcher = (testStore: TestStore, cookie: CookieStore, loade
         })()
     }, [])
 
-
     const onChangeCode = async (value: string) => {
+        setCode(value[0])
+
+        try {
+            const groupRes = await axios.get(`${baseUrl}/api/v1/study_groups/`, {
+                headers: {
+                    Authorization: `Token ${cookie.token}`
+                }
+            })
+            const solRes = await axios.get(`${baseUrl}/api/v1/study_groups/${groupRes.data[0].id}/solutions/`, {
+                headers: {
+                    Authorization: `Token ${cookie.token}`
+                },
+                params: {
+                    task: testStore.currentTask.id
+                }
+            })
+            console.log(solRes.data)
+
+
+            const solDone = await axios.put(`${baseUrl}/api/v1/study_groups/${groupRes.data[0].id}/solutions/${solRes.data[0].id}/done/`, {
+                solution_text: value[0],
+                solution_type: "code",
+                solution_status: "viewed"
+            }, {
+                headers: {
+                    Authorization: `Token ${cookie.token}`
+                }
+            })
+
+        } catch (e) {
+            const err = e as AxiosError
+            error.addError({
+                id: nanoid(),
+                title: err['code'] + ' onChangeCode',
+                description: err.message + '\n' + err.config.url
+            })
+        }
+    }
+
+    const onSendSolution = async () => {
         try {
             const groupRes = await axios.get(`${baseUrl}/api/v1/study_groups/`, {
                 headers: {
@@ -154,7 +196,7 @@ export const useTasksWatcher = (testStore: TestStore, cookie: CookieStore, loade
             })
 
             const solDone = await axios.put(`${baseUrl}/api/v1/study_groups/${groupRes.data[0].id}/solutions/${solRes.data[0].id}/done/`, {
-                solution_text: value[0],
+                solution_text: code,
                 solution_type: "code",
                 solution_status: "done"
             }, {
@@ -163,7 +205,7 @@ export const useTasksWatcher = (testStore: TestStore, cookie: CookieStore, loade
                 }
             })
 
-        } catch(e) {
+        } catch (e) {
             const err = e as AxiosError
             error.addError({
                 id: nanoid(),
@@ -174,9 +216,9 @@ export const useTasksWatcher = (testStore: TestStore, cookie: CookieStore, loade
     }
 
     useEffect(() => {
-         if(testStore.isEnd) {
-             nav(`/skillget/student/course/test/finished`)
-         }
+        if (testStore.isEnd) {
+            nav(`/skillget/student/course/test/finished`)
+        }
     }, [testStore.isEnd])
 
     useEffect(() => {
@@ -188,6 +230,7 @@ export const useTasksWatcher = (testStore: TestStore, cookie: CookieStore, loade
     }, [])
 
     return {
-        onChangeCode: debounce(onChangeCode, 700)
+        onChangeCode: debounce(onChangeCode, 700),
+        onSendSolution,
     }
 }

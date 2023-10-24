@@ -14,6 +14,7 @@ import { useAuth } from "../helpers/hooks/use-auth";
 
 import { AuthStore } from "../store/auth-store";
 import { CookieStore } from "../../../local-store/cookie/cookie-store";
+import AuthError from "./auth-error";
 
 type Props = {
   authStore: AuthStore,
@@ -32,6 +33,7 @@ const AuthForm = observer(({authStore, cookieStore}:Props) => {
           <LoginErrorProvider auth={authStore}/>
           <PasswordErrorProvider auth={authStore}/>
         </div>
+        <AuthError authStore={authStore}/>
         <Addons authStore={authStore}/>
         <Btn
           text="Продолжить"
