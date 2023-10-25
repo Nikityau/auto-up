@@ -11,7 +11,6 @@ const StudentSuccess = () => {
             <div className='student-success__container'>
                 <SuccessSideBar/>
                 <SuccessList/>
-                <Filter/>
             </div>
         </div>
     );

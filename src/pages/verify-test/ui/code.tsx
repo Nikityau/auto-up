@@ -6,8 +6,6 @@ const Code = () => {
 
     const {task,solution} = useContext(VerifyContext)
 
-    console.log('s', solution)
-
     return (
         <>
           <CodeEditor

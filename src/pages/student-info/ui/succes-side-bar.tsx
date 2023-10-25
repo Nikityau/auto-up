@@ -14,7 +14,7 @@ const SuccessSideBar = () => {
                 course={user?.course}
                 modules={module}
                 onChange={(value) => {
-                  success.onChangeModule(value)
+                  //success.onChangeModule(value)
                 }}
             />
             <InfoBlock

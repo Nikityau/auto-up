@@ -54,7 +54,7 @@ export const useVerify = (token: string, loader: LoaderStore, error: ErrorStore)
 
 
                 setTask(taskRes.data)
-                setSolution(studentSolution.data['solution'])
+                setSolution(studentSolution.data['solution']['solution_text'])
             } catch (e) {
                 const err = e as AxiosError
                 console.log(err, err.message)
@@ -89,8 +89,6 @@ export const useVerify = (token: string, loader: LoaderStore, error: ErrorStore)
 
             const stData = (stRes.data as SolStatRes[])[0]
 
-
-
             const resolutionRes = await axios.put(`${baseUrl}/api/v1/study_groups/${groupId}/solutions/${stData.id}/resolution/`, {
                 solution_status: status
             }, {
@@ -98,7 +96,6 @@ export const useVerify = (token: string, loader: LoaderStore, error: ErrorStore)
                     Authorization: `Token ${token}`
                 },
             })
-            console.log(resolutionRes.data)
         } catch (e) {
             const err = e as AxiosError
             error.addError({
