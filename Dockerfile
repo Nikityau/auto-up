@@ -8,4 +8,4 @@ RUN npm i
 
 COPY . .
 
-RUN npm run build:web
+RUN npm run build:prod
