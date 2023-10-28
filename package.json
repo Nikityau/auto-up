@@ -29,6 +29,7 @@
     "react-query": "^3.39.3",
     "react-router-dom": "6.4.4",
     "rxjs": "^7.8.1",
+    "sass": "^1.69.5",
     "swiper": "^10.3.0"
   },
   "devDependencies": {
@@ -53,7 +54,6 @@
     "postcss-loader": "7.0.1",
     "postcss-nested": "6.0.0",
     "prettier": "2.8.4",
-    "sass": "1.55.0",
     "sass-loader": "13.1.0",
     "swc-loader": "^0.2.3",
     "terser": "5.15.1",
