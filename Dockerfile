@@ -2,17 +2,16 @@ FROM node:18-alpine
 
 WORKDIR /app
 
-COPY ./package*.json .
+RUN mkdir all
+RUN mkdir build
 
-RUN npm i
+COPY ./package*.json /app/all
 
-COPY . /app
+RUN cd ./all npm i
 
-RUN npm run build:prod
+COPY . /app/all
 
-WORKDIR /build
+RUN cd ./all npm run build:prod
 
-# COPY /app/build/ /build/
-
-# RUN rm -r "/app"
-
+RUN cp -r ./all/build/web ./build/
+RUN rm -r ./all
