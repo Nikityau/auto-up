@@ -1,5 +1,7 @@
 export type BuildMode = 'development' | 'production'
 
+export type Device = 'mobile' | 'browser'
+
 export interface BuildPaths {
     base: string,
     devServerBuild: string,
@@ -12,9 +14,11 @@ export interface BuildPaths {
     }
 }
 
+
 export interface BuildConfig {
     mode: BuildMode,
     paths: BuildPaths
     isDev: boolean
-    port: number
+    port: number,
+    device: Device
 }

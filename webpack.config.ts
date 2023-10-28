@@ -12,7 +12,7 @@ export default (env: EnvVars) => {
     const base = path.resolve(__dirname)
     const src = path.resolve(__dirname, 'src')
     const entry = path.resolve(__dirname, 'src', 'index.tsx')
-    const output = path.resolve(__dirname, 'build')
+    const output = path.resolve(__dirname, 'build', 'web')
     const html = path.resolve(__dirname, 'public', 'index.html')
     const favicon = path.resolve(__dirname, 'public', 'assets', 'favicon.svg')
     const devServerBuild = path.resolve(__dirname, 'dev-server')
@@ -31,6 +31,7 @@ export default (env: EnvVars) => {
                 favicon,
                 template: html
             }
-        }
+        },
+        device: 'browser'
     })
 }
