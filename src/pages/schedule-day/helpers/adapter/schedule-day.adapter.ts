@@ -2,12 +2,12 @@ import axios from "axios";
 import { nanoid } from "nanoid";
 
 import { StudentSchedule } from "../../../../shared/data/interface/student-schedule.interface";
-import { LessonAdapted } from "../../../timetable/helpers/adapter/schedule.adapter";
 import { baseUrl } from "../../../../shared/api/base-url";
 import { ResLesson } from "../interface/res";
+import { LessonAdapted } from "../../../../pages/timetable-page/helpers/adapter/schedule.adapter";
 
 
-export const scheduleDayAdapter = async (lessons: LessonAdapted[], token: string): Promise<StudentSchedule[]> => {
+export const scheduleDayAdapter = async (lessons: LessonAdapted[]): Promise<StudentSchedule[]> => {
   const schedule: StudentSchedule[] = []
 
   for(let lesson of lessons) {
@@ -27,11 +27,7 @@ export const scheduleDayAdapter = async (lessons: LessonAdapted[], token: string
       timeStart: lesson.startTime
     }
 
-    const lessonRes = await axios.get(`${baseUrl}/api/v1/courses/${lesson.courseId}/lessons/${lesson.lessonId}/`, {
-      headers: {
-        Authorization: `Token ${token}`
-      },
-    })
+    const lessonRes = await axios.get(`${baseUrl}/api/v1/courses/${lesson.courseId}/lessons/${lesson.lessonId}/`)
     const lessonData: ResLesson = lessonRes.data as ResLesson
 
     ls.addonFiles = {
@@ -45,11 +41,7 @@ export const scheduleDayAdapter = async (lessons: LessonAdapted[], token: string
     for(let taskBlock of lessonData.task_blocks) {
       const tbResData = {}
 
-      const taskBlockRes = await axios.get(`${baseUrl}/api/v1/courses/${ls.courseId}/lessons/${ls.lessonId}/tasks/?task_block=${taskBlock.id}`, {
-        headers: {
-          Authorization: `Token ${token}`
-        }
-      })
+      const taskBlockRes = await axios.get(`${baseUrl}/api/v1/courses/${ls.courseId}/lessons/${ls.lessonId}/tasks/?task_block=${taskBlock.id}`)
 
       tbResData['id'] = taskBlock.id
       tbResData['title'] = taskBlock.name

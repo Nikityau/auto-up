@@ -8,25 +8,21 @@ import {DayScheduleStore} from "../../store/day-schedule-store";
 import {LoaderStore} from "../../../../local-store/loader/loader-store";
 
 import {baseUrl} from "../../../../shared/api/base-url";
-import {scheduleAdapter} from "../../../timetable/helpers/adapter/schedule.adapter";
 import {scheduleDayAdapter} from "../adapter/schedule-day.adapter";
 import {usersAdapter} from "../adapter/users.adapter";
 import {ErrorStore} from "../../../../local-store/error-store";
+import { scheduleAdapter } from "../../../../pages/timetable-page/helpers/adapter/schedule.adapter";
 
-export const useFetchDay = (cookie: CookieStore, daySchedule: DayScheduleStore, loader: LoaderStore, error: ErrorStore) => {
+export const useFetchDay = (daySchedule: DayScheduleStore, loader: LoaderStore, error: ErrorStore) => {
     const {date} = useParams()
 
     useQuery('student-lessons', async () => {
         loader.add(`${baseUrl}/api/v1/study_groups/schedule/`)
-        const resLesson = await axios.get(`${baseUrl}/api/v1/study_groups/schedule/?date=${date}`, {
-            headers: {
-                Authorization: `Token ${cookie.token}`
-            }
-        })
+        const resLesson = await axios.get(`${baseUrl}/api/v1/study_groups/schedule/?date=${date}`)
 
-        const adaptedLesson = await scheduleAdapter(resLesson.data, cookie.token)
-        const scheduleAdapted = await scheduleDayAdapter(adaptedLesson.schedule, cookie.token)
-        const schWithSt = await usersAdapter(scheduleAdapted, cookie.token)
+        const adaptedLesson = await scheduleAdapter(resLesson.data)
+        const scheduleAdapted = await scheduleDayAdapter(adaptedLesson.schedule)
+        const schWithSt = await usersAdapter(scheduleAdapted)
 
         daySchedule.setSchedule(schWithSt)
     }, {
@@ -53,10 +49,6 @@ export const useFetchDay = (cookie: CookieStore, daySchedule: DayScheduleStore, 
                 student: studentId,
                 is_attend: status,
                 lesson: daySchedule.currentSchedule.lessonId
-            }, {
-                headers: {
-                    Authorization: `Token ${cookie.token}`
-                }
             })
         } catch (e) {
             const err = e as AxiosError

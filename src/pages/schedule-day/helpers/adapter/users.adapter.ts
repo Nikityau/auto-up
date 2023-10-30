@@ -30,15 +30,11 @@ interface AttRes {
     lesson: number
 }
 
-export const usersAdapter = async (sch: StudentSchedule[], token: string): Promise<StudentSchedule[]> => {
+export const usersAdapter = async (sch: StudentSchedule[]): Promise<StudentSchedule[]> => {
     for (let s of sch) {
         const st: Student[] = []
 
-        const stRes = await axios.get(`${baseUrl}/api/v1/study_groups/${s.groupId}/`, {
-            headers: {
-                Authorization: `Token ${token}`
-            }
-        })
+        const stRes = await axios.get(`${baseUrl}/api/v1/study_groups/${s.groupId}/`)
 
         for (let student of (stRes.data as GroupRes).students) {
             st.push({
@@ -51,9 +47,6 @@ export const usersAdapter = async (sch: StudentSchedule[], token: string): Promi
         }
 
         const attRes = await axios.get(`${baseUrl}/api/v1/study_groups/${s.groupId}/attend_status/`, {
-            headers: {
-                Authorization: `Token ${token}`
-            },
             params: {
                 lesson: s.lessonId,
             }

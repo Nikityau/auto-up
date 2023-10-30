@@ -52,19 +52,11 @@ export const useFetchGroups = (loader: LoaderStore, cookie: CookieStore, error: 
         })
 
         for(let group of data as ResGroup[]) {
-            const sttatRes = await axios.get(`${baseUrl}/api/v1/study_groups/${group.id}/statistics/`, {
-                headers: {
-                    Authorization: `Token ${cookie.token}`
-                }
-            })
+            const sttatRes = await axios.get(`${baseUrl}/api/v1/study_groups/${group.id}/statistics/`)
 
             const statData = sttatRes.data as StatGroupRes
 
-            const courseRes = await axios.get(`${baseUrl}/api/v1/courses/${group.course}/`, {
-                headers: {
-                    Authorization: `Token ${cookie.token}`
-                }
-            })
+            const courseRes = await axios.get(`${baseUrl}/api/v1/courses/${group.course}/`)
 
             grps.push({
                 id: group.id,

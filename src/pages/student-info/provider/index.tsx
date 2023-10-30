@@ -28,10 +28,10 @@ type Props = {
 
 const StudentInfoProvider = observer(({ children, cookie, loader }: Props) => {
 
-  const user = useFetchUserInfo(cookie.token, loader);
-  const att = useFetchAtt(cookie.token, loader);
-  const module = useFetchModule(cookie.token, loader, user?.courseId);
-  const success = useFetchSuccess(cookie.token, loader, module?.[0], user?.courseId)
+  const user = useFetchUserInfo(loader);
+  const att = useFetchAtt(loader);
+  const module = useFetchModule(loader, user?.courseId);
+  const success = useFetchSuccess(loader, module?.[0], user?.courseId)
 
   return (
     <StudentInfoContext.Provider value={{

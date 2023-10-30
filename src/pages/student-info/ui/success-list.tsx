@@ -25,23 +25,6 @@ const SuccessList = () => {
                     Mousewheel
                 ]}
             >
-                {/*{
-          studentLessons.map((el, i) => (
-            <SwiperSlide
-              key={el.id}
-            >
-              <StudentSuccessCard
-                lessonId={el.id}
-                courseId={user?.courseId}
-                lessonWas={el.lesson_was}
-                isWas={el.was}
-                theme={el.theme}
-                lessonNumber={i + 1}
-                tasks={el.tasks}
-              />
-            </SwiperSlide>
-          ))
-        }*/}
                 {
                     success.success?.map((el, i) => (
                         <SwiperSlide key={el.lessonId}>

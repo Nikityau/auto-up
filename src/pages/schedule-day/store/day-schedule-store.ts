@@ -20,6 +20,8 @@ export class DayScheduleStore {
 
     setTab(tab: string) {
         this.tab = tab
+    
+        localStorage.setItem('group-tab-id', tab)
     }
 
     get students() {
@@ -40,7 +42,10 @@ export class DayScheduleStore {
 
     setSchedule(sch: StudentSchedule[]) {
         this.schedule = sch
-        this.tab = this.schedule[0].groupId
+
+        const tab = localStorage.getItem('group-tab-id')
+        
+        this.tab = this.schedule.find(g => g.groupId == tab)?.groupId || this.schedule[0].groupId
     }
 
     setStudentStatus(studentId: string, status: boolean) {

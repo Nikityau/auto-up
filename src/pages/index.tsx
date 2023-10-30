@@ -15,9 +15,8 @@ import { loaderStore } from "../local-store/loader/loader-store";
 import Loader from "../widget/loader";
 
 const StudentCourseLazy = React.lazy(() => import("./student-course"));
-const StudentTimetableLazy = React.lazy(() => import("./student-timetable"));
 const AuthPageLazy = React.lazy(() => import("./auth"));
-const TimetableLazy = React.lazy(() => import("./timetable"));
+const TimetableLazy = React.lazy(() => import("./timetable-page"));
 const GroupsLazy = React.lazy(() => import("./groups"));
 const GroupLazy = React.lazy(() => import("./group"));
 const KnowledgeBaseLazy = React.lazy(() => import("./knowledge-base"));
@@ -54,7 +53,7 @@ const AppRouter = () => {
 
           <Route path={AppRoutes.student} element={<Platform />}>
             <Route path={AppRoutes.course} element={<StudentCourseLazy />} />
-            <Route path={AppRoutes.timetable} element={<StudentTimetableLazy />} />
+            <Route path={AppRoutes.timetable} element={<TimetableLazy />} />
             <Route path={`${AppRoutes.course}/test/course/:courseId/lesson/:lessonId/task-block/:taskBlockId`} element={<TestLazy />} />
             <Route path={`${AppRoutes.course}/test/finished`} element={<TestFinishedLazy />} />
             <Route path={""} element={<Navigate to={AppRoutes.course} />} />

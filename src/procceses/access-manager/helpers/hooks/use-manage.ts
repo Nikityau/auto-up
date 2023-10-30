@@ -3,19 +3,9 @@ import { useEffect } from "react";
 import { UserStore } from "../../../../local-store/user/user-store";
 import { AppRoutes } from "../../../../shared/app-routes";
 import { CookieStore } from "../../../../local-store/cookie/cookie-store";
+import { accessRoutes } from "../../../../shared/data/access-routes";
 
-export const accessRoutes = {
-  "lecturer": [
-    "admin",
-    "lecturer",
-    "moderator",
-    "superuser",
-    "teacher"
-  ],
-  "student": [
-    "student"
-  ]
-};
+
 
 
 export const useManage = (userStore: UserStore, cookieStore: CookieStore) => {

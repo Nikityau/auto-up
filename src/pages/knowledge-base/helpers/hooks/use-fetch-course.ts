@@ -15,31 +15,14 @@ interface Course {
     preview: string,
 }
 
-const courseList: Course[] = [
-    {
-        id: nanoid(),
-        title: "python start",
-        preview: p1_img
-    },
-    {
-        id: nanoid(),
-        title: "python pro",
-        preview: p2_img
-    }
-];
-
-export const useFetchCourses = (cookieStore: CookieStore, loader: LoaderStore, error: ErrorStore) => {
+export const useFetchCourses = (loader: LoaderStore, error: ErrorStore) => {
     const [courses, setCourses] = useState<Course[]>(null);
 
     useEffect(() => {
         (async () => {
             try {
                 loader.add(`${baseUrl}/api/v1/courses/`)
-                const {data} = await axios.get(`${baseUrl}/api/v1/courses/`, {
-                    headers: {
-                        Authorization: `Token ${cookieStore.token}`
-                    }
-                });
+                const {data} = await axios.get(`${baseUrl}/api/v1/courses/`);
 
                 setCourses(data);
             } catch (e) {

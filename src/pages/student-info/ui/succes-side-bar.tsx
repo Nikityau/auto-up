@@ -3,6 +3,7 @@ import ModuleFilterList from '../../../feature/module-filter-list';
 import InfoBlock from '../../../enteties/info-block';
 import TaskInfo from '../../../enteties/task-info';
 import { StudentInfoContext } from "../provider";
+import { ModuleRes } from "../helpers/hooks/use-fetch-module";
 
 const SuccessSideBar = () => {
 
@@ -14,7 +15,7 @@ const SuccessSideBar = () => {
                 course={user?.course}
                 modules={module}
                 onChange={(value) => {
-                  //success.onChangeModule(value)
+                  success.onChangeModule(value as ModuleRes)
                 }}
             />
             <InfoBlock

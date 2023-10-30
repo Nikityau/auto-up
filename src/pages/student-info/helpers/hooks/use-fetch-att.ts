@@ -4,6 +4,7 @@ import axios from "axios";
 import {baseUrl} from "../../../../shared/api/base-url";
 import {LoaderStore} from "../../../../local-store/loader/loader-store";
 import { nanoid } from "nanoid";
+import { useQuery } from "react-query";
 
 interface GroupRes {
     students: {
@@ -37,51 +38,46 @@ export interface AttStat {
     studentAttend: boolean
 }
 
-export const useFetchAtt = (token: string, loader: LoaderStore) => {
-    const [att, setAtt] = useState<AttStat[]>()
+export const useFetchAtt = (loader: LoaderStore) => {
     const {studentId, groupId} = useParams()
 
+    const query = useQuery('att', async () => {
+        loader.add('st-att')
+        const schRes = await axios.get(`${baseUrl}/api/v1/study_groups/schedule/`, {
+            params: {
+                group: groupId
+            },
+        })
+        const stAtt = await axios.get(`${baseUrl}/api/v1/study_groups/${groupId}/attend_status/`, {
+            params: {
+                student: studentId
+            },
+        })
 
-    useEffect(() => {
-        (async () => {
-            loader.add('st-att')
-            const schRes = await axios.get(`${baseUrl}/api/v1/study_groups/schedule/`, {
-                params: {
-                    group: groupId
-                },
-                headers: {
-                    Authorization: `Token ${token}`
-                }
+        const schData = schRes.data as SchRes[]
+        const stAttData = stAtt.data as AttStatRes[]
+
+        const attState:AttStat[] = []
+
+        for(let sch of schData) {
+            const att = stAttData.find(st => st.lesson == sch.lesson.id)
+            attState.push({
+                id: nanoid(),
+                lesson: sch.lesson.title,
+                startDate: new Date(sch.start_time),
+                studentAttend: att.is_attend
             })
-            const stAtt = await axios.get(`${baseUrl}/api/v1/study_groups/${groupId}/attend_status/`, {
-                params: {
-                    student: studentId
-                },
-                headers: {
-                    Authorization: `Token ${token}`
-                }
-            })
+        }
 
-            const schData = schRes.data as SchRes[]
-            const stAttData = stAtt.data as AttStatRes[]
-
-            const attState:AttStat[] = []
-
-            for(let sch of schData) {
-                const att = stAttData.find(st => st.lesson == sch.lesson.id)
-
-                attState.push({
-                    id: nanoid(),
-                    lesson: sch.lesson.title,
-                    startDate: new Date(sch.start_time),
-                    studentAttend: att.is_attend
-                })
-            }
-
-            setAtt(attState)
+        return attState
+    }, {
+        onError: () => {
             loader.remove('st-att')
-        })()
-    }, [])
+        },
+        onSuccess: () => {
+            loader.remove('st-att')
+        }
+    })
 
-    return att
+    return query.data
 }

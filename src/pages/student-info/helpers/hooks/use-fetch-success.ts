@@ -32,7 +32,7 @@ export interface ScRet {
   onChangeModule: FType<ModuleRes, void>
 }
 
-export const useFetchSuccess = (token: string, loader: LoaderStore, init: ModuleRes, courseId: string) : ScRet => {
+export const useFetchSuccess = (loader: LoaderStore, init: ModuleRes, courseId: string) : ScRet => {
   const [success, setSuccess] = useState<SuccessSt[]>();
   const { groupId, studentId } = useParams();
 
@@ -47,13 +47,11 @@ export const useFetchSuccess = (token: string, loader: LoaderStore, init: Module
   const onChangeModule = async (module: ModuleRes) => {
     const key = nanoid()
     loader.add(key)
-    const moduleRes = await axios.get(`${baseUrl}/api/v1/courses/${courseId}/modules/${module.id}/`, {
-      headers: {
-        Authorization: `Token ${token}`
-      }
-    });
+    console.log('module',module);
+    
+    const moduleRes = await axios.get(`${baseUrl}/api/v1/courses/${courseId}/modules/${module.id}/`);
 
-    const adapted = await successAdapted((moduleRes.data as ModuleExtRes).lessons, groupId, studentId, token, courseId)
+    const adapted = await successAdapted((moduleRes.data as ModuleExtRes).lessons, groupId, studentId, courseId)
     setSuccess(adapted)
     loader.remove(key)
   };

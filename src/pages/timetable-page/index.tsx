@@ -6,12 +6,11 @@ import TimetableProvider from "./provider/timetable-provider";
 import TitleUi from "../../shared/ui/page-title";
 
 import { lecturerTimetable } from "../../local-store/timetable/timtetable-store";
-import { cookieStore } from "../../local-store/cookie/cookie-store";
 import { loaderStore } from "../../local-store/loader/loader-store";
 
 import "./style/index.scss";
 
-const Timetable = () => {
+const TimetablePage = () => {
   return (
     <div className="timetable-page">
       <div className="timetable-page__container app-container">
@@ -22,7 +21,6 @@ const Timetable = () => {
           <Filters />
           <TimetableProvider
             loaderStore={loaderStore}
-            cookieStore={cookieStore}
             timetable={lecturerTimetable}
           />
         </div>
@@ -31,4 +29,4 @@ const Timetable = () => {
   );
 };
 
-export default Timetable;
+export default TimetablePage;

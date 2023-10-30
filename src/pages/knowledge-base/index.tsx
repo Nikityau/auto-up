@@ -15,7 +15,6 @@ const KnowledgeBase = () => {
                     title='Курс'
                 />
                 <CourseList
-                  cookieStore={cookieStore}
                   loader={loaderStore}
                   error={errorStore}
                 />

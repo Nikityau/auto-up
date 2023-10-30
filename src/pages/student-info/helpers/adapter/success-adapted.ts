@@ -32,25 +32,18 @@ export const successAdapted = async (lessons: {
   id: string,
   title: string,
   number: number
-}[], groupId: string, studentId: string, token: string, courseId: string): Promise<SuccessSt[]> => {
+}[], groupId: string, studentId: string, courseId: string): Promise<SuccessSt[]> => {
   let sc: SuccessSt[] = [];
 
   for (let lesson of lessons) {
     const stAttend = await axios.get(`${baseUrl}/api/v1/study_groups/${groupId}/attend_status/`, {
-      headers: {
-        Authorization: `Token ${token}`
-      },
       params: {
         student: studentId,
         lesson: lesson.id
       }
     });
 
-    const tbRes = await axios.get(`${baseUrl}/api/v1/courses/${courseId}/lessons/${lesson.id}/`, {
-      headers: {
-        Authorization: `Token ${token}`
-      }
-    });
+    const tbRes = await axios.get(`${baseUrl}/api/v1/courses/${courseId}/lessons/${lesson.id}/`);
     const tbData = tbRes.data as TbRes;
 
     const tasksBlocks: TasksBlock[] = [];
@@ -65,9 +58,6 @@ export const successAdapted = async (lessons: {
       };
 
       const tasksRes = await axios.get(`${baseUrl}/api/v1/courses/${courseId}/lessons/${lesson.id}/tasks/`, {
-        headers: {
-          Authorization: `Token ${token}`
-        },
         params: {
           task_block: tb.id
         }
@@ -76,9 +66,6 @@ export const successAdapted = async (lessons: {
 
       for (let task of taskData) {
         const taskInfo = await axios.get(`${baseUrl}/api/v1/study_groups/${groupId}/solutions/`, {
-          headers: {
-            Authorization: `Token ${token}`
-          },
           params: {
             student: studentId,
             task: task.id

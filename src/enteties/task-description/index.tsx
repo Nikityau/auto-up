@@ -11,7 +11,7 @@ import {MarkDown} from "../../pages/task/provider/task.provider";
 type Img = string
 
 export type TaskDescProps = {
-    number: number
+    number: string | number
     description: MarkDown,
     title: string,
     ioData: Img

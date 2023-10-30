@@ -1,11 +1,11 @@
-import {nanoid} from "nanoid";
-
-import {ResSchedule} from "./interface/res-schedule";
-
-import {CourseInterface} from "../../../../shared/helpers/types/course.interface";
-import {datesCompare} from "../../../../shared/helpers/dates/dates-compare";
 import axios from "axios";
-import {baseUrl} from "../../../../shared/api/base-url";
+import { nanoid } from "nanoid";
+
+import { ResSchedule } from "./interface/res-schedule";
+
+import { CourseInterface } from "../../../../shared/helpers/types/course.interface";
+import { datesCompare } from "../../../../shared/helpers/dates/dates-compare";
+import { baseUrl } from "../../../../shared/api/base-url";
 
 
 export type LessonAdapted = {
@@ -20,7 +20,7 @@ type Res = {
     dates: Date[]
 }
 
-export const scheduleAdapter = async (data: ResSchedule[], token: string): Promise<Res> => {
+export const scheduleAdapter = async (data: ResSchedule[]): Promise<Res> => {
     const schedule: LessonAdapted[] = [];
     const dates: Date[] = [];
 
@@ -29,11 +29,7 @@ export const scheduleAdapter = async (data: ResSchedule[], token: string): Promi
     for (let sch of data) {
         if (!(sch.group in groupCache)) {
             try {
-                const resGroup = await axios.get(`${baseUrl}/api/v1/study_groups/${sch.group}`, {
-                    headers: {
-                        Authorization: `Token ${token}`
-                    }
-                })
+                const resGroup = await axios.get(`${baseUrl}/api/v1/study_groups/${sch.group}`)
 
                 groupCache[sch.group] = resGroup.data
             } catch (e) {

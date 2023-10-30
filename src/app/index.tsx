@@ -14,20 +14,21 @@ import "./style/vars/index.scss";
 import "./style/index.scss";
 
 const App = () => {
-  return (
-    <WithQuery>
-        <WithRouter>
-            <NavHistory>
-                <AccessManger
-                    userStore={userStore}
-                    cookieStore={cookieStore}
-                >
-                    <AppRouter />
-                </AccessManger>
-            </NavHistory>
-        </WithRouter>
-    </WithQuery>
-  );
+
+    return (
+        <WithQuery>
+            <WithRouter>
+                <NavHistory>
+                    <AccessManger
+                        userStore={userStore}
+                        cookieStore={cookieStore}
+                    >
+                        <AppRouter />
+                    </AccessManger>
+                </NavHistory>
+            </WithRouter>
+        </WithQuery>
+    );
 };
 
 export default App;

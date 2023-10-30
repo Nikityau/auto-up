@@ -1,6 +1,5 @@
 import React from 'react';
 import {observer} from "mobx-react-lite";
-import {CookieStore} from "../../../local-store/cookie/cookie-store";
 import {SolutionStatus, useVerify} from "../helpers/hooks/use-verify";
 import {TaskRes} from "../../task/provider/task.provider";
 import {FType} from "../../../shared/helpers/types/f-types";
@@ -8,7 +7,6 @@ import {LoaderStore} from "../../../local-store/loader/loader-store";
 import {ErrorStore} from "../../../local-store/error-store";
 
 type Props = {
-    cookie: CookieStore,
     loader: LoaderStore,
     error: ErrorStore
 } & React.PropsWithChildren
@@ -21,9 +19,9 @@ interface IVerifyContext {
 
 export const VerifyContext = React.createContext<IVerifyContext>(null)
 
-const VerifyProvider = observer(({children, cookie, loader, error}: Props) => {
+const VerifyProvider = observer(({children, loader, error}: Props) => {
 
-    const {task, solution, onSetStatus} = useVerify(cookie.token, loader, error)
+    const {task, solution, onSetStatus} = useVerify(loader, error)
 
     return (
         <VerifyContext.Provider value={{

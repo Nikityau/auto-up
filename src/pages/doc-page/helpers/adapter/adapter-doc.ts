@@ -5,7 +5,7 @@ import {DocModule, IDoc, Lesson, ResDoc} from "../hooks/interface";
 
 import {baseUrl} from "../../../../shared/api/base-url";
 
-export const adapterDoc = async (doc: ResDoc, token: string) => {
+export const adapterDoc = async (doc: ResDoc) => {
     const doc_adapted: IDoc = {
         id: doc.id,
         title: doc.title,
@@ -35,11 +35,7 @@ export const adapterDoc = async (doc: ResDoc, token: string) => {
                 tasks: []
             }
             for (let task of lesson.task_blocks) {
-                const taskRes = await axios.get(`${baseUrl}/api/v1/courses/${doc.id}/lessons/${ls.id}/tasks/?task_block=${task.id}`, {
-                    headers: {
-                        Authorization: `Token ${token}`
-                    }
-                })
+                const taskRes = await axios.get(`${baseUrl}/api/v1/courses/${doc.id}/lessons/${ls.id}/tasks/?task_block=${task.id}`)
                 ls.tasks.push({
                     id:nanoid(),
                     title: task.name,

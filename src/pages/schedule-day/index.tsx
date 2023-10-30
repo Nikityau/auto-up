@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Students from "./ui/students";
 import Schedule from "./ui/schedule";
 
 import ScheduleDayProvider from "./provider/schedule-day.provider";
-import { cookieStore } from "../../local-store/cookie/cookie-store";
 import { dayScheduleStore } from "./store/day-schedule-store";
 import { loaderStore } from "../../local-store/loader/loader-store";
 import {errorStore} from "../../local-store/error-store";
@@ -11,9 +10,15 @@ import {errorStore} from "../../local-store/error-store";
 import "./style/index.scss";
 
 const ScheduleDay = () => {
+
+  useEffect(() => {
+    return () => {
+      localStorage.removeItem('group-tab-id')
+    }
+  }, [])
+  
   return (
     <ScheduleDayProvider
-      cookie={cookieStore}
       daySchedule={dayScheduleStore}
       loader={loaderStore}
       error={errorStore}

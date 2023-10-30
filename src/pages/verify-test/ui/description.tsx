@@ -9,7 +9,7 @@ const Description = () => {
     return (
         <>
             <TaskDescription
-                number={0}
+                number={task?.id}
                 description={task?.description}
                 title={task?.name}
                 ioData={task?.task_images?.[0]?.image}

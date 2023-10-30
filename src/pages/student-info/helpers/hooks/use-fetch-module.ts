@@ -1,7 +1,8 @@
-import { LoaderStore } from "../../../../local-store/loader/loader-store";
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import axios from "axios";
+import { useQuery } from "react-query";
+import { useEffect } from "react";
+
+import { LoaderStore } from "../../../../local-store/loader/loader-store";
 import { baseUrl } from "../../../../shared/api/base-url";
 
 export interface ModuleRes {
@@ -10,29 +11,22 @@ export interface ModuleRes {
   number: number
 }
 
-export const useFetchModule = (token: string, loader: LoaderStore, courseId: string) => {
-  const [modules, setModules] = useState<ModuleRes[]>();
-  const { groupId, studentId } = useParams();
+export const useFetchModule = (loader: LoaderStore, courseId: string) => {
+  const query = useQuery(`module-${courseId}`, async () => {
+    loader.add("st-module");
+    const modulesRes = await axios.get(`${baseUrl}/api/v1/courses/${courseId}/modules/`);
 
-  useEffect(() => {
-    (async () => {
-      try {
-        loader.add("st-module");
-        const modulesRes = await axios.get(`${baseUrl}/api/v1/courses/${courseId}/modules/`, {
-          headers: {
-            Authorization: `Token ${token}`
-          }
-        });
+    const moduleData = (modulesRes.data as ModuleRes[]).sort((m1, m2) => m1.number - m2.number);
 
-        const moduleData = (modulesRes.data as ModuleRes[]).sort((m1,m2) => m1.number - m2.number);
-        setModules(moduleData);
-      } catch (e) {
+    return moduleData
+  }, {
+    onSuccess: () => {
+      loader.remove("st-module");
+    },
+    onError: () => {
+      loader.remove("st-module");
+    }
+  })
 
-      } finally {
-        loader.remove("st-module");
-      }
-    })();
-  }, [courseId]);
-
-  return modules;
+  return query.data;
 };

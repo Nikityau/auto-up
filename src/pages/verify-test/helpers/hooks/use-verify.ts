@@ -17,7 +17,7 @@ interface SolutionRes {
     solution: null | any
 }
 
-export const useVerify = (token: string, loader: LoaderStore, error: ErrorStore) => {
+export const useVerify = (loader: LoaderStore, error: ErrorStore) => {
     const {courseId, lessonId, taskId, studentId, groupId} = useParams()
     const [task, setTask] = useState<TaskRes>(null)
     const [solution, setSolution] = useState(null)
@@ -27,16 +27,9 @@ export const useVerify = (token: string, loader: LoaderStore, error: ErrorStore)
             const key = nanoid()
             loader.add(key)
             try {
-                const taskRes = await axios.get(`${baseUrl}/api/v1/courses/${courseId}/lessons/${lessonId}/tasks/${taskId}/`, {
-                    headers: {
-                        Authorization: `Token ${token}`
-                    }
-                })
+                const taskRes = await axios.get(`${baseUrl}/api/v1/courses/${courseId}/lessons/${lessonId}/tasks/${taskId}/`)
 
                 const stRes = await axios.get(`${baseUrl}/api/v1/study_groups/${groupId}/solutions`, {
-                    headers: {
-                        Authorization: `Token ${token}`
-                    },
                     params: {
                         student: studentId,
                         task: taskId
@@ -45,14 +38,11 @@ export const useVerify = (token: string, loader: LoaderStore, error: ErrorStore)
 
                 if(stRes.data.length == 0) return null
 
-                const studentSolution = await axios.get(`${baseUrl}/api/v1/study_groups/${groupId}/solutions/${stRes.data[0]['id']}/`, {
-                    headers: {
-                        Authorization: `Token ${token}`
-                    }
-                })
+                const studentSolution = await axios.get(`${baseUrl}/api/v1/study_groups/${groupId}/solutions/${stRes.data[0]['id']}/`)
                 console.log(studentSolution.data)
 
-
+                console.log(taskRes.data);
+                
                 setTask(taskRes.data)
                 setSolution(studentSolution.data['solution']['solution_text'])
             } catch (e) {
@@ -66,8 +56,6 @@ export const useVerify = (token: string, loader: LoaderStore, error: ErrorStore)
             } finally {
                 loader.remove(key)
             }
-
-            await onSetStatus('approved')
         })()
     }, [])
 
@@ -76,9 +64,6 @@ export const useVerify = (token: string, loader: LoaderStore, error: ErrorStore)
         try {
             loader.add(key)
             const stRes = await axios.get(`${baseUrl}/api/v1/study_groups/${groupId}/solutions`, {
-                headers: {
-                    Authorization: `Token ${token}`
-                },
                 params: {
                     student: studentId,
                     task: taskId
@@ -87,14 +72,13 @@ export const useVerify = (token: string, loader: LoaderStore, error: ErrorStore)
 
             if(stRes.data.length == 0) return null
 
+            console.log(stRes.data);
+            
+
             const stData = (stRes.data as SolStatRes[])[0]
 
             const resolutionRes = await axios.put(`${baseUrl}/api/v1/study_groups/${groupId}/solutions/${stData.id}/resolution/`, {
                 solution_status: status
-            }, {
-                headers: {
-                    Authorization: `Token ${token}`
-                },
             })
         } catch (e) {
             const err = e as AxiosError

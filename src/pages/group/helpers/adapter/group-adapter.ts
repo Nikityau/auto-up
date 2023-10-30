@@ -1,26 +1,9 @@
-import { Group } from "../hooks/use-fetch-group";
 import axios from "axios";
-import {baseUrl} from "../../../../shared/api/base-url";
+import { baseUrl } from "../../../../shared/api/base-url";
+import { Group } from "../hooks/types/group";
+import { AttStatsRes, CourseRes, ResGroup } from './types/res-group'
 
-interface ResGroup {
-  id: string,
-  name: string,
-  course: string,
-  students: {
-    id: string,
-    first_name: string,
-    last_name: string,
-    raw_password: string
-  }[]
-}
-
-interface AttStatsRes {
-  student: string,
-  is_attend: boolean,
-  lesson: string
-}
-
-export const groupAdapter = async (data: ResGroup, token: string): Promise<Group> => {
+export const groupAdapter = async (data: ResGroup): Promise<Group> => {
   const adapted: Group = {
     id: data.id,
     groupTitle: data.name,
@@ -28,18 +11,11 @@ export const groupAdapter = async (data: ResGroup, token: string): Promise<Group
     students: []
   }
 
-  const courseRes = await axios.get(`${baseUrl}/api/v1/courses/${data.course}/`, {
-    headers: {
-      Authorization: `Token ${token}`
-    }
-  })
-  adapted.courseTitle = courseRes.data['title']
+  const courseRes = await axios.get(`${baseUrl}/api/v1/courses/${data.course}/`)
+  adapted.courseTitle = (courseRes.data as CourseRes).title
 
-  for(let st of data.students) {
+  for (let st of data.students) {
     const attStats = await axios.get(`${baseUrl}/api/v1/study_groups/${adapted.id}/attend_status/`, {
-      headers: {
-        Authorization: `Token ${token}`
-      },
       params: {
         student: st.id
       }
@@ -48,8 +24,8 @@ export const groupAdapter = async (data: ResGroup, token: string): Promise<Group
 
     let attendedCount = 0
 
-    for(let lessons of dataAtt) {
-      if(lessons.is_attend) {
+    for (let lessons of dataAtt) {
+      if (lessons.is_attend) {
         attendedCount += 1
       }
     }
@@ -59,7 +35,7 @@ export const groupAdapter = async (data: ResGroup, token: string): Promise<Group
       avatar: null,
       name: st.first_name,
       surname: st.last_name,
-      login: st['username'],
+      login: st.username,
       enrolled: null,
       status: 'active',
       attendance: Math.round(attendedCount / dataAtt.length * 100),

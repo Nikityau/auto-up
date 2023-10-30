@@ -40,7 +40,7 @@ export class TimetableStore {
       day: computed
     });
 
-    this.who = who;
+    this.who = localStorage.getItem('user-role');
 
     const localType = sessionStorage.getItem(`${this.who}-month-type`);
 
@@ -67,19 +67,18 @@ export class TimetableStore {
   initWeek() {
     const index = this.month.findIndex(d => datesCompare(this.timetable.now, d))
 
+    const len = this.month.length
+
     let startIndex = 0;
     let endIndex = 0;
 
-    if(index < this.month.length - 7) {
+    if(index < this.month.length - 7) {      
       startIndex = index
-      endIndex = index + 5
+      endIndex = index + 6
     } else {
-      startIndex = index - 2
-      endIndex = index + 3
+      startIndex = index
+      endIndex = len - 1
     }
-
-    console.log(startIndex);
-    console.log(endIndex);
     
     this.setWeek(
       this.timetable.month[startIndex],
@@ -221,4 +220,4 @@ export class TimetableStore {
   }
 }
 
-export const lecturerTimetable = new TimetableStore("lecturer");
+export const lecturerTimetable = new TimetableStore("");
