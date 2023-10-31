@@ -21,7 +21,7 @@ export const useFetchTimetable = (loader: LoaderStore) => {
     const query = useQuery('timetable', async () => {
         loader.add(`${baseUrl}/api/v1/study_groups/schedule/` + 'timetable')
 
-        const {data} = await axios.get(`${baseUrl}/api/v1/study_groups/schexcvcxdule/`)
+        const {data} = await axios.get(`${baseUrl}/api/v1/study_groups/schedule/`)
 
         const adapted = await scheduleAdapter(data)
 
