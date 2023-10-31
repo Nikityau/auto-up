@@ -6,22 +6,22 @@ import './style/index.scss'
 
 function NotifcationBar() {
 
-  const {addNotif, notifs, removeNotif} = useContext(NotifsContext)
+  const {notifs, removeNotif} = useContext(NotifsContext)
 
   return (
     <div className='notifications'>
-       <Notify
-          title={'Error'}
-          description={'404'}
-          onClose={() => {}}
-          type={'error'}
-       />
-       <Notify
-          title={'Success'}
-          description={'200'}
-          onClose={() => {}}
-          type={'success'}
-       />
+       {
+         notifs.map(n => (
+            <Notify
+               key={n.id}
+               description={n.description}
+               onClose={removeNotif}
+               title={n.title}
+               type={n.type}
+               id={n.id}
+            />
+         ))
+       }
     </div>
   )
 }
