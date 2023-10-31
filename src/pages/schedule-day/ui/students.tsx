@@ -2,11 +2,8 @@ import React, { useContext } from 'react';
 import TitleUi from '../../../shared/ui/page-title';
 import StudentsList from './students-list';
 import { dayScheduleStore } from '../store/day-schedule-store';
-import { NavHistoryContext } from '../../../procceses/nav-history';
 
 const Students = () => {
-
-    const {back} = useContext(NavHistoryContext)
 
     return (
         <div className='schedule-day__students'>

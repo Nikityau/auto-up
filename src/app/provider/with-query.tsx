@@ -3,10 +3,10 @@ import {QueryClient, QueryClientProvider} from "react-query";
 
 const queryClient = new QueryClient()
 
-const WithQuery = ({children}:React.PropsWithChildren) => {
+const WithQuery = (node:React.ReactNode) => () => {
     return (
         <QueryClientProvider client={queryClient}>
-            {children}
+            {node}
         </QueryClientProvider>
     );
 };

@@ -9,5 +9,6 @@ export interface Student {
     patronymic?: string,
     status: "active" | "disable",
     attendance: number,
-    enrolled: Date
+    enrolled: Date,
+    needCheck?: boolean
 }

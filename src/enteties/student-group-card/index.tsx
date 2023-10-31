@@ -1,5 +1,4 @@
 import React from 'react';
-import { Student } from '../../pages/group/helpers/hooks/use-fetch-group';
 import { toNormalNum } from '../../shared/helpers/dates/to-normal-num';
 
 import './style/index.scss'
@@ -7,6 +6,7 @@ import Control from './ui/control';
 import Avatar from './ui/avatar';
 import TitleData from './ui/title-data';
 import {FType} from "../../shared/helpers/types/f-types";
+import { Student } from '../../pages/group/helpers/hooks/types/student';
 
 type Props = {
     position: number,
@@ -25,7 +25,8 @@ const StudentGroupCard = ({
     surname,
     patronymic,
     position,
-    onClick
+    onClick,
+    needCheck
 }: Props) => {
     return (
         <div className='student-group-card'>
@@ -78,7 +79,10 @@ const StudentGroupCard = ({
                 title='Зачислен'
                 data={toNormalNum(enrolled)}
             />
-           {/* <div className='student-group-card__note'/>*/}
+            {
+                needCheck &&
+               <div className='student-group-card__note'/>
+            }
         </div>
     );
 };

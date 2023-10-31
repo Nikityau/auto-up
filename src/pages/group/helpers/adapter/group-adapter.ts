@@ -4,7 +4,7 @@ import { Group } from "../hooks/types/group";
 import { AttStatsRes, CourseRes, ResGroup } from './types/res-group'
 
 export const groupAdapter = async (data: ResGroup): Promise<Group> => {
-  const adapted: Group = {
+  const adaptedGroup: Group = {
     id: data.id,
     groupTitle: data.name,
     courseTitle: data.course,
@@ -12,14 +12,21 @@ export const groupAdapter = async (data: ResGroup): Promise<Group> => {
   }
 
   const courseRes = await axios.get(`${baseUrl}/api/v1/courses/${data.course}/`)
-  adapted.courseTitle = (courseRes.data as CourseRes).title
+  adaptedGroup.courseTitle = (courseRes.data as CourseRes).title
 
   for (let st of data.students) {
-    const attStats = await axios.get(`${baseUrl}/api/v1/study_groups/${adapted.id}/attend_status/`, {
+    const attStats = await axios.get(`${baseUrl}/api/v1/study_groups/${adaptedGroup.id}/attend_status/`, {
       params: {
         student: st.id
       }
     })
+    const solutionsStatus = await axios.get(`${baseUrl}/api/v1/study_groups/${adaptedGroup.id}/solutions/`, {
+      params: {
+        solution_status: 'done',
+        student: st.id
+      }
+    })
+
     const dataAtt = attStats.data as AttStatsRes[]
 
     let attendedCount = 0
@@ -30,7 +37,7 @@ export const groupAdapter = async (data: ResGroup): Promise<Group> => {
       }
     }
 
-    adapted.students.push({
+    adaptedGroup.students.push({
       id: st.id,
       avatar: null,
       name: st.first_name,
@@ -39,9 +46,10 @@ export const groupAdapter = async (data: ResGroup): Promise<Group> => {
       enrolled: null,
       status: 'active',
       attendance: Math.round(attendedCount / dataAtt.length * 100),
-      password: st.raw_password
+      password: st.raw_password,
+      needCheck: solutionsStatus.data.length > 0
     })
   }
 
-  return adapted
+  return adaptedGroup
 }

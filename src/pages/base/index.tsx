@@ -7,7 +7,6 @@ import {UserStore} from "../../local-store/user/user-store";
 import {loaderStore} from "../../local-store/loader/loader-store";
 import Loader from "../../widget/loader";
 
-import ErrorHandler from "../../procceses/error-handler";
 import {errorStore} from "../../local-store/error-store";
 
 import './style/index.scss'
@@ -25,7 +24,6 @@ const BasePage = observer(({user}: Props) => {
         >
             <Outlet/>
             <Loader loader={loaderStore}/>
-            <ErrorHandler error={errorStore}/>
         </div>
     );
 });

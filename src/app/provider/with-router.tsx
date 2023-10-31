@@ -1,10 +1,10 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 
-const WithRouter = ({children}:React.PropsWithChildren) => {
+const WithRouter = (node:React.ReactNode) => () => {
     return (
         <BrowserRouter>
-            {children}
+            {node}
         </BrowserRouter>
     );
 };

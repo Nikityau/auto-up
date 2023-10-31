@@ -3,8 +3,8 @@ import AppRouter from "../pages";
 
 import WithRouter from "./provider/with-router";
 import WithQuery from "./provider/with-query";
+import WithNotification from "./provider/with-notification";
 
-import NavHistory from "../procceses/nav-history";
 import AccessManger from "../procceses/access-manager";
 
 import { userStore } from "../local-store/user/user-store";
@@ -16,19 +16,15 @@ import "./style/index.scss";
 const App = () => {
 
     return (
-        <WithQuery>
-            <WithRouter>
-                <NavHistory>
-                    <AccessManger
-                        userStore={userStore}
-                        cookieStore={cookieStore}
-                    >
-                        <AppRouter />
-                    </AccessManger>
-                </NavHistory>
-            </WithRouter>
-        </WithQuery>
+        <AccessManger
+            userStore={userStore}
+            cookieStore={cookieStore}
+        >
+            <WithNotification>
+                <AppRouter />
+            </WithNotification>
+        </AccessManger>
     );
 };
 
-export default App;
+export default WithQuery(WithRouter(<App />)());

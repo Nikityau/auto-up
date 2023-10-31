@@ -44,6 +44,7 @@ const Students = () => {
                                         status={s.status}
                                         surname={s.surname}
                                         patronymic={s.patronymic}
+                                        needCheck={s.needCheck}
                                     />
                                 </Link>
                             </SwiperSlide>
