@@ -6,13 +6,11 @@ import { loaderStore } from "../../local-store/loader/loader-store";
 import Doc from './ui/doc';
 import Title from './ui/title';
 
-import {errorStore} from "../../local-store/error-store";
-
 import './style/index.scss'
 
 const Documentation = () => {
     return (
-       <DocPageProvider loaderStore={loaderStore} error={errorStore}>
+       <DocPageProvider loaderStore={loaderStore}>
          <div className='doc-page'>
             <div className='doc-page__container app-container'>
                 <div className='doc-page__title'>

@@ -1,10 +1,11 @@
-import {useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
 import axios from "axios";
-import {baseUrl} from "../../../../shared/api/base-url";
-import {LoaderStore} from "../../../../local-store/loader/loader-store";
 import { nanoid } from "nanoid";
 import { useQuery } from "react-query";
+import { useParams } from "react-router-dom";
+
+import { baseUrl } from "../../../../shared/api/base-url";
+import { LoaderStore } from "../../../../local-store/loader/loader-store";
+import { useErrorHandler } from "../../../../shared/helpers/hooks/use-error-handler";
 
 interface GroupRes {
     students: {
@@ -39,7 +40,8 @@ export interface AttStat {
 }
 
 export const useFetchAtt = (loader: LoaderStore) => {
-    const {studentId, groupId} = useParams()
+    const { studentId, groupId } = useParams()
+    const errHandler = useErrorHandler()
 
     const query = useQuery('att', async () => {
         loader.add('st-att')
@@ -57,9 +59,9 @@ export const useFetchAtt = (loader: LoaderStore) => {
         const schData = schRes.data as SchRes[]
         const stAttData = stAtt.data as AttStatRes[]
 
-        const attState:AttStat[] = []
+        const attState: AttStat[] = []
 
-        for(let sch of schData) {
+        for (let sch of schData) {
             const att = stAttData.find(st => st.lesson == sch.lesson.id)
             attState.push({
                 id: nanoid(),
@@ -71,7 +73,7 @@ export const useFetchAtt = (loader: LoaderStore) => {
 
         return attState
     }, {
-        onError: () => {
+        onError: (e) => {
             loader.remove('st-att')
         },
         onSuccess: () => {

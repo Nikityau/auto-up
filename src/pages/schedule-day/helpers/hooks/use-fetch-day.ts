@@ -1,20 +1,19 @@
-import axios, {AxiosError} from "axios";
-import {useQuery} from "react-query";
-import {useParams} from "react-router-dom";
-import {nanoid} from "nanoid";
+import axios, { AxiosError } from "axios";
+import { useQuery } from "react-query";
+import { useParams } from "react-router-dom";
 
-import {CookieStore} from "../../../../local-store/cookie/cookie-store";
-import {DayScheduleStore} from "../../store/day-schedule-store";
-import {LoaderStore} from "../../../../local-store/loader/loader-store";
+import { DayScheduleStore } from "../../store/day-schedule-store";
+import { LoaderStore } from "../../../../local-store/loader/loader-store";
 
-import {baseUrl} from "../../../../shared/api/base-url";
-import {scheduleDayAdapter} from "../adapter/schedule-day.adapter";
-import {usersAdapter} from "../adapter/users.adapter";
-import {ErrorStore} from "../../../../local-store/error-store";
+import { baseUrl } from "../../../../shared/api/base-url";
+import { scheduleDayAdapter } from "../adapter/schedule-day.adapter";
+import { usersAdapter } from "../adapter/users.adapter";
 import { scheduleAdapter } from "../../../../pages/timetable-page/helpers/adapter/schedule.adapter";
+import { useErrorHandler } from "../../../../shared/helpers/hooks/use-error-handler";
 
-export const useFetchDay = (daySchedule: DayScheduleStore, loader: LoaderStore, error: ErrorStore) => {
-    const {date} = useParams()
+export const useFetchDay = (daySchedule: DayScheduleStore, loader: LoaderStore) => {
+    const { date } = useParams()
+    const errHandler = useErrorHandler()
 
     useQuery('student-lessons', async () => {
         loader.add(`${baseUrl}/api/v1/study_groups/schedule/`)
@@ -30,12 +29,7 @@ export const useFetchDay = (daySchedule: DayScheduleStore, loader: LoaderStore, 
             loader.remove(`${baseUrl}/api/v1/study_groups/schedule/`)
         },
         onError: (e) => {
-            const err = e as Error
-            error.addError({
-                id: nanoid(),
-                title: err['code'],
-                description: err.message
-            })
+            errHandler(e)
 
             loader.remove(`${baseUrl}/api/v1/study_groups/schedule/`)
         }
@@ -51,12 +45,7 @@ export const useFetchDay = (daySchedule: DayScheduleStore, loader: LoaderStore, 
                 lesson: daySchedule.currentSchedule.lessonId
             })
         } catch (e) {
-            const err = e as AxiosError
-            error.addError({
-                id: nanoid(),
-                title: err['code'],
-                description: err.message + '\n' + err.config.url
-            })
+            errHandler(e)
 
             daySchedule.setStudentStatus(studentId, !status)
         }

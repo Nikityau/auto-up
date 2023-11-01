@@ -1,5 +1,5 @@
 .notifications {
-    position: absolute;
+    position: fixed;
     top: 0;
     right: 0;
 
@@ -11,4 +11,8 @@
     justify-content: flex-start;
     flex-direction: column-reverse;
     gap: 20px;
+
+    z-index: 1;
+
+    pointer-events: none;
 }

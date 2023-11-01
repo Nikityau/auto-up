@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import axios, {AxiosError} from "axios";
 import { nanoid } from "nanoid"
+import {useQuery} from "react-query";
+
 import { loaderStore, LoaderStore } from "../../../../local-store/loader/loader-store";
 import { baseUrl } from "../../../../shared/api/base-url";
 import { CookieStore } from "../../../../local-store/cookie/cookie-store";
 import {ErrorStore} from "../../../../local-store/error-store";
-import {useQuery} from "react-query";
+import { useErrorHandler } from "../../../../shared/helpers/hooks/use-error-handler";
 
 
 interface GroupData {
@@ -41,6 +43,8 @@ interface StatGroupRes {
 }
 
 export const useFetchGroups = (loader: LoaderStore, cookie: CookieStore, error: ErrorStore) => {
+    const errHandler = useErrorHandler()
+
     const query = useQuery('groups-query', async () => {
         loaderStore.add(`${baseUrl}/api/v1/study_groups/`)
 
@@ -74,13 +78,8 @@ export const useFetchGroups = (loader: LoaderStore, cookie: CookieStore, error: 
             loaderStore.remove(`${baseUrl}/api/v1/study_groups/`)
         },
         onError: (e) => {
-            const err = e as AxiosError
-            error.addError({
-                id: nanoid(),
-                title: err['code'],
-                description: err.message + '\n' + err.config.url
-            })
-
+            errHandler(e)
+           
             loaderStore.remove(`${baseUrl}/api/v1/study_groups/`)
         }
     })

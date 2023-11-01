@@ -1,13 +1,11 @@
-import {nanoid} from "nanoid";
-import {useEffect, useState} from "react";
-import axios, {AxiosError} from "axios";
+import {useState} from "react";
+import axios from "axios";
+import { useQuery } from "react-query";
 
-import p1_img from "../../assets/p1.png";
-import p2_img from "../../assets/p2.png";
-import {CookieStore} from "../../../../local-store/cookie/cookie-store";
 import {baseUrl} from "../../../../shared/api/base-url";
 import {LoaderStore} from "../../../../local-store/loader/loader-store";
 import {ErrorStore} from "../../../../local-store/error-store";
+import { useErrorHandler } from "../../../../shared/helpers/hooks/use-error-handler";
 
 interface Course {
     id: string,
@@ -15,30 +13,24 @@ interface Course {
     preview: string,
 }
 
-export const useFetchCourses = (loader: LoaderStore, error: ErrorStore) => {
-    const [courses, setCourses] = useState<Course[]>(null);
-
-    useEffect(() => {
-        (async () => {
-            try {
-                loader.add(`${baseUrl}/api/v1/courses/`)
-                const {data} = await axios.get(`${baseUrl}/api/v1/courses/`);
-
-                setCourses(data);
-            } catch (e) {
-                const err = e as AxiosError
-                error.addError({
-                    id: nanoid(),
-                    title: err['code'],
-                    description: err.message + '\n' + err.config.url
-                })
-            } finally {
-                loader.remove(`${baseUrl}/api/v1/courses/`)
-
-            }
-        })();
-    }, []);
+export const useFetchCourses = (loader: LoaderStore) => {
+    const errHandler = useErrorHandler()
 
 
-    return courses;
+    const query = useQuery('knowledge-base', async () => {
+        loader.add(`${baseUrl}/api/v1/courses/`)
+        const {data} = await axios.get(`${baseUrl}/api/v1/courses/`);
+
+        return data
+    }, {
+        onSuccess: () => {
+            loader.remove(`${baseUrl}/api/v1/courses/`)
+        },
+        onError: (e) => {
+            errHandler(e)
+            loader.remove(`${baseUrl}/api/v1/courses/`)
+        },
+    })
+
+    return query.data;
 };

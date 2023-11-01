@@ -5,7 +5,6 @@ import Schedule from "./ui/schedule";
 import ScheduleDayProvider from "./provider/schedule-day.provider";
 import { dayScheduleStore } from "./store/day-schedule-store";
 import { loaderStore } from "../../local-store/loader/loader-store";
-import {errorStore} from "../../local-store/error-store";
 
 import "./style/index.scss";
 
@@ -21,7 +20,6 @@ const ScheduleDay = () => {
     <ScheduleDayProvider
       daySchedule={dayScheduleStore}
       loader={loaderStore}
-      error={errorStore}
     >
       <div className="schedule-day">
         <div className="schedule-day__container app-container">

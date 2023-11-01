@@ -8,6 +8,8 @@
   font-size: 20px;
 
   z-index: 10;
+
+  pointer-events: none;
 }
 
 .loader_loaded {
@@ -23,6 +25,8 @@
   height: calc(100vh - 60px);
 
   //background: #F8F9FD;
+
+  pointer-events: none;
 
   z-index: 10;
 }

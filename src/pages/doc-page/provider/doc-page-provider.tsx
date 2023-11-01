@@ -13,12 +13,11 @@ export const DocPageContext = React.createContext<DocContext>(null)
 
 type Props = {
     loaderStore: LoaderStore,
-    error: ErrorStore
 } & React.PropsWithChildren
 
-const DocPageProvider = ({children, loaderStore, error}:Props) => {
+const DocPageProvider = ({children, loaderStore}:Props) => {
 
-    const doc = useFetchDoc(loaderStore, error)
+    const doc = useFetchDoc(loaderStore)
 
     return (
         <DocPageContext.Provider value={{
