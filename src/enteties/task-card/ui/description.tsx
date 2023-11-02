@@ -8,7 +8,7 @@ const Description = ({description}:Props) => {
     return (
         <div className={'task-card__description'}>
             <div className={'task-card__subtitle'}>
-                <span>В этом блоке мы узнаем:</span>
+                <span>Описания урока:</span>
             </div>
             <div className={'task-card__descr'}>
                 {
