@@ -1,6 +1,6 @@
 import {CourseTask} from "./course-task.interface";
 
-export interface CourseLesson {
+export interface   CourseLesson {
     id: string,
     title?:string,
     number: number
