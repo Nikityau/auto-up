@@ -2,12 +2,12 @@ import React from 'react';
 import { observer } from 'mobx-react-lite';
 import CurrentMonth from './ui/current-month';
 import ChangeBtns from './ui/change-bnts';
-import { TimetableStore } from '../../local-store/timetable/timtetable-store';
+import {Timetable} from "../../local-store/timetable/timetable";
 
 import './style/index.scss'
 
 type Props = {
-    timetable: TimetableStore
+    timetable: Timetable
 }
 
 const MonthChange = observer(({timetable}:Props) => {

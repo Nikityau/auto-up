@@ -3,7 +3,6 @@ import React from 'react'
 import TimetableWeek from '../../../feature/timetable-week';
 import DayGrid from '../../../feature/timetable-week/ui/day';
 import DayInfo from '../../../feature/timetable-week/ui/day-info';
-import { TimetableStore } from '../../../local-store/timetable/timtetable-store';
 import { datesCompare } from '../../../shared/helpers/dates/dates-compare';
 import { infosByDate } from '../../../shared/helpers/dates/info-by-date';
 import { TimetableParsed } from '../helpers/hooks/use-fetch-timetable';
@@ -12,15 +11,15 @@ import { accessRoutes } from '../../../shared/data/access-routes';
 
 
 type Props = {
-    timetable: TimetableStore,
+    week: Date[]
     content: TimetableParsed
 }
 
-const Week = ({ content, timetable }: Props) => {
+const Week = ({ content, week }: Props) => {
     return (
         <TimetableWeek>
             {
-                timetable.week.map(t => (
+                week.map(t => (
                     <DayGrid
                         key={nanoid()}
                         date={t}

@@ -5,14 +5,14 @@ import { observer } from 'mobx-react-lite';
 import TimetableMonth from '../../../feature/timetable-month';
 import DateGrid from '../../../feature/timetable-month/ui/date-grid';
 
-import { TimetableStore } from '../../../local-store/timetable/timtetable-store';
 import { datesCompare } from '../../../shared/helpers/dates/dates-compare';
 
 import {studentAttendance} from "../data/student-info";
 import { StudentInfoContext } from "../provider";
+import {Timetable} from "../../../local-store/timetable/timetable";
 
 type Props = {
-    timetable: TimetableStore
+    timetable: Timetable
 }
 
 const AttendanceCalendar = observer(({timetable}:Props) => {
@@ -53,10 +53,10 @@ const AttendanceCalendar = observer(({timetable}:Props) => {
         <div className='attendence-calendar'>
             <TimetableMonth
                 showCurrentDay={false}
-                date={timetable.timetable.activeDate}
+                date={timetable.active}
             >
                 {
-                    timetable.timetable.month.map(t => (
+                    timetable.days.map(t => (
                         <DateGrid
                             date={t}
                             key={nanoid()}

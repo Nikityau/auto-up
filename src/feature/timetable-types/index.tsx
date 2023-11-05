@@ -1,7 +1,8 @@
 import React from 'react';
 import Type from './ui/type';
 import { nanoid } from 'nanoid';
-import {TimetableType, TimetableStore} from '../../local-store/timetable/timtetable-store';
+import {TimetableType} from '../../local-store/timetable/timtetable-store';
+import {Timetable} from "../../local-store/timetable/timetable";
 
 import './style/index.scss'
 
@@ -30,7 +31,7 @@ const types: Types[] = [
 ]
 
 type Props = {
-    timetable: TimetableStore
+    timetable: Timetable
 }
 
 const TimetableTypes = ({timetable}:Props) => {

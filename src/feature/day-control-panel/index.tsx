@@ -1,26 +1,33 @@
 import React from 'react';
 import {observer} from "mobx-react-lite";
 
-import {TimetableStore} from "../../local-store/timetable/timtetable-store";
 import DateDay from "./ui/date-day";
-
-import './style/index.scss'
 import DaySwitcher from "./ui/day-switcher";
 
+import './style/index.scss'
+import {FType} from "../../shared/helpers/types/f-types";
+
 type Props = {
-    timetable: TimetableStore
+    day: Date,
+    onNext: FType<void, void>
+    onPrev: FType<void, void>
 }
 
-const DayControlPanel = observer(({timetable}:Props) => {
+const DayControlPanel = observer((
+    {
+        day,
+        onNext,
+        onPrev
+    }:Props) => {
     return (
         <div className={'day-control-panel'}>
             <DateDay
-                day={timetable.day.getDay()}
-                date={timetable.day.getDate()}
+                day={day.getDay()}
+                date={day.getDate()}
             />
             <DaySwitcher
-                onNext={() => timetable.nextDay()}
-                onPrev={() => timetable.prevDay()}
+                onNext={onNext}
+                onPrev={onPrev}
             />
         </div>
     );

@@ -4,25 +4,25 @@ import NavByRole from '../../../enteties/nav-by-role';
 import CalendarLesson from '../../../feature/calendar-lesson';
 import TimetableMonth from '../../../feature/timetable-month';
 import DateGrid from '../../../feature/timetable-month/ui/date-grid';
-import { TimetableStore } from '../../../local-store/timetable/timtetable-store';
 import { datesCompare } from '../../../shared/helpers/dates/dates-compare';
 import { infoByDate } from '../../../shared/helpers/dates/info-by-date';
 import { accessRoutes } from '../../../shared/data/access-routes';
 import { TimetableParsed } from '../helpers/hooks/use-fetch-timetable';
 
 type Props = {
-    timetable: TimetableStore,
+    month: Date[],
+    activeDate: Date
     content: TimetableParsed
 }
 
-const Month = ({timetable, content}:Props) => {
+const Month = ({month, activeDate,content}:Props) => {
     return (
         <TimetableMonth
             showCurrentDay={true}
-            date={timetable.timetable.activeDate}
+            date={activeDate}
         >
             {
-                timetable.timetable.month.map(d => (
+                month.map(d => (
                     <DateGrid
                         key={nanoid()}
                         date={d}

@@ -3,7 +3,7 @@ import React from "react";
 import MonthChange from "../../../feature/month-change";
 import TimetableTypes from "../../../feature/timetable-types";
 
-import { lecturerTimetable } from "../../../local-store/timetable/timtetable-store";
+import {timetableRemake} from "../../../local-store/timetable/timetable";
 
 import InfoProvider from "../provider/info-provider";
 import WeekSwitcherProvider from "../provider/week-switcher-provider";
@@ -12,16 +12,16 @@ const Filters = () => {
   return (
     <div className="timetable-filters">
       <MonthChange
-        timetable={lecturerTimetable}
+        timetable={timetableRemake}
       />
       <TimetableTypes
-        timetable={lecturerTimetable}
+        timetable={timetableRemake}
       />
       <WeekSwitcherProvider
-        timetableStore={lecturerTimetable}
+        timetableStore={timetableRemake}
       />
       <InfoProvider
-        timetableStore={lecturerTimetable}
+        timetableStore={timetableRemake}
       />
     </div>
   );

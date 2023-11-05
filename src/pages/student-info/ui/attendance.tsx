@@ -3,8 +3,9 @@ import AttendanceProvider from '../provider/attendance-provider';
 import AttendanceSideBar from './attendce-side-bar';
 import AttendanceCalendar from './attendance-calendar';
 import TitleUi from '../../../shared/ui/page-title';
-import { studentAttendanceCalendar } from '..';
 import {cookieStore} from "../../../local-store/cookie/cookie-store";
+import {attendanceTimetable} from "../index";
+
 
 const Attendance = () => {
     return (
@@ -16,7 +17,7 @@ const Attendance = () => {
                 <div className='student-attendce__container'>
                     <AttendanceSideBar />
                     <AttendanceCalendar
-                        timetable={studentAttendanceCalendar}
+                        timetable={attendanceTimetable}
                     />
                 </div>
             </div>

@@ -1,8 +1,9 @@
 import React from 'react';
 import { TimetableStore } from '../../../local-store/timetable/timtetable-store';
+import {Timetable} from "../../../local-store/timetable/timetable";
 
 type Props = {
-    timetable: TimetableStore
+    timetable: Timetable
 }
 
 const ChangeBtns = ({timetable}:Props) => {

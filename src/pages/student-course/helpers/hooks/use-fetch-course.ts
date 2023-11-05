@@ -10,6 +10,7 @@ import { CourseLesson } from "../../data/interface/course-lesson.interface";
 import { CourseTask } from "../../data/interface/course-task.interface";
 import { CourseRes, IModule, LessonsRes, SolRes } from "./types/res.types";
 import { useErrorHandler } from "../../../../shared/helpers/hooks/use-error-handler";
+import {ModuleRes} from "../../../student-info/helpers/hooks/use-fetch-module";
 
 interface Tasks {
     id: string
@@ -17,6 +18,11 @@ interface Tasks {
 
 interface StudyGroups {
     id: string
+}
+
+export interface ILesson2 {
+    id: string,
+    number: number
 }
 
 export type ILesson = {
@@ -27,14 +33,21 @@ export type ILesson = {
     }[]
 } & Omit<CourseLesson, 'tasks'>
 
+
+async function fetchData<R>(url: string): Promise<R> {
+    const dataRes = await axios.get(url)
+
+    return Promise.resolve(dataRes.data as R)
+}
+
 export const useFetchCourse = (courseStore: CourseStore, loader: LoaderStore) => {
     const [course, setCourse] = useState<CourseRes>(null)
 
     const [currModel, setCurrModule] = useState<IModule>(null)
     const [modules, setModules] = useState<IModule[]>(null)
 
-    const [lesson, setLesson] = useState<ILesson>(null)
-    const [lessons, setLesssons] = useState<ILesson[]>(null)
+    const [lesson, setLesson] = useState<ILesson2>(null)
+    const [lessons, setLessons] = useState<ILesson2[]>(null)
 
     const [tasks, setTasks] = useState<CourseTask[]>(null)
 
@@ -45,88 +58,44 @@ export const useFetchCourse = (courseStore: CourseStore, loader: LoaderStore) =>
     }, [])
 
     const fetchModules = async () => {
-        const courseRes = await axios.get(`${baseUrl}/api/v1/courses/`)
-        const courseData = (courseRes.data as CourseRes[])[0]
-        courseStore.setCourse({
-            id: courseData.id,
-            title: courseData.title,
-            modules: null,
-            icon: null
-        })
-        let modules: CourseModule[] = []
-        for (let module of courseData.modules) {
-            modules.push({
-                id: module.id,
-                title: module.title,
-                number: module.number,
-                lessons: null
-            })
-        }
-        modules = modules.sort((m1, m2) => m1.number - m2.number)
+        const courseData = await fetchData<CourseRes[]>(`${baseUrl}/api/v1/courses/`)
 
         setCourse({
-            id: courseData.id,
-            title: courseData.title,
+            id: courseData[0].id,
+            title: courseData[0].title,
             modules: null
         })
-        setModules(modules)
-        setCurrModule(modules[0])
+
+        const moduleData = await fetchData<IModule[]>(`${baseUrl}/api/v1/courses/${courseData[0].id}/modules/`)
+        setModules(moduleData)
+        setCurrModule(moduleData[0])
+    }
+
+    const fetchLessons = async (module: IModule) => {
+        const lessonsData = await fetchData<LessonsRes>(`${baseUrl}/api/v1/courses/${course.id}/modules/${module.id}/`)
+
+
+        const lessons: ILesson2[] = lessonsData.lessons.map(l => ({
+            id: l.id,
+            number: l.number
+        })).sort((l1, l2) => l1.number - l2.number)
+        setLessons(lessons)
+        setLesson(lessons[0])
+    }
+
+    const fetchTasks = async () => {
+
+    }
+
+    const onSetCurrentLesson = (lesson: ILesson2) => {
+        console.log(lesson.id)
+        setLesson(lesson)
+        fetchTasks()
     }
 
     const onSetModule = (module: IModule) => {
         setCurrModule(module)
         fetchLessons(module)
-    }
-
-    const fetchLessons = async (module: IModule) => {
-        console.log('mod', module.id);
-        
-        const lessonsRes = await axios.get(`${baseUrl}/api/v1/courses/${course.id}/modules/${module.id}/`)
-        const lessonsData = lessonsRes.data as LessonsRes;
-        
-        const lessons: ILesson[] = lessonsData.lessons.map(l => ({
-            id: l.id,
-            number: l.number,
-            taskBlock: l.task_blocks.map(t => ({
-                id: t.id,
-                name: t.name,
-                taskAmount: t.tasks_amount
-            }))
-        })).sort((l1, l2) => l1.number - l2.number)
-
-        setLesssons(lessons)
-        setLesson(lessons[0])
-    }
-
-    const onSetCurrentLesson = (lesson: ILesson) => {
-        setLesson(lesson)
-        fetchTasks(lesson)
-    }
-
-    const fetchTasks = async (lesson: ILesson) => {
-        const tasksState: CourseTask[] = []
-        console.log(lesson);
-        
-        const groupRes = await axios.get(`${baseUrl}/api/v1/study_groups/`)
-      
-        for(let tb of lesson.taskBlock) {
-            console.log(tb);
-
-
-
-            tasksState.push({
-                id: tb.id,
-                title: tb.name,
-                description: [],
-                icon: null,
-                solvedTasks: 0,
-                tasksCount: tb.taskAmount
-            })
-        }
-        console.log('ts',tasksState);
-        
-
-        setTasks(tasksState)
     }
 
     return {

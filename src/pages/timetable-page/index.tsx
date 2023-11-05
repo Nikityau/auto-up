@@ -5,8 +5,8 @@ import TimetableProvider from "./provider/timetable-provider";
 
 import TitleUi from "../../shared/ui/page-title";
 
-import { lecturerTimetable } from "../../local-store/timetable/timtetable-store";
 import { loaderStore } from "../../local-store/loader/loader-store";
+import {timetableRemake} from "../../local-store/timetable/timetable";
 
 import "./style/index.scss";
 
@@ -21,7 +21,7 @@ const TimetablePage = () => {
           <Filters />
           <TimetableProvider
             loaderStore={loaderStore}
-            timetable={lecturerTimetable}
+            timetable={timetableRemake}
           />
         </div>
       </div>

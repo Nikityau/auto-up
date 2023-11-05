@@ -9,7 +9,8 @@ export interface CourseRes {
     title: string,
     modules: IModule[]
 }
- 
+
+
 export interface LessonsRes {
     id: string,
     title: string,

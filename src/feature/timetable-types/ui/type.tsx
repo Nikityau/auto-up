@@ -2,9 +2,10 @@ import React from 'react';
 import cn from 'classnames'
 import { observer } from 'mobx-react-lite';
 import { TimetableStore, TimetableType } from '../../../local-store/timetable/timtetable-store';
+import {Timetable} from "../../../local-store/timetable/timetable";
 
 type Props = {
-    timetable: TimetableStore
+    timetable: Timetable
     type: TimetableType,
     text: string,
 }
@@ -12,7 +13,7 @@ type Props = {
 const Type = observer(({ text, type, timetable }: Props) => {
 
     const onClick = () => {
-        timetable.setType(type)
+        timetable.changeType(type)
     }
 
     const getClassBtType = () => {
