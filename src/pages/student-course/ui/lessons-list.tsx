@@ -1,14 +1,12 @@
 import React, { useContext } from 'react';
 import {observer} from "mobx-react-lite";
-import {CourseStore} from "../store/course-store";
 import Lesson from "./lesson";
 import { CourseContext } from '../provider/course-provider';
 
 type Props = {
-    course: CourseStore
 }
 
-const LessonsList = observer(({course}: Props) => {
+const LessonsList = ({}: Props) => {
 
     const {lessons, currentLesson, onSetLesson} = useContext(CourseContext)
 
@@ -30,6 +28,6 @@ const LessonsList = observer(({course}: Props) => {
             }
         </div>
     );
-});
+};
 
 export default LessonsList;

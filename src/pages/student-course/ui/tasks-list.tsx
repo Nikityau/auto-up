@@ -1,8 +1,6 @@
 import React, { useContext } from 'react';
-import { observer } from "mobx-react-lite";
 import { Link } from "react-router-dom";
 
-import { CourseStore } from "../store/course-store";
 import TaskCard from "../../../enteties/task-card";
 import { CourseContext } from '../provider/course-provider';
 
@@ -10,7 +8,7 @@ import { CourseContext } from '../provider/course-provider';
 type Props = {
 }
 
-const TasksList = observer(({  }: Props) => {
+const TasksList = ({  }: Props) => {
 
     const { tasks, course, currentLesson } = useContext(CourseContext)
 
@@ -19,9 +17,6 @@ const TasksList = observer(({  }: Props) => {
             {
                 tasks &&
                 tasks.map(t => {
-                    console.log('task',t);
-                    
-
                     return (
                         <Link to={`test/course/${course.id}/lesson/${currentLesson.id}/task-block/${t?.id}`}
                         key={t?.id}
@@ -40,6 +35,6 @@ const TasksList = observer(({  }: Props) => {
             }
         </div>
     );
-});
+};
 
 export default TasksList;
