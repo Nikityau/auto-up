@@ -1,18 +1,21 @@
 import React, { useContext } from 'react';
 import CourseModules from '../../../enteties/course-modules';
-import { CourseContext } from '../provider/course-provider';
-import { useFetchCourse } from '../helpers/hooks/use-fetch-course';
-import { useCourseInfo } from '../helpers/hooks/use-course-info';
+import {CourseContext} from "../provider/course-provider";
+import {useCourse} from "../helpers/hooks/use-course";
+import {useModules} from "../helpers/hooks/use-modules";
 
 const ModuleWrapper = () => {
-    const {course} = useCourseInfo()
+    //const {course, modules, currentModule,onSetModule} = useContext(CourseContext)
+
+    const course = useCourse()
+    const {modules, module, onSetModule} = useModules()
 
     return (
         <CourseModules
             courseTittle={course?.title}
-            currentModule={null}
-            modules={null}
-            onChangeModule={null}
+            currentModule={module}
+            modules={modules}
+            onChangeModule={onSetModule}
         />
     );
 };

@@ -2,15 +2,18 @@ import React, { useContext } from 'react';
 import { Link } from "react-router-dom";
 
 import TaskCard from "../../../enteties/task-card";
-import { CourseContext } from '../provider/course-provider';
+import {useTasks} from "../helpers/hooks/use-tasks";
+import {useCourse} from "../helpers/hooks/use-course";
+import {useLessons} from "../helpers/hooks/use-lessons";
 
 
 type Props = {
 }
 
 const TasksList = ({  }: Props) => {
-
-    const { tasks, course, currentLesson } = useContext(CourseContext)
+    const tasks = useTasks()
+    const course = useCourse()
+    const {lesson} = useLessons()
 
     return (
         <div className={'tasks-list'}>
@@ -18,7 +21,7 @@ const TasksList = ({  }: Props) => {
                 tasks &&
                 tasks.map(t => {
                     return (
-                        <Link to={`test/course/${course.id}/lesson/${currentLesson.id}/task-block/${t?.id}`}
+                        <Link to={`test/course/${course.id}/lesson/${lesson.id}/task-block/${t?.id}`}
                         key={t?.id}
                     >
                         <TaskCard
@@ -27,7 +30,7 @@ const TasksList = ({  }: Props) => {
                             description={t.description}
                             tasksCount={t.tasksCount}
                             solvedTasks={t.solvedTasks}
-                            icon={t.icon}
+                            icon={null}
                         />
                     </Link>
                     )

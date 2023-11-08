@@ -1,5 +1,5 @@
 import {useNavigate, useParams} from "react-router-dom";
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import axios, {AxiosError} from "axios";
 import {nanoid} from "nanoid";
 
@@ -11,6 +11,8 @@ import {baseUrl} from "../../../../shared/api/base-url";
 import {TestData} from "../../data/interface/test.interface";
 import {TaskData} from "../../data/interface/task.inteface";
 import {debounce} from "../../../../shared/helpers/functions/debounce";
+import {useErrorHandler} from "../../../../shared/helpers/hooks/use-error-handler";
+import {NotifsContext} from "../../../../app/provider/with-notification";
 
 interface TasksRes {
     id: string
@@ -32,6 +34,9 @@ export const useTasksWatcher = (testStore: TestStore, cookie: CookieStore, loade
     const nav = useNavigate()
     const {courseId, lessonId, taskBlockId} = useParams()
     const [code, setCode] = useState<string>("")
+    const errHandler = useErrorHandler()
+    const {addNotif} = useContext(NotifsContext)
+
 
     useEffect(() => {
         (async () => {
@@ -39,8 +44,6 @@ export const useTasksWatcher = (testStore: TestStore, cookie: CookieStore, loade
             loader.add(key)
 
             try {
-
-
                 const tasks = await axios.get(`${baseUrl}/api/v1/courses/${courseId}/lessons/${lessonId}/tasks/`, {
                     headers: {
                         Authorization: `Token ${cookie.token}`
@@ -106,8 +109,7 @@ export const useTasksWatcher = (testStore: TestStore, cookie: CookieStore, loade
 
                         userCode = solResExt.data['solution']['solution_text']
                     } catch (e) {
-                        console.log(e['message'])
-                        console.log('err')
+                        errHandler(e)
                     }
 
                     const taskData = taskRes.data as TaskExtRes
@@ -156,8 +158,6 @@ export const useTasksWatcher = (testStore: TestStore, cookie: CookieStore, loade
                     task: testStore.currentTask.id
                 }
             })
-            console.log(solRes.data)
-
 
             const solDone = await axios.put(`${baseUrl}/api/v1/study_groups/${groupRes.data[0].id}/solutions/${solRes.data[0].id}/done/`, {
                 solution_text: value[0],
@@ -170,12 +170,7 @@ export const useTasksWatcher = (testStore: TestStore, cookie: CookieStore, loade
             })
 
         } catch (e) {
-            const err = e as AxiosError
-            error.addError({
-                id: nanoid(),
-                title: err['code'] + ' onChangeCode',
-                description: err.message + '\n' + err.config.url
-            })
+            errHandler(e)
         }
     }
 
@@ -205,13 +200,15 @@ export const useTasksWatcher = (testStore: TestStore, cookie: CookieStore, loade
                 }
             })
 
-        } catch (e) {
-            const err = e as AxiosError
-            error.addError({
+            addNotif({
                 id: nanoid(),
-                title: err['code'],
-                description: err.message + '\n' + err.config.url
+                title: 'Отправлено',
+                description: 'Ваш код успешно отправлен',
+                type: 'success'
             })
+
+        } catch (e) {
+           errHandler(e)
         }
     }
 

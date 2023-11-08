@@ -1,14 +1,12 @@
-import React, { useContext } from 'react';
-import {observer} from "mobx-react-lite";
+import React from 'react';
 import Lesson from "./lesson";
-import { CourseContext } from '../provider/course-provider';
+import {useLessons} from "../helpers/hooks/use-lessons";
 
 type Props = {
 }
 
 const LessonsList = ({}: Props) => {
-
-    const {lessons, currentLesson, onSetLesson} = useContext(CourseContext)
+    const {lessons, lesson, onSetLesson} = useLessons()
 
     return (
         <div className={'lessons-list'}>
@@ -17,11 +15,11 @@ const LessonsList = ({}: Props) => {
                 lessons.map((l, i) => (
                     <Lesson
                         key={l.id}
-                        number={i + 1}
                         classNames={[
-                            currentLesson?.id == l.id &&
+                            lesson?.id == l.id &&
                             'lesson_current'
                         ]}
+                        number={i + 1}
                         onClick={() => onSetLesson(l)}
                     />
                 ))
