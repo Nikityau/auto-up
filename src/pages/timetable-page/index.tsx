@@ -2,11 +2,9 @@ import React from "react";
 import Filters from "./ui/filters";
 
 import TimetableProvider from "./provider/timetable-provider";
+import {timetableRemake} from "../../local-store/timetable/timetable";
 
 import TitleUi from "../../shared/ui/page-title";
-
-import { loaderStore } from "../../local-store/loader/loader-store";
-import {timetableRemake} from "../../local-store/timetable/timetable";
 
 import "./style/index.scss";
 
@@ -20,7 +18,6 @@ const TimetablePage = () => {
         <div className="timetable-page__tt-zone">
           <Filters />
           <TimetableProvider
-            loaderStore={loaderStore}
             timetable={timetableRemake}
           />
         </div>

@@ -3,7 +3,6 @@ import {GroupContext} from '../provider/group-provider';
 import StudentGroupCard from '../../../enteties/student-group-card';
 import {Swiper, SwiperSlide} from 'swiper/react';
 import {Mousewheel} from 'swiper/modules';
-import {AppRoutes} from 'src/shared/app-routes';
 
 import 'swiper/css';
 import {Link} from 'react-router-dom';

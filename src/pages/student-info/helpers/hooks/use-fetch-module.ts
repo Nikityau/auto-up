@@ -1,9 +1,10 @@
 import axios from "axios";
 import { useQuery } from "react-query";
-import { useEffect } from "react";
 
-import { LoaderStore } from "../../../../local-store/loader/loader-store";
+import {loaderStore } from "../../../../local-store/loader/loader-store";
 import { baseUrl } from "../../../../shared/api/base-url";
+import {useErrorHandler} from "../../../../shared/helpers/hooks/use-error-handler";
+import {useLoader} from "../../../../shared/helpers/hooks/use-loader";
 
 export interface ModuleRes {
   id: string,
@@ -11,9 +12,12 @@ export interface ModuleRes {
   number: number
 }
 
-export const useFetchModule = (loader: LoaderStore, courseId: string) => {
+export const useFetchModule = (courseId: string) => {
+  const err = useErrorHandler()
+  const {off, on} = useLoader(loaderStore)
+
   const query = useQuery(`module-${courseId}`, async () => {
-    loader.add("st-module");
+    on()
     const modulesRes = await axios.get(`${baseUrl}/api/v1/courses/${courseId}/modules/`);
 
     const moduleData = (modulesRes.data as ModuleRes[]).sort((m1, m2) => m1.number - m2.number);
@@ -21,10 +25,11 @@ export const useFetchModule = (loader: LoaderStore, courseId: string) => {
     return moduleData
   }, {
     onSuccess: () => {
-      loader.remove("st-module");
+      off()
     },
-    onError: () => {
-      loader.remove("st-module");
+    onError: (e) => {
+      err(e)
+      off()
     }
   })
 

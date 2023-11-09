@@ -4,8 +4,9 @@ import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 
 import { baseUrl } from "../../../../shared/api/base-url";
-import { LoaderStore } from "../../../../local-store/loader/loader-store";
+import {loaderStore} from "../../../../local-store/loader/loader-store";
 import { useErrorHandler } from "../../../../shared/helpers/hooks/use-error-handler";
+import {useLoader} from "../../../../shared/helpers/hooks/use-loader";
 
 interface GroupRes {
     students: {
@@ -39,12 +40,13 @@ export interface AttStat {
     studentAttend: boolean
 }
 
-export const useFetchAtt = (loader: LoaderStore) => {
+export const useFetchAtt = () => {
     const { studentId, groupId } = useParams()
     const errHandler = useErrorHandler()
+    const {off, on} = useLoader(loaderStore)
 
     const query = useQuery('att', async () => {
-        loader.add('st-att')
+        on()
         const schRes = await axios.get(`${baseUrl}/api/v1/study_groups/schedule/`, {
             params: {
                 group: groupId
@@ -74,10 +76,11 @@ export const useFetchAtt = (loader: LoaderStore) => {
         return attState
     }, {
         onError: (e) => {
-            loader.remove('st-att')
+            errHandler(e)
+            off()
         },
         onSuccess: () => {
-            loader.remove('st-att')
+            off()
         }
     })
 

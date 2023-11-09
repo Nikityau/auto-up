@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { baseUrl } from "../../../../shared/api/base-url";
 import { useParams } from "react-router-dom";
-import { LoaderStore } from "../../../../local-store/loader/loader-store";
+import {loaderStore, LoaderStore} from "../../../../local-store/loader/loader-store";
 import { useQuery } from "react-query";
+import {useLoader} from "../../../../shared/helpers/hooks/use-loader";
+import {useErrorHandler} from "../../../../shared/helpers/hooks/use-error-handler";
 
 interface GroupRes {
     students: {
@@ -33,11 +35,13 @@ export interface UserInfo {
     groupName: string
 }
 
-export const useFetchUserInfo = (loader: LoaderStore) => {
+export const useFetchUserInfo = () => {
     const { groupId, studentId } = useParams()
+    const {off,on} = useLoader(loaderStore)
+    const err = useErrorHandler()
 
     const query = useQuery('user-info', async () => {
-        loader.add('user-info')
+        on()
         const groupRes = await axios.get(`${baseUrl}/api/v1/study_groups/${groupId}/`)
         const groupData = groupRes.data as GroupRes
 
@@ -65,11 +69,11 @@ export const useFetchUserInfo = (loader: LoaderStore) => {
         return undefined
     }, {
         onSuccess: () => {
-            loader.remove('user-info')
-
+            off()
         },
-        onError: () => {
-            loader.remove('user-info')
+        onError: (e) => {
+            off()
+            err(e)
         }
     })
 

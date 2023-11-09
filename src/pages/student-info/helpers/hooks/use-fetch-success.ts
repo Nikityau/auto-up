@@ -1,4 +1,4 @@
-import { LoaderStore } from "../../../../local-store/loader/loader-store";
+import {loaderStore, LoaderStore} from "../../../../local-store/loader/loader-store";
 import { useEffect, useState } from "react";
 import { ModuleRes } from "./use-fetch-module";
 import { useParams } from "react-router-dom";
@@ -8,6 +8,7 @@ import { TasksBlock } from "../../../../shared/data/interface/tasks-block.interf
 import { FType } from "../../../../shared/helpers/types/f-types";
 import { successAdapted } from "../adapter/success-adapted";
 import { nanoid } from "nanoid";
+import {useLoader} from "../../../../shared/helpers/hooks/use-loader";
 
 export interface ModuleExtRes {
   id: string,
@@ -32,9 +33,10 @@ export interface ScRet {
   onChangeModule: FType<ModuleRes, void>
 }
 
-export const useFetchSuccess = (loader: LoaderStore, init: ModuleRes, courseId: string) : ScRet => {
+export const useFetchSuccess = (init: ModuleRes, courseId: string) : ScRet => {
   const [success, setSuccess] = useState<SuccessSt[]>();
   const { groupId, studentId } = useParams();
+  const {off, on} = useLoader(loaderStore)
 
   useEffect(() => {
     (async () => {
@@ -45,15 +47,13 @@ export const useFetchSuccess = (loader: LoaderStore, init: ModuleRes, courseId: 
   }, [init]);
 
   const onChangeModule = async (module: ModuleRes) => {
-    const key = nanoid()
-    loader.add(key)
-    console.log('module',module);
-    
+    on()
+
     const moduleRes = await axios.get(`${baseUrl}/api/v1/courses/${courseId}/modules/${module.id}/`);
 
     const adapted = await successAdapted((moduleRes.data as ModuleExtRes).lessons, groupId, studentId, courseId)
     setSuccess(adapted)
-    loader.remove(key)
+    off()
   };
 
   return {

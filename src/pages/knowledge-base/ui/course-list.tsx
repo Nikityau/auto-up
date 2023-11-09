@@ -5,17 +5,15 @@ import { observer } from "mobx-react-lite";
 
 import { useFetchCourses } from "../helpers/hooks/use-fetch-course";
 import CourseDocCard from "../../../enteties/course-doc-card";
-import { LoaderStore } from "../../../local-store/loader/loader-store";
 
 import img from "../assets/p1.png";
 
 type Props = {
-  loader: LoaderStore,
 }
 
-const CourseList = observer(({ loader }: Props) => {
+const CourseList = observer(({  }: Props) => {
 
-  const courses = useFetchCourses(loader);
+  const courses = useFetchCourses();
 
   return (
     <div className="knowledge-base-page__course-list">

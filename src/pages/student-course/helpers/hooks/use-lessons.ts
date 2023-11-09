@@ -1,10 +1,13 @@
 import {useEffect, useState} from "react";
 import {ILesson} from "../../store/lessons";
 import {courseEM} from "../../store/course-em";
+import {useLoader} from "../../../../shared/helpers/hooks/use-loader";
+import {loaderStore} from "../../../../local-store/loader/loader-store";
 
 export const useLessons = () => {
     const [lesson, setLesson] = useState<ILesson>(null)
     const [lessons, setLessons] = useState<ILesson[]>(null)
+    const {on, off} = useLoader(loaderStore)
 
     useEffect(() => {
         const unsubLessons = courseEM.on('lessons', (data: ILesson[]) => {
@@ -13,11 +16,16 @@ export const useLessons = () => {
         const unsubLesson = courseEM.on('lesson', (data: ILesson) => {
             setLesson(data)
             courseEM.emit('fetch-tasks')
+            on()
+        })
+        const unsubTasks = courseEM.on('tasks', () => {
+            off()
         })
 
         return () => {
             unsubLessons()
             unsubLesson()
+            unsubTasks()
         }
     }, [])
 

@@ -1,7 +1,6 @@
 import React from 'react';
 import TitleUi from '../../shared/ui/page-title';
 import CourseList from './ui/course-list';
-import { loaderStore } from "../../local-store/loader/loader-store";
 
 import './style/index.scss'
 
@@ -13,7 +12,7 @@ const KnowledgeBase = () => {
                     title='Курс'
                 />
                 <CourseList
-                  loader={loaderStore}
+
                 />
             </div>
         </div>

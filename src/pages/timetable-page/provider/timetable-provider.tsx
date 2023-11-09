@@ -3,21 +3,19 @@ import {observer} from "mobx-react-lite";
 
 import {useFetchTimetable} from "../helpers/hooks/use-fetch-timetable";
 
-import {LoaderStore} from "../../../local-store/loader/loader-store";
-
 import Month from "../ui/month";
-import Week from "../ui/week";
 import Day from "../ui/day";
+
 import {Timetable} from "../../../local-store/timetable/timetable";
+import Week from "../ui/week";
 
 type Props = {
     timetable: Timetable,
-    loaderStore: LoaderStore
 }
 
-const TimetableProvider = ({timetable, loaderStore}: Props) => {
+const TimetableProvider = ({timetable}: Props) => {
 
-    const content = useFetchTimetable(loaderStore);
+    const content = useFetchTimetable();
 
     if (timetable.type == 'month') {
         return (
@@ -31,9 +29,10 @@ const TimetableProvider = ({timetable, loaderStore}: Props) => {
 
     if (timetable.type == 'week') {
         return (
-            <div>
-                week
-            </div>
+            <Week
+                week={timetable.week}
+                content={content}
+            />
         )
     }
 

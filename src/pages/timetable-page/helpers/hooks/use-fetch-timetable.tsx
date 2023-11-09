@@ -5,20 +5,22 @@ import React, { useEffect } from "react";
 import { CourseInterface } from "../../../../shared/helpers/types/course.interface";
 import { baseUrl } from "../../../../shared/api/base-url";
 import { scheduleAdapter } from "../adapter/schedule.adapter";
-import { LoaderStore } from "../../../../local-store/loader/loader-store";
+import {loaderStore, LoaderStore} from "../../../../local-store/loader/loader-store";
 import { useErrorHandler } from "../../../../shared/helpers/hooks/use-error-handler";
+import {useLoader} from "../../../../shared/helpers/hooks/use-loader";
 
 export type TimetableParsed = {
     dates: Date[],
     content: Omit<CourseInterface, "isCurrent">[]
 }
 
-export const useFetchTimetable = (loader: LoaderStore) => {
+export const useFetchTimetable = () => {
     const errorHandler = useErrorHandler()
+    const {on, off} = useLoader(loaderStore)
 
 
     const query = useQuery('timetable', async () => {
-        loader.add(`${baseUrl}/api/v1/study_groups/schedule/` + 'timetable')
+        on()
 
         const { data } = await axios.get(`${baseUrl}/api/v1/study_groups/schedule/`)
 
@@ -30,19 +32,13 @@ export const useFetchTimetable = (loader: LoaderStore) => {
         }
     }, {
         onSuccess: (data) => {
-            loader.remove(`${baseUrl}/api/v1/study_groups/schedule/` + 'timetable')
+            off()
         },
         onError: (err) => {
             errorHandler(err)
-            loader.remove(`${baseUrl}/api/v1/study_groups/schedule/` + 'timetable')
+            off()
         }
     })
-
-    useEffect(() => {
-        return () => {
-            loader.remove(`${baseUrl}/api/v1/study_groups/schedule/` + 'timetable')
-        }
-    }, [])
 
     return query.data;
 };

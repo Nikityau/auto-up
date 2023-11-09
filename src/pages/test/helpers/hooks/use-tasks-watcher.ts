@@ -5,7 +5,7 @@ import {nanoid} from "nanoid";
 
 import {TestStore} from "../../store/test-store";
 import {CookieStore} from "../../../../local-store/cookie/cookie-store";
-import {LoaderStore} from "../../../../local-store/loader/loader-store";
+import {loaderStore, LoaderStore} from "../../../../local-store/loader/loader-store";
 import {ErrorStore} from "../../../../local-store/error-store";
 import {baseUrl} from "../../../../shared/api/base-url";
 import {TestData} from "../../data/interface/test.interface";
@@ -13,6 +13,7 @@ import {TaskData} from "../../data/interface/task.inteface";
 import {debounce} from "../../../../shared/helpers/functions/debounce";
 import {useErrorHandler} from "../../../../shared/helpers/hooks/use-error-handler";
 import {NotifsContext} from "../../../../app/provider/with-notification";
+import {useLoader} from "../../../../shared/helpers/hooks/use-loader";
 
 interface TasksRes {
     id: string
@@ -30,24 +31,24 @@ interface TaskExtRes {
     name: string
 }
 
-export const useTasksWatcher = (testStore: TestStore, cookie: CookieStore, loader: LoaderStore, error: ErrorStore) => {
+export const useTasksWatcher = (testStore: TestStore,) => {
     const nav = useNavigate()
     const {courseId, lessonId, taskBlockId} = useParams()
     const [code, setCode] = useState<string>("")
+
     const errHandler = useErrorHandler()
+    const {off, on} = useLoader(loaderStore)
+
     const {addNotif} = useContext(NotifsContext)
 
 
     useEffect(() => {
         (async () => {
             const key = nanoid()
-            loader.add(key)
+            on()
 
             try {
                 const tasks = await axios.get(`${baseUrl}/api/v1/courses/${courseId}/lessons/${lessonId}/tasks/`, {
-                    headers: {
-                        Authorization: `Token ${cookie.token}`
-                    },
                     params: {
                         task_block: taskBlockId
                     }
@@ -57,23 +58,12 @@ export const useTasksWatcher = (testStore: TestStore, cookie: CookieStore, loade
                     id: nanoid(),
                     tasks: []
                 }
-                const groupRes = await axios.get(`${baseUrl}/api/v1/study_groups/`, {
-                    headers: {
-                        Authorization: `Token ${cookie.token}`
-                    }
-                })
+                const groupRes = await axios.get(`${baseUrl}/api/v1/study_groups/`, )
                 for (let td of taskData) {
                     let task: TaskData = null
 
-                    const taskRes = await axios.get(`${baseUrl}/api/v1/courses/${courseId}/lessons/${lessonId}/tasks/${td.id}/`, {
-                        headers: {
-                            Authorization: `Token ${cookie.token}`
-                        }
-                    })
+                    const taskRes = await axios.get(`${baseUrl}/api/v1/courses/${courseId}/lessons/${lessonId}/tasks/${td.id}/`, )
                     const solRes = await axios.get(`${baseUrl}/api/v1/study_groups/${groupRes.data[0].id}/solutions/`, {
-                        headers: {
-                            Authorization: `Token ${cookie.token}`
-                        },
                         params: {
                             task: td.id
                         }
@@ -101,11 +91,7 @@ export const useTasksWatcher = (testStore: TestStore, cookie: CookieStore, loade
 
                     try {
                         const url = `${baseUrl}/api/v1/study_groups/${groupRes.data[0].id}/solutions/${solData['id']}/`
-                        const solResExt = await axios.get(url, {
-                            headers: {
-                                Authorization: `Token ${cookie.token}`
-                            }
-                        })
+                        const solResExt = await axios.get(url)
 
                         userCode = solResExt.data['solution']['solution_text']
                     } catch (e) {
@@ -129,14 +115,9 @@ export const useTasksWatcher = (testStore: TestStore, cookie: CookieStore, loade
 
                 testStore.setTest(test)
             } catch (e) {
-                const err = e as AxiosError
-                error.addError({
-                    id: nanoid(),
-                    title: err['code'],
-                    description: err.message
-                })
+                errHandler(e)
             } finally {
-                loader.remove(key)
+                off()
             }
         })()
     }, [])
@@ -145,15 +126,8 @@ export const useTasksWatcher = (testStore: TestStore, cookie: CookieStore, loade
         setCode(value[0])
 
         try {
-            const groupRes = await axios.get(`${baseUrl}/api/v1/study_groups/`, {
-                headers: {
-                    Authorization: `Token ${cookie.token}`
-                }
-            })
+            const groupRes = await axios.get(`${baseUrl}/api/v1/study_groups/`)
             const solRes = await axios.get(`${baseUrl}/api/v1/study_groups/${groupRes.data[0].id}/solutions/`, {
-                headers: {
-                    Authorization: `Token ${cookie.token}`
-                },
                 params: {
                     task: testStore.currentTask.id
                 }
@@ -163,11 +137,7 @@ export const useTasksWatcher = (testStore: TestStore, cookie: CookieStore, loade
                 solution_text: value[0],
                 solution_type: "code",
                 solution_status: "viewed"
-            }, {
-                headers: {
-                    Authorization: `Token ${cookie.token}`
-                }
-            })
+            }, )
 
         } catch (e) {
             errHandler(e)
@@ -176,15 +146,8 @@ export const useTasksWatcher = (testStore: TestStore, cookie: CookieStore, loade
 
     const onSendSolution = async () => {
         try {
-            const groupRes = await axios.get(`${baseUrl}/api/v1/study_groups/`, {
-                headers: {
-                    Authorization: `Token ${cookie.token}`
-                }
-            })
+            const groupRes = await axios.get(`${baseUrl}/api/v1/study_groups/`, )
             const solRes = await axios.get(`${baseUrl}/api/v1/study_groups/${groupRes.data[0].id}/solutions/`, {
-                headers: {
-                    Authorization: `Token ${cookie.token}`
-                },
                 params: {
                     task: testStore.currentTask.id
                 }
@@ -194,11 +157,7 @@ export const useTasksWatcher = (testStore: TestStore, cookie: CookieStore, loade
                 solution_text: code,
                 solution_type: "code",
                 solution_status: "done"
-            }, {
-                headers: {
-                    Authorization: `Token ${cookie.token}`
-                }
-            })
+            }, )
 
             addNotif({
                 id: nanoid(),
@@ -208,7 +167,7 @@ export const useTasksWatcher = (testStore: TestStore, cookie: CookieStore, loade
             })
 
         } catch (e) {
-           errHandler(e)
+            errHandler(e)
         }
     }
 

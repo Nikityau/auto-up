@@ -22,16 +22,15 @@ export const StudentInfoContext = React.createContext<StInfoCntx>(null);
 
 type Props = {
   cookie: CookieStore,
-  loader: LoaderStore
 } & React.PropsWithChildren
 
 
-const StudentInfoProvider = observer(({ children, cookie, loader }: Props) => {
+const StudentInfoProvider = observer(({ children }: Props) => {
 
-  const user = useFetchUserInfo(loader);
-  const att = useFetchAtt(loader);
-  const module = useFetchModule(loader, user?.courseId);
-  const success = useFetchSuccess(loader, module?.[0], user?.courseId)
+  const user = useFetchUserInfo();
+  const att = useFetchAtt();
+  const module = useFetchModule(user?.courseId);
+  const success = useFetchSuccess(module?.[0], user?.courseId)
 
   return (
     <StudentInfoContext.Provider value={{

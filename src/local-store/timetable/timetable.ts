@@ -56,13 +56,23 @@ export class Timetable {
                 this.dayController.change(date)
             }
         })
+
+        const type = localStorage.getItem('timetable-type')
+
+        if(type) {
+            this.type = type as TimetableType
+        }
     }
 
     get month(): Date[] {
         return this._month
     }
 
-    get day():Date {
+    get week(): Date[] {
+        return this._week
+    }
+
+    get day(): Date {
         return this._day
     }
 
@@ -74,6 +84,8 @@ export class Timetable {
 
     changeType(type: TimetableType) {
         this.type = type
+
+        localStorage.setItem('timetable-type', type)
     }
 
     nextMonth() {
@@ -93,6 +105,7 @@ export class Timetable {
         this.dateObservable.next(this.active)
         this.setDates()
     }
+
     nextWeek() {
         this.active = new Date(
             this.active.getFullYear(),
@@ -102,6 +115,7 @@ export class Timetable {
         this.dateObservable.next(this.active)
         this._week = this.weekController.week
     }
+
     prevWeek() {
         this.active = new Date(
             this.active.getFullYear(),
@@ -111,7 +125,6 @@ export class Timetable {
         this.dateObservable.next(this.active)
         this._week = this.weekController.week
     }
-
 
     nextDay() {
         this.active = new Date(

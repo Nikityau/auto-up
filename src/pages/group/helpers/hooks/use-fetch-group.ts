@@ -1,33 +1,32 @@
-import { nanoid } from "nanoid";
 import axios from "axios";
-import { useParams } from "react-router-dom";
-import { useQuery } from "react-query";
+import {useParams} from "react-router-dom";
+import {useQuery} from "react-query";
 
-import { LoaderStore } from "../../../../local-store/loader/loader-store";
-import { baseUrl } from "../../../../shared/api/base-url";
-import { groupAdapter } from "../adapter/group-adapter";
-import { ErrorStore } from "../../../../local-store/error-store";
-import { useErrorHandler } from "../../../../shared/helpers/hooks/use-error-handler";
+import {loaderStore} from "../../../../local-store/loader/loader-store";
+import {baseUrl} from "../../../../shared/api/base-url";
+import {groupAdapter} from "../adapter/group-adapter";
+import {useErrorHandler} from "../../../../shared/helpers/hooks/use-error-handler";
+import {useLoader} from "../../../../shared/helpers/hooks/use-loader";
 
 
-export const useFetchGroup = (loader: LoaderStore, error: ErrorStore) => {
-    const { id } = useParams();
+export const useFetchGroup = () => {
+    const {id} = useParams();
     const errHandler = useErrorHandler()
+    const {off, on} = useLoader(loaderStore)
 
     const query = useQuery('group-fetch', async () => {
-        loader.add(`${baseUrl}/api/v1/study_groups/${id}/`);
-        const { data } = await axios.get(`${baseUrl}/api/v1/study_groups/${id}/`);
+        on()
+        const {data} = await axios.get(`${baseUrl}/api/v1/study_groups/${id}/`);
         const adapted = await groupAdapter(data);
 
         return adapted
     }, {
         onError: (e) => {
             errHandler(e)
-
-            loader.remove(`${baseUrl}/api/v1/study_groups/${id}/`);
+            off()
         },
         onSuccess: () => {
-            loader.remove(`${baseUrl}/api/v1/study_groups/${id}/`);
+            off()
         }
     })
 

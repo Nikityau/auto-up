@@ -1,13 +1,10 @@
-import { useEffect, useState } from "react";
-import axios, {AxiosError} from "axios";
-import { nanoid } from "nanoid"
+import axios from "axios";
 import {useQuery} from "react-query";
 
-import { loaderStore, LoaderStore } from "../../../../local-store/loader/loader-store";
-import { baseUrl } from "../../../../shared/api/base-url";
-import { CookieStore } from "../../../../local-store/cookie/cookie-store";
-import {ErrorStore} from "../../../../local-store/error-store";
-import { useErrorHandler } from "../../../../shared/helpers/hooks/use-error-handler";
+import {loaderStore} from "../../../../local-store/loader/loader-store";
+import {baseUrl} from "../../../../shared/api/base-url";
+import {useErrorHandler} from "../../../../shared/helpers/hooks/use-error-handler";
+import {useLoader} from "../../../../shared/helpers/hooks/use-loader";
 
 
 interface GroupData {
@@ -42,20 +39,17 @@ interface StatGroupRes {
     next_lesson: LessonRes
 }
 
-export const useFetchGroups = (loader: LoaderStore, cookie: CookieStore, error: ErrorStore) => {
+export const useFetchGroups = () => {
     const errHandler = useErrorHandler()
+    const {off, on} = useLoader(loaderStore)
 
     const query = useQuery('groups-query', async () => {
-        loaderStore.add(`${baseUrl}/api/v1/study_groups/`)
+        on()
 
         const grps: GroupData[] = []
-        const {data} = await axios.get(`${baseUrl}/api/v1/study_groups/`, {
-            headers: {
-                Authorization: `Token ${cookie.token}`
-            }
-        })
+        const {data} = await axios.get(`${baseUrl}/api/v1/study_groups/`,)
 
-        for(let group of data as ResGroup[]) {
+        for (let group of data as ResGroup[]) {
             const sttatRes = await axios.get(`${baseUrl}/api/v1/study_groups/${group.id}/statistics/`)
 
             const statData = sttatRes.data as StatGroupRes
@@ -75,20 +69,13 @@ export const useFetchGroups = (loader: LoaderStore, cookie: CookieStore, error: 
         return grps
     }, {
         onSuccess: () => {
-            loaderStore.remove(`${baseUrl}/api/v1/study_groups/`)
+            off()
         },
         onError: (e) => {
             errHandler(e)
-           
-            loaderStore.remove(`${baseUrl}/api/v1/study_groups/`)
+            off()
         }
     })
-
-    useEffect(() => {
-        return () => {
-            loaderStore.remove(`${baseUrl}/api/v1/study_groups/`)
-        }
-    }, [])
 
     return query.data
 }

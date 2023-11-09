@@ -5,19 +5,20 @@ import axios from "axios";
 import { IDoc } from "./interface";
 import { adapterDoc } from "../adapter/adapter-doc";
 import { baseUrl } from "../../../../shared/api/base-url";
-import { LoaderStore } from "../../../../local-store/loader/loader-store";
-import { ErrorStore } from "../../../../local-store/error-store";
+import {loaderStore} from "../../../../local-store/loader/loader-store";
 import { useErrorHandler } from "../../../../shared/helpers/hooks/use-error-handler";
+import {useLoader} from "../../../../shared/helpers/hooks/use-loader";
 
-export const useFetchDoc = (loader: LoaderStore) => {
+export const useFetchDoc = () => {
     const [doc, setDoc] = useState<IDoc>(null);
     const { id } = useParams();
     const errHandler = useErrorHandler()
+    const {off, on} = useLoader(loaderStore)
 
     useEffect(() => {
         (async () => {
             try {
-                loader.add(`${baseUrl}/api/v1/courses/${id}/`)
+                on()
                 const { data } = await axios.get(`${baseUrl}/api/v1/courses/${id}/`);
 
                 const doc_adapted = await adapterDoc(data);
@@ -25,7 +26,7 @@ export const useFetchDoc = (loader: LoaderStore) => {
             } catch (e) {
                 errHandler(e)
             } finally {
-                loader.remove(`${baseUrl}/api/v1/courses/${id}/`)
+                off()
             }
         })();
     }, []);
