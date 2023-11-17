@@ -37,6 +37,9 @@ export const useFetchAtt = () => {
     const errHandler = useErrorHandler()
     const {off, on} = useLoader()
 
+
+
+
     const query = useQuery('att', async () => {
         on()
         const schRes = await axios.get(`${baseUrl}/api/v1/study_groups/schedule/`, {

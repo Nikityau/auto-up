@@ -42,7 +42,7 @@ export const useVerify = () => {
                 const studentSolution = await axios.get(`${baseUrl}/api/v1/study_groups/${groupId}/solutions/${stRes.data[0]['id']}/`)
 
                 setTask(taskRes.data)
-                setSolution(studentSolution.data['solution']['solution_text'])
+                setSolution(studentSolution.data['solution']?.['solution_text'])
             } catch (e) {
                 errHandler(e)
             } finally {

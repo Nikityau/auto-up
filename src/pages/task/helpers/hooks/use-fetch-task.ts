@@ -1,26 +1,27 @@
 import {useParams} from "react-router-dom";
-import {useEffect, useState} from "react";
-import axios from "axios";
+
 import {baseUrl} from "../../../../shared/api/base-url";
-import {TaskRes} from "../../provider/task.provider";
+import {useFetch} from "../../../../shared/helpers/hooks/use-fetch";
+import {useErrorHandler} from "../../../../shared/helpers/hooks/use-error-handler";
+import {useLoader} from "../../../../shared/helpers/hooks/use-loader";
 
-export const useFetchTask = (token: string) => {
+export const useFetchTask = () => {
     const {courseId, taskId, lessonId} = useParams()
-    const [task, setTask] = useState<TaskRes>(null)
+    const errHandler = useErrorHandler()
+    const {off, on} = useLoader()
 
-    useEffect(() => {
-        (async () => {
-            const taskRes = await axios.get(`${baseUrl}/api/v1/courses/${courseId}/lessons/${lessonId}/tasks/${taskId}/`, {
-                headers: {
-                    Authorization: `Token ${token}`
-                }
-            })
-
-            console.log('task',taskRes.data)
-
-            setTask(taskRes.data)
-        })()
-    }, [])
+    const task = useFetch({
+        url: `${baseUrl}/api/v1/courses/${courseId}/lessons/${lessonId}/tasks/${taskId}/`,
+        onError: (err) => {
+            errHandler(err)
+        },
+        onBeforeLoadStart: () => {
+            on()
+        },
+        onComplete: () => {
+            off()
+        }
+    })
 
 
     return task

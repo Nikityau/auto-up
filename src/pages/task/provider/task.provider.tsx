@@ -1,10 +1,8 @@
 import React from 'react';
 import {useFetchTask} from "../helpers/hooks/use-fetch-task";
 import {observer} from "mobx-react-lite";
-import {CookieStore} from "../../../local-store/cookie/cookie-store";
 
 type Props = {
-    cookie:CookieStore
 } & React.PropsWithChildren
 
 export type MarkDown = string
@@ -33,9 +31,9 @@ interface ITaskContext {
 
 export const TaskContext = React.createContext<ITaskContext>(null)
 
-const TaskProvider = observer(({children, cookie}:Props) => {
+const TaskProvider = observer(({children}:Props) => {
 
-    const task = useFetchTask(cookie.token)
+    const task = useFetchTask()
 
     return (
         <TaskContext.Provider value={{

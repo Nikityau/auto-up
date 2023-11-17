@@ -1,13 +1,12 @@
 import {CourseInterface} from "../../../../shared/helpers/types/course.interface";
 import {baseUrl} from "../../../../shared/api/base-url";
-import {scheduleAdapter} from "../adapter/schedule.adapter";
+import {LessonAdapted, scheduleAdapter} from "../adapter/schedule.adapter";
 import {useErrorHandler} from "../../../../shared/helpers/hooks/use-error-handler";
 import {useLoader} from "../../../../shared/helpers/hooks/use-loader";
 import {useFetch} from "../../../../shared/helpers/hooks/use-fetch";
 
 export type TimetableParsed = {
-    dates: Date[],
-    content: Omit<CourseInterface, "isCurrent">[]
+    schedule: Record<string, LessonAdapted[]>
 }
 
 export const useFetchTimetable = () => {
@@ -20,8 +19,7 @@ export const useFetchTimetable = () => {
             const adapted = await scheduleAdapter(data)
 
             return {
-                dates: adapted.dates,
-                content: adapted.schedule
+                schedule: adapted.schedule
             }
         },
         onError: (err) => {

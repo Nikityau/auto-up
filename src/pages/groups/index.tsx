@@ -3,7 +3,6 @@ import GroupsList from './ui/groups-list';
 import GroupsProvider from './provider/groups-provider';
 import TitleUi from '../../shared/ui/page-title';
 
-
 import './style/index.scss'
 
 const Groups = () => {

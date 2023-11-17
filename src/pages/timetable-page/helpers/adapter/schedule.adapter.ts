@@ -1,11 +1,10 @@
 import axios from "axios";
-import { nanoid } from "nanoid";
+import {nanoid} from "nanoid";
 
-import { ResSchedule } from "./interface/res-schedule";
+import {ResSchedule} from "./interface/res-schedule";
 
-import { CourseInterface } from "../../../../shared/helpers/types/course.interface";
-import { datesCompare } from "../../../../shared/helpers/dates/dates-compare";
-import { baseUrl } from "../../../../shared/api/base-url";
+import {CourseInterface} from "../../../../shared/helpers/types/course.interface";
+import {baseUrl} from "../../../../shared/api/base-url";
 
 
 export type LessonAdapted = {
@@ -16,13 +15,11 @@ export type LessonAdapted = {
 
 
 type Res = {
-    schedule: LessonAdapted[],
-    dates: Date[]
+    schedule: Record<string, LessonAdapted[]>
 }
 
 export const scheduleAdapter = async (data: ResSchedule[]): Promise<Res> => {
-    const schedule: LessonAdapted[] = [];
-    const dates: Date[] = [];
+    const schedule: Record<string, LessonAdapted[]> = {}
 
     const groupCache = {}
 
@@ -37,40 +34,34 @@ export const scheduleAdapter = async (data: ResSchedule[]): Promise<Res> => {
             }
         }
 
-        schedule.push({
+        const lessonDate = new Date(sch.start_time)
+        const dateSpecFormat = `${lessonDate.getFullYear()}-${lessonDate.getMonth() + 1}-${lessonDate.getDate()}`
+
+        const lesson = {
             id: nanoid(),
             courseId: sch.course.id,
             groupId: sch.group,
             lessonId: sch.lesson.id,
             courseTitle: sch.course.title,
             groupTitle: sch.group_name,
-            lessonPerDay: 1,
+            lessonPerDay: null,
             theme: sch.lesson.title,
             endTime: new Date(new Date(sch.start_time).getTime() + sch.duration_minutes * 60 * 1000).toLocaleTimeString().slice(0, 5),
             startTime: new Date(sch.start_time).toLocaleTimeString().slice(0, 5),
             date: new Date(sch.start_time),
-            type: groupCache[sch.group]?.['lesson_format']
-        });
+            type: groupCache[sch.group]['lesson_format']
+        }
 
-        if (dates.length == 0) {
-            dates.push(new Date(sch.start_time));
+        if (dateSpecFormat in schedule) {
+            schedule[dateSpecFormat].push(lesson)
         } else {
-            const d = dates.find(d => datesCompare(d, new Date(sch.start_time)));
-
-            if (!d) {
-                dates.push(new Date(sch.start_time));
-            } else {
-                for (let i = 0; i < schedule.length; ++i) {
-                    if (datesCompare(new Date(sch.start_time), schedule[i].date)) {
-                        schedule[i].lessonPerDay += 1;
-                    }
-                }
-            }
+            schedule[dateSpecFormat] = [
+                lesson
+            ]
         }
     }
 
     return {
-        dates,
-        schedule
+        schedule,
     }
 };

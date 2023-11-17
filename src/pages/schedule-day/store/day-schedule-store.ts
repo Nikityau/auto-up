@@ -15,6 +15,7 @@ export class DayScheduleStore {
             students: computed,
             currentSchedule: computed,
             tasks: computed,
+            dispose: action,
         })
     }
 
@@ -50,6 +51,11 @@ export class DayScheduleStore {
 
     setStudentStatus(studentId: string, status: boolean) {
         this.students.find(s => s.id == studentId).isIn = status
+    }
+
+    dispose() {
+        this.tab = null
+        this.schedule = null
     }
 }
 

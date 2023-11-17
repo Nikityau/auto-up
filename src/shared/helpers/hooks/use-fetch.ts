@@ -7,7 +7,7 @@ interface FetchConfig {
     onLoaded?: (data: any) => void,
     onModify?: (data: any) => any,
     onError?: (err: any) => void
-    onComplete?: () => void
+    onComplete?: (data: any) => void,
 }
 
 export const useFetch = (
@@ -17,7 +17,7 @@ export const useFetch = (
         onModify,
         onBeforeLoadStart,
         onComplete,
-        onError
+        onError,
     }: FetchConfig) => {
     const [state, setState] = useState<any>(null)
 
@@ -26,18 +26,25 @@ export const useFetch = (
     }, []);
 
     const fetchData = async () => {
+        let finalData = null
+
         try {
             onBeforeLoadStart?.()
 
             const {data} = await axios.get(url)
 
+            if(onLoaded) {
+                await onLoaded(data)
+            }
+
             const modified = await onModify?.(data) || data
+            finalData = modified
 
             setState(modified)
         } catch (e) {
             await onError?.(e)
         } finally {
-            await onComplete?.()
+            await onComplete?.(finalData)
         }
     }
 
