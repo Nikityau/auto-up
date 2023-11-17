@@ -2,12 +2,11 @@ import {useEffect, useState} from "react";
 import {IModule} from "../../store/module";
 import {courseEM} from "../../store/course-em";
 import {useLoader} from "../../../../shared/helpers/hooks/use-loader";
-import {loaderStore} from "../../../../local-store/loader/loader-store";
 
 export const useModules = () => {
     const [module, setModule] = useState<IModule>(null)
     const [modules, setModules] = useState<IModule[]>(null)
-    const {off, on} = useLoader(loaderStore)
+    const {off, on} = useLoader()
 
     useEffect(() => {
         const unsubModules = courseEM.on('modules', (data: IModule[]) => {

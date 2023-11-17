@@ -1,12 +1,9 @@
 import {useNavigate, useParams} from "react-router-dom";
 import {useContext, useEffect, useState} from "react";
-import axios, {AxiosError} from "axios";
+import axios from "axios";
 import {nanoid} from "nanoid";
 
 import {TestStore} from "../../store/test-store";
-import {CookieStore} from "../../../../local-store/cookie/cookie-store";
-import {loaderStore, LoaderStore} from "../../../../local-store/loader/loader-store";
-import {ErrorStore} from "../../../../local-store/error-store";
 import {baseUrl} from "../../../../shared/api/base-url";
 import {TestData} from "../../data/interface/test.interface";
 import {TaskData} from "../../data/interface/task.inteface";
@@ -37,7 +34,7 @@ export const useTasksWatcher = (testStore: TestStore,) => {
     const [code, setCode] = useState<string>("")
 
     const errHandler = useErrorHandler()
-    const {off, on} = useLoader(loaderStore)
+    const {off, on} = useLoader()
 
     const {addNotif} = useContext(NotifsContext)
 
@@ -93,7 +90,7 @@ export const useTasksWatcher = (testStore: TestStore,) => {
                         const url = `${baseUrl}/api/v1/study_groups/${groupRes.data[0].id}/solutions/${solData['id']}/`
                         const solResExt = await axios.get(url)
 
-                        userCode = solResExt.data['solution']['solution_text']
+                        userCode = solResExt.data['solution']?.['solution_text']
                     } catch (e) {
                         errHandler(e)
                     }

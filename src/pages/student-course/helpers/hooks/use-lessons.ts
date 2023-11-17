@@ -2,12 +2,11 @@ import {useEffect, useState} from "react";
 import {ILesson} from "../../store/lessons";
 import {courseEM} from "../../store/course-em";
 import {useLoader} from "../../../../shared/helpers/hooks/use-loader";
-import {loaderStore} from "../../../../local-store/loader/loader-store";
 
 export const useLessons = () => {
     const [lesson, setLesson] = useState<ILesson>(null)
     const [lessons, setLessons] = useState<ILesson[]>(null)
-    const {on, off} = useLoader(loaderStore)
+    const {on, off} = useLoader()
 
     useEffect(() => {
         const unsubLessons = courseEM.on('lessons', (data: ILesson[]) => {

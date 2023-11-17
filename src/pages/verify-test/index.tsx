@@ -4,14 +4,12 @@ import Code from "./ui/code";
 import Description from "./ui/description";
 import VerifyProvider from "./provider/verify.provider";
 import Btns from "./ui/btns";
-import {loaderStore} from "../../local-store/loader/loader-store";
-import {errorStore} from "../../local-store/error-store";
 
 import './style/index.scss'
 
 const VerifyTest = () => {
     return (
-        <VerifyProvider loader={loaderStore} error={errorStore}>
+        <VerifyProvider>
             <div className={'verify-test-page'}>
                 <div className={'verify-test-page__container app-container'}>
                     <BackBtn/>

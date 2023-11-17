@@ -1,5 +1,5 @@
-import React, {useContext, useEffect} from "react";
-import TaskProvider, {TaskContext} from "./provider/task.provider";
+import React from "react";
+import TaskProvider from "./provider/task.provider";
 import {cookieStore} from "../../local-store/cookie/cookie-store";
 import Description from "./ui/description";
 import Code from "./ui/code";

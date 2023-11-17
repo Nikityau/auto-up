@@ -1,63 +1,62 @@
-import {loaderStore, LoaderStore} from "../../../../local-store/loader/loader-store";
-import { useEffect, useState } from "react";
-import { ModuleRes } from "./use-fetch-module";
-import { useParams } from "react-router-dom";
 import axios from "axios";
-import { baseUrl } from "../../../../shared/api/base-url";
-import { TasksBlock } from "../../../../shared/data/interface/tasks-block.interface";
-import { FType } from "../../../../shared/helpers/types/f-types";
-import { successAdapted } from "../adapter/success-adapted";
-import { nanoid } from "nanoid";
+import {useEffect, useState} from "react";
+import {useParams} from "react-router-dom";
+
+import {ModuleRes} from "./use-fetch-module";
+import {baseUrl} from "../../../../shared/api/base-url";
+import {TasksBlock} from "../../../../shared/data/interface/tasks-block.interface";
+import {FType} from "../../../../shared/helpers/types/f-types";
+import {successAdapted} from "../adapter/success-adapted";
 import {useLoader} from "../../../../shared/helpers/hooks/use-loader";
 
 export interface ModuleExtRes {
-  id: string,
-  title: string,
-  lessons: {
     id: string,
     title: string,
-    number: number
-  }[]
+    lessons: {
+        id: string,
+        title: string,
+        number: number
+    }[]
 }
 
 export interface SuccessSt {
-  lessonId: string,
-  studentAttend: boolean,
-  theme: string,
-  number: number,
-  tasks: TasksBlock[]
+    lessonId: string,
+    studentAttend: boolean,
+    theme: string,
+    number: number,
+    tasks: TasksBlock[]
 }
 
 export interface ScRet {
-  success: SuccessSt[],
-  onChangeModule: FType<ModuleRes, void>
+    success: SuccessSt[],
+    onChangeModule: FType<ModuleRes, void>
 }
 
-export const useFetchSuccess = (init: ModuleRes, courseId: string) : ScRet => {
-  const [success, setSuccess] = useState<SuccessSt[]>();
-  const { groupId, studentId } = useParams();
-  const {off, on} = useLoader(loaderStore)
+export const useFetchSuccess = (init: ModuleRes, courseId: string): ScRet => {
+    const [success, setSuccess] = useState<SuccessSt[]>();
+    const {groupId, studentId} = useParams();
+    const {off, on} = useLoader()
 
-  useEffect(() => {
-    (async () => {
-      if (!init) return;
+    useEffect(() => {
+        (async () => {
+            if (!init) return;
 
-      await onChangeModule(init);
-    })();
-  }, [init]);
+            await onChangeModule(init);
+        })();
+    }, [init]);
 
-  const onChangeModule = async (module: ModuleRes) => {
-    on()
+    const onChangeModule = async (module: ModuleRes) => {
+        on()
 
-    const moduleRes = await axios.get(`${baseUrl}/api/v1/courses/${courseId}/modules/${module.id}/`);
+        const moduleRes = await axios.get(`${baseUrl}/api/v1/courses/${courseId}/modules/${module.id}/`);
 
-    const adapted = await successAdapted((moduleRes.data as ModuleExtRes).lessons, groupId, studentId, courseId)
-    setSuccess(adapted)
-    off()
-  };
+        const adapted = await successAdapted((moduleRes.data as ModuleExtRes).lessons, groupId, studentId, courseId)
+        setSuccess(adapted)
+        off()
+    };
 
-  return {
-    success,
-    onChangeModule
-  };
+    return {
+        success,
+        onChangeModule
+    };
 };

@@ -2,7 +2,6 @@ import axios from "axios";
 import {useParams} from "react-router-dom";
 import {useQuery} from "react-query";
 
-import {loaderStore} from "../../../../local-store/loader/loader-store";
 import {baseUrl} from "../../../../shared/api/base-url";
 import {groupAdapter} from "../adapter/group-adapter";
 import {useErrorHandler} from "../../../../shared/helpers/hooks/use-error-handler";
@@ -12,7 +11,7 @@ import {useLoader} from "../../../../shared/helpers/hooks/use-loader";
 export const useFetchGroup = () => {
     const {id} = useParams();
     const errHandler = useErrorHandler()
-    const {off, on} = useLoader(loaderStore)
+    const {off, on} = useLoader()
 
     const query = useQuery('group-fetch', async () => {
         on()

@@ -1,5 +1,6 @@
 import { action, makeObservable, observable } from "mobx";
 import Cookies from "js-cookie";
+
 export class CookieStore {
   token: string = null
   roles: string = null

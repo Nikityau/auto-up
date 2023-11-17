@@ -1,13 +1,9 @@
-import axios from "axios";
-import { useQuery } from "react-query";
-import React, { useEffect } from "react";
-
-import { CourseInterface } from "../../../../shared/helpers/types/course.interface";
-import { baseUrl } from "../../../../shared/api/base-url";
-import { scheduleAdapter } from "../adapter/schedule.adapter";
-import {loaderStore, LoaderStore} from "../../../../local-store/loader/loader-store";
-import { useErrorHandler } from "../../../../shared/helpers/hooks/use-error-handler";
+import {CourseInterface} from "../../../../shared/helpers/types/course.interface";
+import {baseUrl} from "../../../../shared/api/base-url";
+import {scheduleAdapter} from "../adapter/schedule.adapter";
+import {useErrorHandler} from "../../../../shared/helpers/hooks/use-error-handler";
 import {useLoader} from "../../../../shared/helpers/hooks/use-loader";
+import {useFetch} from "../../../../shared/helpers/hooks/use-fetch";
 
 export type TimetableParsed = {
     dates: Date[],
@@ -16,29 +12,28 @@ export type TimetableParsed = {
 
 export const useFetchTimetable = () => {
     const errorHandler = useErrorHandler()
-    const {on, off} = useLoader(loaderStore)
+    const {on, off} = useLoader()
 
+    const timetable = useFetch({
+        url: `${baseUrl}/api/v1/study_groups/schedule/`,
+        onModify: async (data) => {
+            const adapted = await scheduleAdapter(data)
 
-    const query = useQuery('timetable', async () => {
-        on()
-
-        const { data } = await axios.get(`${baseUrl}/api/v1/study_groups/schedule/`)
-
-        const adapted = await scheduleAdapter(data)
-
-        return {
-            dates: adapted.dates,
-            content: adapted.schedule
-        }
-    }, {
-        onSuccess: (data) => {
-            off()
+            return {
+                dates: adapted.dates,
+                content: adapted.schedule
+            }
         },
         onError: (err) => {
             errorHandler(err)
+        },
+        onBeforeLoadStart: () => {
+            on()
+        },
+        onComplete: () => {
             off()
         }
     })
 
-    return query.data;
+    return timetable;
 };

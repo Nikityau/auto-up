@@ -1,20 +1,12 @@
 import axios from "axios";
-import { nanoid } from "nanoid";
-import { useQuery } from "react-query";
-import { useParams } from "react-router-dom";
+import {nanoid} from "nanoid";
+import {useQuery} from "react-query";
+import {useParams} from "react-router-dom";
 
-import { baseUrl } from "../../../../shared/api/base-url";
-import {loaderStore} from "../../../../local-store/loader/loader-store";
-import { useErrorHandler } from "../../../../shared/helpers/hooks/use-error-handler";
+import {baseUrl} from "../../../../shared/api/base-url";
+import {useErrorHandler} from "../../../../shared/helpers/hooks/use-error-handler";
 import {useLoader} from "../../../../shared/helpers/hooks/use-loader";
 
-interface GroupRes {
-    students: {
-        id: string
-        first_name: string,
-        last_name: string
-    }[]
-}
 
 interface AttStatRes {
     student: string,
@@ -41,9 +33,9 @@ export interface AttStat {
 }
 
 export const useFetchAtt = () => {
-    const { studentId, groupId } = useParams()
+    const {studentId, groupId} = useParams()
     const errHandler = useErrorHandler()
-    const {off, on} = useLoader(loaderStore)
+    const {off, on} = useLoader()
 
     const query = useQuery('att', async () => {
         on()

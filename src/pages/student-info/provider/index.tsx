@@ -4,7 +4,6 @@ import { observer } from "mobx-react-lite";
 import { useFetchUserInfo, UserInfo } from "../helpers/hooks/use-fetch-user-info";
 
 import { CookieStore } from "../../../local-store/cookie/cookie-store";
-import { LoaderStore } from "../../../local-store/loader/loader-store";
 
 import { AttStat, useFetchAtt } from "../helpers/hooks/use-fetch-att";
 import { ModuleRes, useFetchModule } from "../helpers/hooks/use-fetch-module";

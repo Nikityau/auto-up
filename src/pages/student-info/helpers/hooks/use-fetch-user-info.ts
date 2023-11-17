@@ -1,9 +1,7 @@
-import { useEffect, useState } from "react";
 import axios from "axios";
-import { baseUrl } from "../../../../shared/api/base-url";
-import { useParams } from "react-router-dom";
-import {loaderStore, LoaderStore} from "../../../../local-store/loader/loader-store";
-import { useQuery } from "react-query";
+import {baseUrl} from "../../../../shared/api/base-url";
+import {useParams} from "react-router-dom";
+import {useQuery} from "react-query";
 import {useLoader} from "../../../../shared/helpers/hooks/use-loader";
 import {useErrorHandler} from "../../../../shared/helpers/hooks/use-error-handler";
 
@@ -36,8 +34,8 @@ export interface UserInfo {
 }
 
 export const useFetchUserInfo = () => {
-    const { groupId, studentId } = useParams()
-    const {off,on} = useLoader(loaderStore)
+    const {groupId, studentId} = useParams()
+    const {off, on} = useLoader()
     const err = useErrorHandler()
 
     const query = useQuery('user-info', async () => {
@@ -66,7 +64,7 @@ export const useFetchUserInfo = () => {
         }
 
 
-        return undefined
+        return null
     }, {
         onSuccess: () => {
             off()

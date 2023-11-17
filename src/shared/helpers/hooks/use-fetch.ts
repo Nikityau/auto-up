@@ -1,38 +1,45 @@
-import { useEffect, useState } from "react"
-import axios from 'axios'
-import { FType } from "../types/f-types"
+import {useEffect, useState} from "react";
+import axios from "axios";
 
-type Props = {
+interface FetchConfig {
     url: string,
-    onDownloadProgress?: FType<any, void>
-    onUploadProgress?: FType<any, void>
-    onResponse: FType<any, void>
-    onError: FType<any, void>
+    onBeforeLoadStart?: () => void,
+    onLoaded?: (data: any) => void,
+    onModify?: (data: any) => any,
+    onError?: (err: any) => void
+    onComplete?: () => void
 }
 
-export const useFetch = ({
-    url,
-    onResponse,
-    onDownloadProgress,
-    onUploadProgress,
-    onError
-}:Props) => {
+export const useFetch = (
+    {
+        url,
+        onLoaded,
+        onModify,
+        onBeforeLoadStart,
+        onComplete,
+        onError
+    }: FetchConfig) => {
+    const [state, setState] = useState<any>(null)
 
-    useEffect(() => {        
-        axios({
-            method: 'get',
-            url: url,
+    useEffect(() => {
+        fetchData()
+    }, []);
 
-            onDownloadProgress: (progress) => {
-                onDownloadProgress?.(progress)
-            },
-            onUploadProgress: (progress) => {
-                onUploadProgress?.(progress)
-            },
-        }).then(({data}) => {
-            onResponse(data)
-        }).catch((err) => {
-            onError(err)
-        })
-    }, [])
+    const fetchData = async () => {
+        try {
+            onBeforeLoadStart?.()
+
+            const {data} = await axios.get(url)
+
+            const modified = await onModify?.(data) || data
+
+            setState(modified)
+        } catch (e) {
+            await onError?.(e)
+        } finally {
+            await onComplete?.()
+        }
+    }
+
+    return state
 }

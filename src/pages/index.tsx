@@ -9,9 +9,6 @@ import BasePage from "./base";
 import Platform from "./platform";
 import ErrorPage from "./error-page";
 
-import { userStore } from "../local-store/user/user-store";
-import { loaderStore } from "../local-store/loader/loader-store";
-
 import Loader from "../widget/loader";
 
 const StudentCourseLazy = React.lazy(() => import("./student-course"));
@@ -24,15 +21,15 @@ const ScheduleDayLazy = React.lazy(() => import("./schedule-day"));
 const DocumentationLazy = React.lazy(() => import("./doc-page"));
 const StudentInfoLazy = React.lazy(() => import("./student-info"));
 const TestFinishedLazy = React.lazy(() => import("./test-finish"));
-const TestLazy = React.lazy(() => import("./test"));
+const TestLazy = React.lazy(() => import("./student-test"));
 const TaskLazy = React.lazy(() => import('./task'))
 const VerifyTestLazy = React.lazy(() => import('./verify-test'))
 
 const AppRouter = () => {
   return (
-    <Suspense fallback={<Loader loader={loaderStore}/>}>
+    <Suspense fallback={<Loader/>}>
       <Routes>
-        <Route path={AppRoutes.skillget} element={<BasePage user={userStore} />}>
+        <Route path={AppRoutes.skillget} element={<BasePage/>}>
           <Route path={AppRoutes.auth} element={<AuthPageLazy />} />
           <Route path={`error/:name`} element={<ErrorPage/>}/>
 

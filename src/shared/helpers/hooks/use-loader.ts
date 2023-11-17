@@ -1,8 +1,9 @@
-import {useEffect, useId} from "react";
-import {LoaderStore} from "../../../local-store/loader/loader-store";
+import {useContext, useEffect, useId} from "react";
+import {LoaderContext} from "../../../app/provider/with-loader";
 
-export const useLoader = (loaderStore: LoaderStore) => {
+export const useLoader = () => {
     const uid = useId()
+    const {add, remove} = useContext(LoaderContext)
 
     useEffect(() => {
         return () => {
@@ -11,11 +12,11 @@ export const useLoader = (loaderStore: LoaderStore) => {
     }, [])
 
     const on = () => {
-        loaderStore.add(uid)
+        add(uid)
     }
 
     const off = () => {
-        loaderStore.remove(uid)
+        remove(uid)
     }
 
     return {
