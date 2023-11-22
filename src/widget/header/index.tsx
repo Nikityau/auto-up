@@ -1,12 +1,10 @@
 import React from "react";
-import {Link} from "react-router-dom";
 import HeaderChoser from "./ui/header-choser";
 import PlatformLogo from "./ui/platform-logo";
-import {AppRoutes} from "../../shared/app-routes";
 import UserBar from "../user-bar";
 
 import "./style/index.scss";
-import {CookieStore, cookieStore} from "../../local-store/cookie/cookie-store";
+import {CookieStore} from "../../local-store/cookie/cookie-store";
 import {observer} from "mobx-react-lite";
 
 type Props = {

@@ -3,13 +3,13 @@
     height: 30px;
 
     border-radius: 7px;
-    border: 1px solid #191617;
+    border: 1px solid var(--text-color-main);
 
     display: flex;
     justify-content: center;
     align-items: center;
 
-    color: #191617;
+    color: var(--text-color-main);
     font-family: Montserrat, sans-serif;
     font-size: 16px;
     font-style: normal;
@@ -22,6 +22,6 @@
 }
 
 .schedule-day__tab_current {
-    color: #fff;
-    background: #191617;
+    color: var(--tab-current);
+    background: var(--tab-current-bg);
 }

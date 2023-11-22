@@ -8,7 +8,7 @@ type Props = {
 const Title = ({title, number}:Props) => {
     return (
         <div className={'task-description__title'}>
-            <span>Задание {number}</span>
+            <span>Задание {number == 0 ? null : number}</span>
             <span>{title}</span>
         </div>
     );

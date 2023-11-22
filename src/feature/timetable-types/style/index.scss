@@ -3,7 +3,7 @@
     grid-template-columns: repeat(3, auto);
 
     border-radius: 6px;
-    border: 2px solid #000;
+    border: 2px solid var(--month-switcher-bg);
 
     overflow: hidden;
 
@@ -16,37 +16,33 @@
 
         height: 50px;
 
-        color: #4F4B5C;
+        color: var(--timetable-type-text);
         font-family: Montserrat, sans-serif;
         font-size: 12px;
         font-style: normal;
         font-weight: 400;
-        line-height: normal;       
-    }
+        line-height: normal;
 
-    .timetable-types__type {   
-        border-color: transparent;
-
-        background: #F8F9FD;
+        border-color: #000;
     }
 
     .timetable-types__type_border_r {
-        border-right: 1px solid;
+        border-right: 1px solid var(--month-switcher-bg);
     }
 
     .timetable-types__type_border_l {
-        border-left: 1px solid;
+        border-left: 1px solid var(--month-switcher-bg);
     }
 
     .timetable-types__type_border_b {
-        border-right: 1px solid;
-        border-left: 1px solid;
+        border-right: 1px solid var(--month-switcher-bg);
+        border-left: 1px solid var(--month-switcher-bg);
     }
 
     .timetable-types__type_current {
         color: #7E5EFF;
-        border-color: #9E9CFF;
-        background: #EBEBFF;
+        border-color: var(--timetable-border-current);
+        background: var(--timetable-current-bg);
 
         font-weight: 500;
     }

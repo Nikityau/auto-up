@@ -10,7 +10,7 @@
   .calendar-lesson__time,
   .calendar-lesson__theme,
   .calendar-lesson__title {
-    color: #110C22;
+    color: var(--timetable-text-color);
     font-family: Montserrat, sans-serif;
     font-size: 14px;
     font-style: normal;

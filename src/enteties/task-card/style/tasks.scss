@@ -1,8 +1,22 @@
 .task-card__tasks {
-  color: #191617;
+  color: var(--task-block-title);
   font-family: Montserrat, sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+}
+
+.task-card__btn {
+  color: var(--task-block-title);
+  border-color: var(--task-block-title);
+
+
+  .btn-with-icon__continue {
+    background: var(--task-block-title);
+  }
+
+  svg {
+    filter: var(--task-block-btn-arrow);
+  }
 }

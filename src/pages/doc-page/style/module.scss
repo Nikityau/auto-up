@@ -19,7 +19,7 @@
     }
 
     .doc-page__lesson-title {
-        color: #000;
+        color: var(--text-color-main);
         font-family: Montserrat, sans-serif;
         font-size: 16px;
         font-style: normal;
@@ -35,7 +35,7 @@
     .doc-page__l-title {
         .info-block__title {
             padding: 24px 0;
-            border-bottom: 1px solid #000;
+            border-bottom: 1px solid var(--text-color-main);
         }
 
         .info-bloc__info {
@@ -45,7 +45,7 @@
     }
 
     .dock-page__task-block-title {
-        color: #000;
+        color: var(--text-color-main);
         font-family: Montserrat, sans-serif;
         font-size: 16px;
         font-style: normal;

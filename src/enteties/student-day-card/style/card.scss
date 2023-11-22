@@ -7,13 +7,18 @@
     background: #191617;
     box-shadow: 0px 2.56px 9.6px 0px rgba(0, 0, 0, 0.13), 0px 0.48px 1.44px 0px rgba(0, 0, 0, 0.11);
 
-    display: flex;
+   /* display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-between;*/
+
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
 
     .student-day-card__position {
         width: 23px;
         height: 23px;
+
+        place-self: center;
 
         display: flex;
         justify-content: center;
@@ -33,6 +38,8 @@
     .student-day-card__avatar {
         width: 49px;
         height: 49px;
+
+        align-self: center;
 
         border-radius: 50%;
 

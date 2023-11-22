@@ -5,20 +5,24 @@ import WithRouter from "./provider/with-router";
 import WithQuery from "./provider/with-query";
 import WithNotification from "./provider/with-notification";
 import WithLoader from "./provider/with-loader";
+import WithTheme from "./provider/with-theme";
 
 import AccessManger from "../procceses/access-manager";
 
 import "./style/vars/index.scss";
 import "./style/index.scss";
+import "./style/theme/index.scss"
 
 const App = () => {
 
     return (
         <AccessManger>
             <WithLoader>
-                <WithNotification>
-                    <AppRouter/>
-                </WithNotification>
+                <WithTheme>
+                    <WithNotification>
+                        <AppRouter/>
+                    </WithNotification>
+                </WithTheme>
             </WithLoader>
         </AccessManger>
     );

@@ -13,6 +13,7 @@
         .info-block__btn {
             svg {
                 transition: all .3s;
+                filter: var(--svg-button)
             }
 
             display: flex;

@@ -7,8 +7,8 @@
   height: calc(86px * 1.5 - 66px);
 
   border-radius: 13px;
-  border: 1px solid #191617;
-  background: #FFF;
+  border: 1px solid var(--logo-up-ball);
+  background: var(--tasks-bg);
 
   display: flex;
   align-items: flex-end;

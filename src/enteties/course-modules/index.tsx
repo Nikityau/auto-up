@@ -1,6 +1,4 @@
 import React from 'react';
-import {observer} from "mobx-react-lite";
-import {CourseStore} from "../../pages/student-course/store/course-store";
 import CourseTitle from "./ui/course-title";
 import Modules from "./ui/modules";
 import courseImg from './assets/course-icon.png'

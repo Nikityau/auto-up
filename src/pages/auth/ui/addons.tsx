@@ -17,9 +17,9 @@ const Addons = observer(({ authStore }: Props) => {
         onChange={(value) => {
           authStore.setIsRem(value);
         }} />
-      <div className="auth-form__forgot-password">
+      {/*<div className="auth-form__forgot-password">
         <span>Забыли пароль?</span>
-      </div>
+      </div>*/}
     </div>
   );
 });

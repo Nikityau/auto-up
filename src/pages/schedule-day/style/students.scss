@@ -16,8 +16,11 @@
 
         cursor: pointer;
 
+        background: var(--text-header-nav);
+
         svg {
             width: 20px;
+            filter: var(--svg-button)
         }
     }
 

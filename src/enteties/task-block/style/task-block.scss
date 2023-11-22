@@ -9,7 +9,7 @@
         align-items: flex-end;
 
         .task-block__title {
-            color: rgba(0, 0, 0, 0.50);
+            color: var(--text-color-main);
             font-family: Montserrat, sans-serif;
             font-size: 25.6px;
             font-style: normal;
@@ -18,7 +18,7 @@
         }
 
         .task-block__tasks-title {
-            color: #343434;
+            color: var(--task-title);
             font-family: Montserrat, sans-serif;
             font-size: 12.8px;
             font-style: normal;

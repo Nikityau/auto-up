@@ -1,5 +1,5 @@
 .nav-link {
-    color: #000;
+    color: var(--text-header-nav);
     text-align: center;
     font-family: Montserrat, sans-serif;
     font-size: 14px;
@@ -17,9 +17,9 @@
 
 .nav-link__current {
     .nav-link {
-        color: #3D3AFF;
+        color: var(--text-header-current);
         font-weight: 600;
 
-        border-color: #3D3AFF;
+        border-color: var(--text-header-current);
     }
 }

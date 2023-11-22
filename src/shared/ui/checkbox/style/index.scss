@@ -32,7 +32,7 @@
   }
 
   .checkbox-ui__text {
-    color: #191617;
+    color: var(--task-block-title);
     text-align: center;
     font-family: Montserrat, sans-serif;
     font-size: 14px;
@@ -43,10 +43,11 @@
 
 .checkbox-ui_checked {
   .checkbox-ui__box {
-    background: #191617;
+    background: var(--task-block-title);
 
     img {
       opacity: 1;
+      filter: var(--svg-button);
     }
   }
 }

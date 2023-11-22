@@ -16,7 +16,7 @@ const CourseDocCard = ({ id, preview, title }: Props) => {
                 <p>Курс программирования</p>
                 <p>{title}</p>
             </div>
-            <ButtonWithIcon title={'Продолжить'}/>
+            <ButtonWithIcon classNames={'course-doc-card__btn'} title={'Продолжить'}/>
             <div className='course-doc-card__preview'>
                 <img src={preview} alt={'preview'} />
             </div>

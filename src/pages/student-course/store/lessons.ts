@@ -7,6 +7,8 @@ import {CourseEM, ICourseEMController} from "./course-em";
 export interface ILesson {
     id: string,
     number: number,
+    presentation: string,
+    theme: string
 }
 
 interface ILessonRes {
@@ -14,7 +16,9 @@ interface ILessonRes {
     title: string,
     lessons: {
         id: string
-        number: number
+        number: number,
+        presentation: string,
+        title: string,
         task_blocks: {
             id: string,
             tasks_amount: number,
@@ -39,7 +43,9 @@ export class Lessons implements  ICourseEMController {
         this.lessons = data.lessons.map(l => {
             const lesson: ILesson = {
                 id: l.id,
-                number: l.number
+                number: l.number,
+                presentation: l.presentation,
+                theme: l.title
             }
             return lesson
         }).sort((l1, l2) => l1.number - l2.number)

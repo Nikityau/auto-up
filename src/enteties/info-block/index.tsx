@@ -21,7 +21,7 @@ const InfoBlock = ({ title, children, classNames, isOpen = false }: Props) => {
             classNames
         )}>
             <div className='info-block__title'
-                 onClick={swtch}
+                 onClick={() => swtch()}
             >
                 {title}
                 <div className='info-block__btn'>

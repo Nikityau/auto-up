@@ -1,12 +1,11 @@
 import React from "react";
 import { observer } from "mobx-react-lite";
 
-import { TimetableStore } from "../../../local-store/timetable/timtetable-store";
-
 import TimetableInfo from "../../../enteties/timetable-info";
+import {Timetable} from "../../../local-store/timetable/timetable";
 
 type Props = {
-  timetableStore: TimetableStore
+  timetableStore: Timetable
 }
 
 const InfoProvider = observer(({ timetableStore }: Props) => {

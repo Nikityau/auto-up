@@ -7,7 +7,7 @@
     padding: 25px;
 
     border-radius: 25px;
-    background: #FFF;
+    background: var(--header-bg);
     box-shadow: 0px 3.2px 12px 0px rgba(0, 0, 0, 0.13), 0px 0.6px 1.8px 0px rgba(0, 0, 0, 0.11);
 
     overflow: hidden;
@@ -36,7 +36,7 @@
     .course-doc-card__title {
         position: relative;
 
-        color: #191617;
+        color: var(--text-color-main);
         font-family: Montserrat, sans-serif;
         font-size: 16px;
         font-style: normal;
@@ -52,9 +52,9 @@
         padding: 7px 20px;
 
         border-radius: 10px;
-        border: 1px solid #191617;
+        border: 1px solid var(--text-color-main);
 
-        color: #191617;
+        color: var(--text-color-main);
         font-family: Montserrat, sans-serif;
         font-size: 14px;
         font-style: normal;
@@ -65,6 +65,13 @@
         align-items: center;
         gap: 20px;
 
+        .btn-with-icon__continue {
+            background: var(--text-color-main);
+            svg {
+                filter: var(--svg-button)
+            }
+        }
+
         .course-doc-card__continue {
             width: 30px;
             height: 30px;
@@ -74,7 +81,7 @@
             align-items: center;
 
             border-radius: 50%;
-            background: #191617;
+            background: var(--text-color-main);
         }
     }
 }

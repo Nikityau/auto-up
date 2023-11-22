@@ -1,11 +1,15 @@
 .test-finished__greetings {
   .test-finished__title {
-    color: #191617;
+    color: var(--text-color-main);
     text-align: center;
     font-family: Montserrat, sans-serif;
     font-size: 32px;
     font-style: normal;
     font-weight: 600;
     line-height: normal;
+  }
+
+  img {
+    filter: var(--svg-button)
   }
 }

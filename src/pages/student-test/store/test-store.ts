@@ -38,7 +38,7 @@ export class TestStore {
     get taskNumber() {
         if(!this.test) return null
 
-        return this.tasks.findIndex(t => t.id == this.currentTask.id)
+        return this.tasks.findIndex(t => t.id == this.currentTask.id) + 1
     }
 
     setNextTask() {

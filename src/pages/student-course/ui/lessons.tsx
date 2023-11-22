@@ -1,4 +1,4 @@
-import React from 'react';
+ import React from 'react';
 import LessonsHeader from "./lessons-header";
 import LessonsWrapper from "./lessons-wrapper";
 

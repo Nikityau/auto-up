@@ -1,5 +1,6 @@
 .week-switcher__arrow {
-  border-right: 1px solid #000;
+  border-right: 1px solid;
+  border-color: var(--month-switcher-bg);
 
   padding: 0 20px;
 
@@ -9,11 +10,16 @@
   align-items: center;
 
   cursor: pointer;
+
+  svg {
+    filter: var(--svg-button)
+  }
 }
 
 .week-switcher__arrow_right {
   border-right: unset;
-  border-left: 1px solid #000;
+  border-left: 1px solid;
+  border-color: var(--month-switcher-bg);
 
   svg {
     transform: rotate(180deg);

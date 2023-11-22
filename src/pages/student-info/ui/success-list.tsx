@@ -2,12 +2,10 @@ import React, {useContext} from "react";
 import {Mousewheel} from "swiper/modules";
 import {Swiper, SwiperSlide} from "swiper/react";
 import StudentSuccessCard from "../../../enteties/student-success-card";
-import {studentLessons} from "../data/student-info";
+import {StudentInfoContext} from "../provider";
 
 import "swiper/css";
-import {StudentInfoContext} from "../provider";
-import cn from "classnames";
-import StudentSuccess from "./student-success";
+
 
 const SuccessList = () => {
 

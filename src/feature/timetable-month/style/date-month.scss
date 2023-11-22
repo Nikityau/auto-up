@@ -7,7 +7,7 @@
     border-left: 1px solid #4F4B5C;
     border-bottom: 1px solid #4F4B5C;
     border-right: 1px solid #4F4B5C;
-    background: #FFF;
+    background: var(--timetable-grid-bg);
 
     overflow: hidden;
 
@@ -19,7 +19,7 @@
         top: 14px;
         left: 20px;
 
-        color: #4F4B5C;
+        color: var(--timetable-date-color);
         text-align: center;
         font-family: Montserrat, sans-serif;
         font-size: clamp(5px, 5px + .5vw, 15px);
@@ -34,12 +34,8 @@
     }
 }
 
-
-
 .date-month_another {
-    background: #F8F9FD;
-
-
+    background: var(--timetable-grid-bg-2);
 
     .date-month__date {
         color: #B3B3B3;
@@ -47,7 +43,7 @@
 }
 
 .date-month_current {
-    background: #6C69FF;
+    background: var(--color-purple);
 
     .date-month__date {
         color: #fff;

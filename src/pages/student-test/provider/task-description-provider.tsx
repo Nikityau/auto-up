@@ -23,7 +23,7 @@ const TaskDescriptionProvider = observer(({testStore}: Props) => {
                 testStore.test &&
                 <TaskDescription
                     ioData={testStore.currentTask?.ioData}
-                    number={null}
+                    number={testStore.taskNumber}
                     title={testStore.currentTask?.title}
                     description={testStore.currentTask?.description}
                 />

@@ -2,12 +2,12 @@
   width: calc(100% - 40px);
 
   border-radius: 10px;
-  border: 1px solid #000;
+  border: 1px solid var(--month-switcher-bg);
 
   padding: 15px 20px;
 
   .type-lessons__title {
-    color: #000;
+    color: var(--timetable-type-text);
     font-family: Montserrat,sans-serif;
     font-size: 12px;
     font-style: normal;

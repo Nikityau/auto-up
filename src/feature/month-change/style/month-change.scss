@@ -2,7 +2,7 @@
     width: auto;
     padding: 20px 20px;
 
-    background: #191617;
+    background: var(--month-switcher-bg);
 
     border-radius: 12px;
 
@@ -25,6 +25,7 @@
     .month-change__btns {
         display: flex;
         align-items: center;
+        gap: 20px;
 
         .month-change__next,
         .month-change__prev {
@@ -32,7 +33,6 @@
 
             display: flex;
             align-items: center;
-
         }
 
         .month-change__prev {

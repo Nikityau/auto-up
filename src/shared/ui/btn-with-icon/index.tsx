@@ -2,15 +2,20 @@ import React from 'react';
 import {FType} from "../../helpers/types/f-types";
 
 import './style/index.scss'
+import cn from "classnames";
 
 type Props = {
     title: string,
+    classNames?: string | string[]
     onClick?: FType<void, void>
 }
 
-const ButtonWithIcon = ({title,onClick}:Props) => {
+const ButtonWithIcon = ({title,onClick, classNames}:Props) => {
     return (
-        <div className='btn-with-icon'
+        <div className={cn(
+            'btn-with-icon',
+            classNames
+        )}
             onClick={() => {
                 onClick?.()
             }}

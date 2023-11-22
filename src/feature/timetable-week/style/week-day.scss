@@ -5,15 +5,15 @@
   min-height: 311px;
   height: 100%;
   border-radius: 13px;
-  border: 1px solid #000;
-  background: #F8F9FD;
+  border: 1px solid var(--month-switcher-bg);
+  background: var(--timetable-grid-bg-2);
 
   .timetable-week__day-title {
     position: absolute;
     top: 20px;
     left: 19px;
 
-    color: #4F4B5C;
+    color: var(--timetable-date-color);
     font-family: Montserrat, sans-serif;
     font-size: 18px;
     font-style: normal;
@@ -30,5 +30,7 @@
 
   img {
     margin-bottom: 20px;
+
+    filter: var(--svg-button);
   }
 }

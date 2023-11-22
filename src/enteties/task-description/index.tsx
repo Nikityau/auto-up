@@ -3,10 +3,10 @@ import Title from "./ui/title";
 
 import IoData from "./ui/io-data";
 import Description from "./ui/description";
-import Tips from "./ui/tips";
+import {MarkDown} from "../../pages/task/provider/task.provider";
 
 import './style/index.scss'
-import {MarkDown} from "../../pages/task/provider/task.provider";
+
 
 type Img = string
 
@@ -29,7 +29,7 @@ const TaskDescription = (
             <div className={'task-description'}>
                 <Title
                     title={title}
-                    number={number}
+                    number={Number(number)}
                 />
                 {
                     ioData &&

@@ -22,6 +22,8 @@
   line-height: normal;
 
   cursor: pointer;
+
+  filter: var(--svg-button);
 }
 
 .test-page__task-num_current {

@@ -8,10 +8,11 @@
     }
 
     span {
-        color: #292929;
+        color: var(--text-color-main);
         font-family: Comfortaa, sans-serif;
         font-size: 24px;
         font-style: normal;
         font-weight: 600;
     }
 }
+

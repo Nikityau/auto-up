@@ -6,7 +6,7 @@
   padding: 15px 30px;
 
   border-radius: 6px;
-  background: #191617;
+  background: var(--month-switcher-bg);
 
   display: flex;
   align-items: center;
@@ -41,7 +41,7 @@
   .test-page__btn_send {
     width: fit-content;
 
-    background: #191617;
+    background: #20B57F;
     height: 100%;
     padding: 16px 30px;
     display: flex;

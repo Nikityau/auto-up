@@ -41,7 +41,10 @@ const TaskCard = (
                         tasksCount={tasksCount}
                         solvedCount={solvedTasks}
                     />
-                    <ButtonWithIcon title={'Приступить'}/>
+                    <ButtonWithIcon
+                        title={'Приступить'}
+                        classNames={'task-card__btn'}
+                    />
                 </div>
             </div>
         </div>

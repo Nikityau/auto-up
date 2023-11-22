@@ -7,11 +7,12 @@
     margin-top: 7px;
 
     border-radius: 13px;
-    border: 1px solid #000;
+    border: 1px solid var(--text-color-main);
+    background: var(--header-bg);
     backdrop-filter: blur(250px);
 
     .schedule-day__lesson-task-title {
-        color: #000;
+        color: var(--text-color-main);
         font-family: Montserrat, sans-serif;
         font-size: clamp(5px, 5px + .8vw,16px);
         font-style: normal;

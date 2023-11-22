@@ -1,25 +1,18 @@
 import React from 'react';
 import {Outlet} from 'react-router-dom'
-import {observer} from "mobx-react-lite";
 
 import Loader from "../../widget/loader";
-
-import bg from './assets/grid.svg'
-
+import ThemeProvider from "./provider/theme-provider";
 
 import './style/index.scss'
 
-const BasePage = observer(() => {
+const BasePage =() => {
     return (
-        <div className='app'
-             style={{
-                 backgroundImage: `url(${bg})`
-             }}
-        >
+        <ThemeProvider>
             <Outlet/>
             <Loader/>
-        </div>
+        </ThemeProvider>
     );
-});
+};
 
 export default BasePage;

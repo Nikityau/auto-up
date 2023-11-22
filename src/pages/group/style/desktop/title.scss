@@ -6,11 +6,11 @@
     padding: 26px 30px;
 
     border-radius: 10px;
-    border: 1px solid #000;
+    border: 1px solid var(--module-text-color);
 
     .group-page__course-title,
     .group-page__group-title {
-        color: #191617;
+        color: var(--text-color-main);
         font-family: Montserrat, sans-serif;
         font-size: 20px;
         font-style: normal;

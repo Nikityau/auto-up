@@ -8,13 +8,13 @@
   gap: 26px;
 
   border-radius: 25px;
-  background: #FFF;
+  background: var(--task-block-bg);
   box-shadow: 0px 3.2px 12px 0px rgba(0, 0, 0, 0.13), 0px 0.6px 1.8px 0px rgba(0, 0, 0, 0.11);
 
   cursor: pointer;
 
   .task-card__title {
-    color: #191617;
+    color: var(--task-block-title);
     font-family: Montserrat, sans-serif;
     font-size: 22px;
     font-style: normal;

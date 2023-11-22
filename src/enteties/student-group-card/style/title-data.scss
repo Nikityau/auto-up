@@ -1,8 +1,10 @@
 .student-group-card__info {
 
+    place-self: center;
+
     .student-group-card__data,
     .student-group-card__title {
-        color: #4F4B5C;
+        color: var(--text-color-main);
         font-family: Montserrat, sans-serif;
         font-size: 13px;
         font-style: normal;
