@@ -7,7 +7,7 @@ const PlatformLogo = () => {
         <div className='platform-logo'>
             <img src={logo_img} alt={'logo'}/>
             <div className='platform-logo__title'>
-                <span>Platfrom</span>
+                <span>Platform</span>
             </div>
         </div>
     );

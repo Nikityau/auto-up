@@ -10,6 +10,8 @@ export const useFetchCourses = () => {
 
     const data = useFetch({
         url: `${baseUrl}/api/v1/courses/`,
+        needCache: true,
+        uniqueKey: 'knowledge-base',
         onError: (err) => {
             errHandler(err)
         },

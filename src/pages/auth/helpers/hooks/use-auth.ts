@@ -4,11 +4,10 @@ import axios from "axios";
 import {useEnter} from "./use-enter";
 import {AuthStore} from "../../store/auth-store";
 import {AppRoutes} from "../../../../shared/app-routes";
-import {CookieStore} from "../../../../local-store/cookie/cookie-store";
 import {baseUrl} from "../../../../shared/api/base-url";
-import { accessRoutes } from "../../../../shared/data/access-routes";
+import {accessRoutes} from "../../../../shared/data/access-routes";
 
-export const useAuth = (authStore: AuthStore, cookieStore: CookieStore) => {
+export const useAuth = (authStore: AuthStore) => {
 
     const nav = useNavigate();
 
@@ -21,9 +20,6 @@ export const useAuth = (authStore: AuthStore, cookieStore: CookieStore) => {
 
         try {
             authStore.setIsFetchError(false)
-
-            console.log(authStore.login);
-            
 
             const resAuth = await axios.post(`${baseUrl}/auth/token/login/`, {
                 username: authStore.login,
@@ -39,14 +35,15 @@ export const useAuth = (authStore: AuthStore, cookieStore: CookieStore) => {
             });
 
             const roles = resMe.data["roles"];
+
             localStorage.setItem('user-role', roles)
+            localStorage.setItem('user-token', token)
 
-
-            if (authStore.isRem) {
+            /*if (authStore.isRem) {
                 cookieStore.setCookie(token, roles, 7);
             } else {
                 cookieStore.setCookie(token, roles, 0.006);
-            }
+            }*/
 
             if (roles.find(r => r == "student")) {
                 nav(`/${AppRoutes.skillget}/${AppRoutes.student}`);
@@ -58,8 +55,6 @@ export const useAuth = (authStore: AuthStore, cookieStore: CookieStore) => {
             }
 
         } catch (err) {
-            console.log(err.message);
-            
             authStore.setIsFetchError(true)
         }
     }

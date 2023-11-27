@@ -13,5 +13,5 @@ COPY . /app/all
 
 RUN cd ./all npm run build:prod
 
-RUN cp -r ./all/build/web ./build/
-RUN rm -r ./all
+RUN cp -r /app/all/build/web /app/build/
+RUN rm -r /app/all

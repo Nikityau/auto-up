@@ -1,9 +1,6 @@
 import React from "react";
-import { observer } from "mobx-react-lite";
 
 import { useFetchUserInfo, UserInfo } from "../helpers/hooks/use-fetch-user-info";
-
-import { CookieStore } from "../../../local-store/cookie/cookie-store";
 
 import { AttStat, useFetchAtt } from "../helpers/hooks/use-fetch-att";
 import { ModuleRes, useFetchModule } from "../helpers/hooks/use-fetch-module";
@@ -20,11 +17,10 @@ interface StInfoCntx {
 export const StudentInfoContext = React.createContext<StInfoCntx>(null);
 
 type Props = {
-  cookie: CookieStore,
 } & React.PropsWithChildren
 
 
-const StudentInfoProvider = observer(({ children }: Props) => {
+const StudentInfoProvider = ({ children }: Props) => {
 
   const user = useFetchUserInfo();
   const att = useFetchAtt();
@@ -41,6 +37,6 @@ const StudentInfoProvider = observer(({ children }: Props) => {
       {children}
     </StudentInfoContext.Provider>
   );
-});
+};
 
 export default StudentInfoProvider;

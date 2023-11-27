@@ -44,6 +44,8 @@ export const useFetchGroups = () => {
 
     const groups = useFetch({
         url: `${baseUrl}/api/v1/study_groups/`,
+        uniqueKey: 'groups',
+        needCache: true,
         onError: (err) => {
             errHandler(err)
         },

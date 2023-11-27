@@ -1,8 +1,11 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
+import {dataStore} from "../../../local-store/data-store/data-store";
 
 interface FetchConfig {
     url: string,
+    uniqueKey?: string
+    needCache?: boolean,
     onBeforeLoadStart?: () => void,
     onLoaded?: (data: any) => void,
     onModify?: (data: any) => any,
@@ -13,6 +16,8 @@ interface FetchConfig {
 export const useFetch = (
     {
         url,
+        uniqueKey,
+        needCache,
         onLoaded,
         onModify,
         onBeforeLoadStart,
@@ -28,6 +33,13 @@ export const useFetch = (
     const fetchData = async () => {
         let finalData = null
 
+        if(needCache && dataStore.get(uniqueKey)) {
+            finalData = dataStore.get(uniqueKey)
+            setState(finalData)
+
+            return
+        }
+
         try {
             onBeforeLoadStart?.()
 
@@ -39,6 +51,10 @@ export const useFetch = (
 
             const modified = await onModify?.(data) || data
             finalData = modified
+
+            if(needCache) {
+                dataStore.set(uniqueKey, finalData)
+            }
 
             setState(modified)
         } catch (e) {

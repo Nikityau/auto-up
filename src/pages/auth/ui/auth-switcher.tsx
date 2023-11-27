@@ -5,14 +5,14 @@ import Switcher from '../../../shared/ui/switcher';
 
 type Props = {
     state: boolean
-    onChagnge: FType<boolean, void>
+    onChange: FType<boolean, void>
 }
 
-const AuthSwitcher = observer(({onChagnge, state}:Props) => {
+const AuthSwitcher = observer(({onChange, state}:Props) => {
     return (
        <Switcher
             init={state}
-            onChange={onChagnge}
+            onChange={onChange}
             text='Запомнить'
        />
     );

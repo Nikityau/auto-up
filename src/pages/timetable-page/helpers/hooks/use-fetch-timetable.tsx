@@ -1,4 +1,3 @@
-import {CourseInterface} from "../../../../shared/helpers/types/course.interface";
 import {baseUrl} from "../../../../shared/api/base-url";
 import {LessonAdapted, scheduleAdapter} from "../adapter/schedule.adapter";
 import {useErrorHandler} from "../../../../shared/helpers/hooks/use-error-handler";
@@ -15,6 +14,8 @@ export const useFetchTimetable = () => {
 
     const timetable = useFetch({
         url: `${baseUrl}/api/v1/study_groups/schedule/`,
+        uniqueKey: 'timetable',
+        needCache: true,
         onModify: async (data) => {
             const adapted = await scheduleAdapter(data)
 

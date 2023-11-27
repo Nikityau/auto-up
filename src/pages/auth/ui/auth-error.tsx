@@ -1,6 +1,6 @@
 import React from 'react';
-import {AuthStore} from "../store/auth-store";
 import {observer} from "mobx-react-lite";
+import {AuthStore} from "../store/auth-store";
 
 type Props = {
     authStore: AuthStore

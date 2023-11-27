@@ -11,19 +11,17 @@ import AuthProvider from "../provider/auth-provider";
 import PasswordErrorProvider from "../provider/password-error.provider";
 
 import { useAuth } from "../helpers/hooks/use-auth";
-
-import { AuthStore } from "../store/auth-store";
-import { CookieStore } from "../../../local-store/cookie/cookie-store";
 import AuthError from "./auth-error";
+import { AuthStore } from "../store/auth-store";
+
 
 type Props = {
   authStore: AuthStore,
-  cookieStore: CookieStore
 }
 
-const AuthForm = observer(({authStore, cookieStore}:Props) => {
+const AuthForm = observer(({authStore}:Props) => {
 
-  const {auth} = useAuth(authStore, cookieStore)
+  const {auth} = useAuth(authStore)
 
   return (
     <AuthProvider>
@@ -34,7 +32,7 @@ const AuthForm = observer(({authStore, cookieStore}:Props) => {
           <PasswordErrorProvider auth={authStore}/>
         </div>
         <AuthError authStore={authStore}/>
-        <Addons authStore={authStore}/>
+        {/*<Addons authStore={authStore}/>*/}
         <Btn
           text="Продолжить"
           onClick={() => auth()}
