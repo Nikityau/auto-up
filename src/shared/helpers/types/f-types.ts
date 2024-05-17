@@ -1,1 +1,0 @@
-export type FType<I,R> = (value: I) => R

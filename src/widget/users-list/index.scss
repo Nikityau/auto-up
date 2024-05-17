@@ -1,0 +1,41 @@
+.users-list {
+  display: grid;
+  grid-template-rows: 20px 50px calc(100vh - 200px);
+  gap: 20px;
+
+  .users-list__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    span {
+      font-family: Inter, sans-serif;
+      font-size: 20px;
+      font-weight: 500;
+
+      color: #050505;
+    }
+  }
+
+  .users-list__filter {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: space-between;
+
+    span {
+      font-family: Inter, sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+
+      color: #050505;
+    }
+  }
+
+  .users-list__list {
+    overflow-y: scroll;
+    padding-right: 10px;
+  }
+}
+

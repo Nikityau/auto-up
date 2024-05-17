@@ -35,7 +35,7 @@ export const buildConfig = (conf:BuildConfig): webpack.Configuration => {
         resolve: {
             extensions: ['.js', '.jsx', '.ts', '.tsx'],
             alias: {
-                app: path.resolve(__dirname, 'src', 'app'),
+                down-app.tsx: path.resolve(__dirname, 'src', 'down-app.tsx'),
                 pages: path.resolve(__dirname, 'src', 'pages'),
                 widgets: path.resolve(__dirname, 'src','widgets'),
                 features: path.resolve(__dirname, 'src', 'features'),

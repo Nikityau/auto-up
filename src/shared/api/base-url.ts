@@ -1,1 +1,0 @@
-export const baseUrl = "https://rstu-skillget.ddns.net"

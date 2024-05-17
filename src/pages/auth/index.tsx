@@ -1,29 +1,61 @@
-import React from "react";
-import AuthForm from "./ui/auth-form";
+import React from 'react';
+import {Link, useLocation, useNavigate} from "react-router-dom";
+import Button from "../../shared/ui/button/button";
 
-import { AuthStore } from "./store/auth-store";
-
-import py from './assets/py-icon.png'
-
-import "./style/index.scss";
-
-const authStore = new AuthStore()
+import './index.scss'
 
 const AuthPage = () => {
-  return (
-    <div className="auth-page">
-      <div className="auth-page__container">
-        <div className={"auth-page__left-side"}>
-          <AuthForm
-            authStore={authStore}
-          />
+
+    const {
+        hash
+    } = useLocation()
+
+    const nav = useNavigate()
+
+    const isAuth = hash.includes('auth')
+
+
+    return (
+        <div className={'auth'}>
+            <div className={'auth__form'}>
+                <h2>{isAuth ? 'Авторизация' : 'Регистрация'}</h2>
+
+                <div className={'auth__form-inputs'}>
+                    <input
+                        placeholder={isAuth ? 'Логин' : 'Имя пользователя'}
+                    />
+                    {
+                        !isAuth &&
+                        <input
+                            type={'date'}
+                            placeholder={'26.10.2002'}
+                        />
+                    }
+                    {
+                        !isAuth &&
+                        <input
+                            placeholder={'Электронная почта / номер телефона'}
+                        />
+                    }
+                    <input
+                        type={'password'}
+                        placeholder={'Пароль'}
+                    />
+                </div>
+
+                <Button
+                    text={isAuth ? 'Войти' : 'Зарегистрироваться'}
+                    onClick={() => {
+                        nav('/auto-up/inside')
+                    }}
+                    classNames={'button-ui_theme_blue'}
+                />
+                <Link to={`/auto-up/auth#${isAuth ? 'reg' : 'auth'}`}>
+                    {isAuth ? 'зарегистрироваться' : 'авторизоваться'}
+                </Link>
+            </div>
         </div>
-        <div className={'auth-page__logo'}>
-          <img src={py} alt={'py-icon'}/>
-        </div>
-      </div>
-    </div>
-  );
+    );
 };
 
 export default AuthPage;

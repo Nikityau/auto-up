@@ -1,32 +1,18 @@
 * {
-    padding: 0;
-    margin: 0;
-}
+  margin: 0;
+  padding: 0;
 
-a {
-  text-decoration: unset;  
-}
-
-body {
-  overflow-x: hidden;
-}
-
-.app-container {
-    width: calc(100vw - 180px);
-    margin: 0 auto;
-}
-
-@media screen and (max-width: 1250px){
-  .app-container {
-    width: calc(100vw - 50px);
+  &::-webkit-scrollbar {
+    width: 6px;
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #DFDFDF;
+    border-radius: 20px;
   }
 }
 
-
-:root {
-  --min-fs: 5px;
-  --val-fs: .8vw;
-  --max-fs: 16px;
-
-  --font-size: clamp(var(--min-fs), var(--val-fs), var(--max));
+a {
+  text-decoration: none;
 }
+

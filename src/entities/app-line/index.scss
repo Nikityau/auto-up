@@ -1,0 +1,37 @@
+.app-line {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  font-family: Inter, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+
+  padding: 36px 0;
+  border-bottom: 1px solid #9E9E9E;
+
+  color: #050505;
+
+  .app-line__left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .app-line__right {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+  }
+
+  .app-line__icon {
+    width: 40px;
+    height: 40px;
+
+    border-radius: 8px;
+
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+}

@@ -1,0 +1,8 @@
+.auto-up {
+  height: calc(100vh - 80px);
+
+  padding: 40px;
+
+  display: grid;
+  grid-template-columns: 260px auto;
+}

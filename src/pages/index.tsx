@@ -1,69 +1,37 @@
-import React, { Suspense } from "react";
-import {
-  Routes,
-  Route,
-  Navigate
-} from "react-router-dom";
-import { AppRoutes } from "../shared/app-routes";
-import BasePage from "./base";
-import Platform from "./platform";
-import ErrorPage from "./error-page";
+import React from 'react';
+import {Navigate, Route, Routes} from "react-router-dom";
 
-import Loader from "../widget/loader";
+import Auth from "./auth";
+import Base from "./base/base";
+import Statistic from "./statistic";
+import Users from "./users";
+import AllFiles from "./all-files";
+import UserFiles from "./user";
+import UploadFile from "./upload-file";
 
-const StudentCourseLazy = React.lazy(() => import("./student-course"));
-const AuthPageLazy = React.lazy(() => import("./auth"));
-const TimetableLazy = React.lazy(() => import("./timetable-page"));
-const GroupsLazy = React.lazy(() => import("./groups"));
-const GroupLazy = React.lazy(() => import("./group"));
-const KnowledgeBaseLazy = React.lazy(() => import("./knowledge-base"));
-const ScheduleDayLazy = React.lazy(() => import("./schedule-day"));
-const DocumentationLazy = React.lazy(() => import("./doc-page"));
-const StudentInfoLazy = React.lazy(() => import("./student-info"));
-const TestFinishedLazy = React.lazy(() => import("./test-finish"));
-const TestLazy = React.lazy(() => import("./student-test"));
-const TaskLazy = React.lazy(() => import('./task'))
-const VerifyTestLazy = React.lazy(() => import('./verify-test'))
+const AppPages = () => {
+    return (
+        <Routes>
+            <Route path={'/auto-up'}>
+                <Route path={'auth'} element={<Auth/>}/>
+                <Route path={'reg'} element={<Auth/>}/>
 
-const AppRouter = () => {
-  return (
-    <Suspense fallback={<Loader/>}>
-      <Routes>
-        <Route path={AppRoutes.skillget} element={<BasePage/>}>
-          <Route path={AppRoutes.auth} element={<AuthPageLazy />} />
-          <Route path={`error/:name`} element={<ErrorPage/>}/>
+                <Route path={'inside'} element={<Base/>}>
+                    <Route path={'statistic'} element={<Statistic/>}/>
+                    <Route path={'users'} element={<Users/>}/>
+                    <Route path={'users/:id'} element={<UserFiles/>}/>
+                    <Route path={'all-files'} element={<AllFiles/>}/>
+                    <Route path={'upload-files'} element={<UploadFile/>}/>
 
-          <Route path={AppRoutes.lecturer} element={<Platform />}>
-            <Route path={'course/:courseId/lesson/:lessonId/task/:taskId'} element={<TaskLazy/>}/>
-            <Route path={'course/:courseId/lesson/:lessonId/task/:taskId/group/:groupId/student/:studentId'} element={<VerifyTestLazy/>}/>
+                    <Route path={''} element={<Navigate to={'statistic'}/>}/>
+                </Route>
 
-            <Route path={AppRoutes.timetable} element={<TimetableLazy />} />
-            <Route path={`${AppRoutes.timetable}/day/:date`} element={<ScheduleDayLazy />} />
-            <Route path={AppRoutes.groups} element={<GroupsLazy />} />
-            <Route path={`${AppRoutes.groups}/:id`} element={<GroupLazy />} />
-            <Route path={`${AppRoutes.groups}/:groupId/students/:studentId`} element={<StudentInfoLazy />} />
-            <Route path={AppRoutes.knowledgeBase} element={<KnowledgeBaseLazy />} />
-            <Route path={`${AppRoutes.knowledgeBase}/:id`} element={<DocumentationLazy />} />
+                <Route path={''} element={<Navigate to={'auth#auth'}/>}/>
+            </Route>
 
-            <Route path={""} element={<Navigate to={AppRoutes.timetable} />} />
-          </Route>
-
-          <Route path={AppRoutes.student} element={<Platform />}>
-            <Route path={AppRoutes.course} element={<StudentCourseLazy />} />
-            <Route path={AppRoutes.timetable} element={<TimetableLazy />} />
-            <Route path={`${AppRoutes.course}/test/course/:courseId/lesson/:lessonId/task-block/:taskBlockId`} element={<TestLazy />} />
-            <Route path={`${AppRoutes.course}/test/finished`} element={<TestFinishedLazy />} />
-            <Route path={""} element={<Navigate to={AppRoutes.course} />} />
-          </Route>
-
-          <Route path={""} element={<Navigate to={AppRoutes.auth} />} />
-        </Route>
-
-        <Route path={""} element={<Navigate to={AppRoutes.skillget} />} />
-      </Routes>
-    </Suspense>
-  );
+            <Route path={'/'} element={<Navigate to="/auto-up"/>}/>
+        </Routes>
+    );
 };
 
-
-export default AppRouter;
+export default AppPages;

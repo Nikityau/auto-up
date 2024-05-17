@@ -1,0 +1,43 @@
+.total-statistic-chart {
+  position: relative;
+
+  .traffic-types {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+
+    width: calc(100% - 40px);
+
+    transform: translateX(-50%);
+
+    z-index: 1;
+
+    margin: 0 20px;
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 30px;
+  }
+
+  .traffic-type {
+    font-family: Inter, sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+
+    color: #FDFDFD;
+
+    border: 1px solid #FDFDFD;
+    border-radius: 10px;
+    padding: 14px 20px;
+
+    cursor: pointer;
+
+    transition: all .3s ease-in-out;
+  }
+
+  .traffic-type_active {
+    background: #0337EF;
+    border-color: #0337EF;
+  }
+}

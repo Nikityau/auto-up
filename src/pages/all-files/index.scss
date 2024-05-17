@@ -1,0 +1,31 @@
+.all-files {
+  display: flex;
+  flex-direction: column;
+
+  .all-files__search {
+    width: 715px;
+
+    padding: 16px 20px;
+
+    font-family: Inter, sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+
+    color: #000;
+
+    border: 1px solid #9E9E9E;
+    border-radius: 10px;
+    
+    &::placeholder {
+      color: #9E9E9E;
+    }
+  }
+
+  .all-files__list {
+    overflow-y: scroll;
+
+    padding-right: 20px;
+
+    height: calc(100vh - 170px);
+  }
+}

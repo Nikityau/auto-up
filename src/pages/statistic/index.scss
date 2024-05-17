@@ -1,0 +1,14 @@
+.statistic {
+  display: grid;
+  grid-template-columns: 2.5fr 1fr;
+
+  .statistic__apps {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .statistic__users {
+    padding-left: 30px;
+  }
+}

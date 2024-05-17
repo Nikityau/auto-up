@@ -1,31 +1,17 @@
 import React from "react";
-import AppRouter from "../pages";
 
-import WithRouter from "./provider/with-router";
-import WithQuery from "./provider/with-query";
-import WithNotification from "./provider/with-notification";
-import WithLoader from "./provider/with-loader";
-import WithTheme from "./provider/with-theme";
+import BrowserProvider from "./provider/browser-provider";
+import AppPages from "../pages";
 
-import AccessManger from "../procceses/access-manager";
-
-import "./style/vars/index.scss";
-import "./style/index.scss";
-import "./style/theme/index.scss"
+import './style/index.scss'
 
 const App = () => {
 
     return (
-        <AccessManger>
-            <WithLoader>
-                <WithTheme>
-                    <WithNotification>
-                        <AppRouter/>
-                    </WithNotification>
-                </WithTheme>
-            </WithLoader>
-        </AccessManger>
+        <BrowserProvider>
+            <AppPages/>
+        </BrowserProvider>
     );
 };
 
-export default WithQuery(WithRouter(<App/>)());
+export default App;

@@ -1,0 +1,36 @@
+.text-with-tip {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  font-family: Inter, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+
+  color: #050505;
+
+  .text-with-tip__tip {
+    position: absolute;
+    top: 20px;
+    left: -100%;
+
+
+    font-family: Inter, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+
+    color: #050505;
+
+    padding: 20px;
+
+    background: #fff;
+
+    border: 1px solid #0337EF;
+    border-radius: 12px;
+
+    z-index: 5;
+  }
+}
+

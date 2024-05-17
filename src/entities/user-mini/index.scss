@@ -1,0 +1,23 @@
+.user-mini {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+  .user-mini__avatar {
+    width: 42px;
+    height: 42px;
+
+    border-radius: 50%;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .user-mini__name {
+    font-family: Inter, sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+
+    color: #9E9E9E;
+  }
+}

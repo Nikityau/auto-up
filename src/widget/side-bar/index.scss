@@ -1,0 +1,8 @@
+.side-bar {
+  display: grid;
+  grid-template-rows: 50px auto 50px;
+
+  .navigation {
+    align-self: center;
+  }
+}
